@@ -1,0 +1,43 @@
+@use "sass:map";
+
+$breakpoints: (
+    "xs": 375px,
+    "sm": 640px,
+    "md": 768px,
+    "lg": 1024px,
+    "xl": 1280px,
+    "2xl": 1536px,
+);
+
+@mixin breakpoint($size) {
+    @if map.has-key($breakpoints, $size) {
+        @media (min-width: map.get($breakpoints, $size)) {
+            @content;
+        }
+    } @else {
+        @error 'Invalid breakpoint size: #{$size}.';
+    }
+}
+
+@mixin range($start, $end: null) {
+    @if map.has-key($breakpoints, $start) {
+        $min: map.get($breakpoints, $start);
+        $max: if(
+            $end != null and map.has-key($breakpoints, $end),
+            map.get($breakpoints, $end),
+            null
+        );
+
+        @if $max {
+            @media (min-width: $min) and (max-width: $max) {
+                @content;
+            }
+        } @else {
+            @media (max-width: $min) {
+                @content;
+            }
+        }
+    } @else {
+        @error 'Invalid breakpoint size: #{$start}.';
+    }
+}

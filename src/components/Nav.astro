@@ -1,0 +1,58 @@
+---
+interface NavItem {
+    text: string;
+    href: string;
+    active?: boolean;
+}
+
+interface Props {
+    isMobile?: boolean;
+    items?: NavItem[];
+}
+
+const { isMobile = false, items } = Astro.props;
+
+const navItems: NavItem[] = [
+    //{ text: "Chez nous", href: "#home" },
+    { text: "Menus & vins", href: "#menus" },
+    { text: "Agenda", href: "#agenda" },
+    //{ text: "Alentours", href: "#alentours" },
+    { text: "Infos pratiques", href: "#infos" },
+];
+
+const finalItems = items || navItems;
+
+const navBaseClass = isMobile ? "c-header__mobile-nav" : "c-header__nav";
+const listBaseClass = isMobile
+    ? "c-header__mobile-nav_list"
+    : "c-header__nav-list";
+const itemBaseClass = isMobile
+    ? "c-header__mobile-nav_item"
+    : "c-header__nav-item";
+const linkBaseClass = isMobile
+    ? "c-header__mobile-nav_link"
+    : "c-header__nav-link";
+---
+
+<nav
+    class={navBaseClass}
+    aria-label={isMobile ? "Mobile Navigation" : "Main Navigation"}
+>
+    <ul class={listBaseClass}>
+        {
+            finalItems.map((item) => (
+                <li class={itemBaseClass}>
+                    <a
+                        class:list={[
+                            linkBaseClass,
+                            { "is-active": item.active },
+                        ]}
+                        href={item.href}
+                    >
+                        {item.text}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</nav>

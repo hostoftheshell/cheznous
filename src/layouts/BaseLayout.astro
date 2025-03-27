@@ -1,0 +1,32 @@
+---
+import Container from "../components/Container.astro";
+import Header from "../components/Header.astro";
+import { Seo } from "astro-seo-meta";
+
+const { pageTitle } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+        <Seo
+            title={pageTitle}
+            description="Chez Nous, pizzeria artisanale à Vermenton (89270). Dégustez des pizzas faites maison, sur place, dans une ambiance conviviale avec des ingrédients frais et de qualité."
+        />
+    </head>
+    <body>
+        <Container>
+            <Header />
+            <!-- <h1>{pageTitle}</h1> -->
+            <slot />
+        </Container>
+        <script>
+            import "../scripts/menu.js";
+        </script>
+    </body>
+</html>

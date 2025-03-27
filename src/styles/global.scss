@@ -1,0 +1,29 @@
+@use "fonts";
+@use "breakpoints";
+@use "variables";
+@use "header";
+@import "normalize.css";
+
+html {
+    font-size: var(--font-size-base);
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: var(--weight-regular);
+}
+h1 {
+    font-family: var(--font-title);
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-bold);
+}

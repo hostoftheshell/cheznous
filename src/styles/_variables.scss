@@ -1,0 +1,44 @@
+@use "breakpoints";
+
+:root {
+    /* Colors */
+    --color-text: #432918;
+    --color-background: #fff4e5;
+
+    /* Font Families */
+    --font-title: "Bodoni Moda Variable", serif;
+    --font-heading: "Fraunces Variable", serif;
+    --font-body: "Metropolis", sans-serif;
+
+    /* Font Weights */
+    --weight-light: 300;
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-extrabold: 800;
+
+    /* Container Widths */
+    --grid-margin: 0.625rem;
+    --container-width: calc(100% - 2 * var(--grid-margin));
+
+    /* Z-Index */
+    --z-index-overlay: 600;
+    --z-index-top: 1000;
+}
+
+@include breakpoints.range("xl") {
+    :root {
+        --font-size-base: 14px;
+    }
+}
+@include breakpoints.range("xl", "2xl") {
+    :root {
+        --font-size-base: 15px;
+    }
+}
+@include breakpoints.breakpoint("md") {
+    :root {
+        --grid-margin: 1.25rem;
+    }
+}

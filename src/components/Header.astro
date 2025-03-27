@@ -1,0 +1,16 @@
+---
+import Nav from "../components/Nav.astro";
+import SocialNav from "../components/SocialNav.astro";
+import Logo from "../components/Logo.astro";
+import Hamburger from "../components/Hamburger.astro";
+---
+
+<header class="c-header">
+    <Nav isMobile={false} />
+    <Logo />
+    <SocialNav />
+    <Hamburger />
+</header>
+<div class="c-mobile-nav-overlay">
+    <Nav isMobile={true} />
+</div>
