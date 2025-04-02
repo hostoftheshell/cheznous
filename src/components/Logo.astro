@@ -1,12 +1,6 @@
 ---
-import { Image } from "astro:assets";
-import cheznous_brown_ld from "../assets/logo/cheznous_brown_ld.svg";
+import LogoDark from "@assets/logo/cheznous_dark.svg?raw";
+import LogoLight from "@assets/logo/cheznous_light.svg?raw";
 ---
 
-<Image
-    src={cheznous_brown_ld}
-    width="122"
-    height="82"
-    alt="Logo du restaurant Chez Nous, représentant une maison avec des couverts et une typographie élégante."
-    class="c-header__logo"
-/>
+<div class="c-header__logo" set:html={LogoLight} />

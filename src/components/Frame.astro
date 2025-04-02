@@ -1,0 +1,19 @@
+---
+import { Image } from "astro:assets";
+
+const { title, description, image } = Astro.props;
+---
+
+<div class="c-frame">
+    <div class="c-frame__heading">
+        <h2 class="c-frame__heading-text">{title}</h2>
+    </div>
+    <div class="c-frame__description">
+        <p class="c-frame__description-text">{description}</p>
+    </div>
+    <div class="c-frame__img">
+        <figure class="c-frame__img-figure">
+            {image && <Image src={image.src} alt={image.alt} width="600" />}
+        </figure>
+    </div>
+</div>

@@ -1,7 +1,8 @@
 ---
-import Container from "../components/Container.astro";
-import Header from "../components/Header.astro";
+import "@styles/global.scss";
+import Header from "@components/Header.astro";
 import { Seo } from "astro-seo-meta";
+import Banner from "@components/Banner.astro";
 
 const { pageTitle } = Astro.props;
 ---
@@ -20,13 +21,17 @@ const { pageTitle } = Astro.props;
         />
     </head>
     <body>
-        <Container>
-            <Header />
-            <!-- <h1>{pageTitle}</h1> -->
+        <Header />
+        <main id="main" class="o-main">
             <slot />
-        </Container>
+        </main>
+        <Banner
+            generalInfo="réservations & privatisation : "
+            additionalInfo="accessibilité PMR"
+            phoneNumber="03 86 51 89 56"
+        />
         <script>
-            import "../scripts/menu.js";
+            import "../scripts/vh-responsive.js";
         </script>
     </body>
 </html>

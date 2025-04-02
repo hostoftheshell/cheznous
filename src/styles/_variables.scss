@@ -4,6 +4,10 @@
     /* Colors */
     --color-text: #432918;
     --color-background: #fff4e5;
+    --color-landing-ui-light: #fff4e5;
+    --color-landing-ui-dark: #432918;
+    --color-primary: #432918;
+    --color-secondary: #fff4e5;
 
     /* Font Families */
     --font-title: "Bodoni Moda Variable", serif;
@@ -25,6 +29,9 @@
     /* Z-Index */
     --z-index-overlay: 600;
     --z-index-top: 1000;
+
+    --h-banner: 5.625rem;
+    --padding-banner: 0.625rem;
 }
 
 @include breakpoints.range("xl") {

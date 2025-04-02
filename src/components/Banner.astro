@@ -1,0 +1,55 @@
+---
+import PhoneIcon from "@assets/icons/phone.svg?raw";
+import AccessibilityIcon from "@assets/icons/accessibility.svg?raw";
+
+interface Props {
+    generalInfo: string;
+    additionalInfo: string;
+    phoneNumber: string;
+    phoneIcon?: string;
+    accessibilityIcon?: string;
+}
+const {
+    generalInfo,
+    additionalInfo,
+    phoneNumber,
+    phoneIcon = PhoneIcon,
+    accessibilityIcon = AccessibilityIcon,
+} = Astro.props;
+
+const countryCode = "+33";
+const formattedPhoneNumber = phoneNumber
+    ? `${countryCode}${phoneNumber.replace(/\s/g, "").replace(/^0/, "")}`
+    : "";
+---
+
+<div class="c-banner">
+    <div class="c-banner__content">
+        <div class="c-banner__info">
+            {
+                phoneIcon && (
+                    <span class="c-banner__info-icon" set:html={phoneIcon} />
+                )
+            }
+            <span class="c-banner__info-text">
+                {generalInfo}
+            </span>
+            <span class="c-banner__info-number">
+                <a href={`tel:${formattedPhoneNumber}`}>{phoneNumber}</a>
+            </span>
+        </div>
+        <div class="c-banner__accessibility">
+            <span class="c-banner__accessibility-text">
+                {additionalInfo}
+            </span>
+            {
+                accessibilityIcon && (
+                    <span
+                        class="c-banner__accessibility-icon"
+                        set:html={accessibilityIcon}
+                    />
+                )
+            }
+        </div>
+    </div>
+</div>

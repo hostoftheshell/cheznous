@@ -1,0 +1,55 @@
+@use "breakpoints";
+
+.o-layout {
+    padding-top: 7.5rem;
+    margin-left: -1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.o-layout__item {
+    padding-left: 1.25rem;
+    box-sizing: border-box;
+    width: 100%;
+    flex: none;
+    @include breakpoints.breakpoint("md") {
+        width: 33.3333333333%;
+    }
+}
+
+.c-frame {
+    position: relative;
+    border: 1px solid var(--color-text);
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    aspect-ratio: 3 / 4;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.c-frame__heading {
+    padding: 1.094rem;
+    border-bottom: 1px solid var(--color-text);
+}
+.c-frame__heading-text {
+    font-size: 3rem;
+    font-weight: var(--weight-regular);
+}
+.c-frame__heading-text::first-letter {
+    text-transform: uppercase;
+}
+
+.c-frame__description {
+    padding: 0.625rem 1.094rem 1.094rem;
+    border-bottom: 1px solid var(--color-text);
+}
+
+.c-frame__description-text {
+    font-size: 1.125rem;
+    margin: 0;
+}
+
+.c-frame.-article,
+.c-frame__heading.-article {
+    border: none;
+}
