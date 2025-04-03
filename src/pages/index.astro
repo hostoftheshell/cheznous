@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Hero from "@components/Hero.astro";
-import Container from "@components/Container.astro";
-import Frame from "@components/Frame.astro";
+import RestaurantSection from "@components/RestaurantSection.astro";
+import type { RestaurantEntry } from "../types/restaurant";
 
 import { getCollection } from "astro:content";
 const [globalEntries, restaurantEntries] = await Promise.all([
@@ -11,12 +11,12 @@ const [globalEntries, restaurantEntries] = await Promise.all([
 ]);
 
 const restaurantText = globalEntries.find((e) => e.slug === "restaurant-text");
-if (!restaurantText) throw new Error("Missing restaurant-text entry");
+if (!restaurantText) throw new Error("'restaurant-text' est manquant");
 
-const sortedRestaurants = restaurantEntries.sort(
+const sortedRestaurants = [...restaurantEntries].sort(
     (a, b) => a.data.id - b.data.id,
 );
-const groupedRestaurants = [
+const groupedRestaurants: RestaurantEntry[][] = [
     sortedRestaurants.slice(0, 2),
     sortedRestaurants.slice(2, 3),
     sortedRestaurants.slice(3, 5),
@@ -29,44 +29,9 @@ const HERO_TITLE = "Pizza,\nPasta,\nDolce vita";
 <BaseLayout pageTitle={PAGE_TITLE}>
     <Hero title={HERO_TITLE} />
 
-    <section id="restaurant" class="c-section -padding-top">
-        <Container>
-            <div class="o-layout">
-                {
-                    groupedRestaurants.map((group, index) => (
-                        <div class="o-layout__item">
-                            {index === 1 && (
-                                <div class="c-frame -article">
-                                    <div class="c-frame__heading -article">
-                                        <h1>{PAGE_TITLE}</h1>
-                                        <h2>
-                                            {restaurantText.data.subheading ??
-                                                "Sous-titre non disponible."}
-                                        </h2>
-                                        <div style="white-space: pre-line;">
-                                            {restaurantText.data.paragraph ??
-                                                "Texte non disponible."}
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                            {group.map(({ data }) => (
-                                <Frame
-                                    key={data.id}
-                                    title={data.title}
-                                    description={data.description}
-                                    image={data.image}
-                                />
-                            ))}
-                        </div>
-                    ))
-                }
-            </div>
-        </Container>
-    </section>
-
-    <!-- Future contact section -->
-    <!-- <section class="contact">...</section> -->
-
-    <style></style>
+    <RestaurantSection
+        groupedRestaurants={groupedRestaurants}
+        restaurantText={restaurantText.data}
+        PAGE_TITLE={PAGE_TITLE}
+    />
 </BaseLayout>

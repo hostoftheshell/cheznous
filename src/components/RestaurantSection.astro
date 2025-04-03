@@ -1,0 +1,149 @@
+---
+import Container from "@components/Container.astro";
+import Frame from "@components/Frame.astro";
+import type { RestaurantEntry } from "../types/restaurant";
+interface Props {
+    groupedRestaurants: RestaurantEntry[][];
+    restaurantText: {
+        heading?: string;
+        subheading?: string;
+        paragraph?: string;
+    };
+    PAGE_TITLE: string;
+}
+const { groupedRestaurants, restaurantText, PAGE_TITLE } = Astro.props;
+---
+
+<!-- Scroll tracker (only need one per section) -->
+<section id="restaurant" class="c-section -padding-top">
+    <Container>
+        <div class="o-layout">
+            {
+                groupedRestaurants.map((group, index) => (
+                    <div
+                        class="o-layout__item"
+                        data-index={index}
+                        data-speed={
+                            index === 1 ? "0.8" : index === 2 ? "1.2" : "0"
+                        }
+                    >
+                        {index === 1 && (
+                            <div class="c-frame -article">
+                                <div class="c-frame__heading -article">
+                                    <h1>{PAGE_TITLE}</h1>
+                                    <h2>
+                                        {restaurantText.heading ??
+                                            "Titre non disponible."}
+                                    </h2>
+                                </div>
+                                <div class="c-frame__description -article">
+                                    <h3>
+                                        {restaurantText.subheading ??
+                                            "Sous-titre non disponible."}
+                                    </h3>
+                                    <div style="white-space: pre-line;">
+                                        {restaurantText.paragraph ??
+                                            "Texte non disponible."}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        {group.map(({ data }) => (
+                            <Frame
+                                title={data.title}
+                                description={data.description}
+                                image={data.image ?? undefined}
+                            />
+                        ))}
+                    </div>
+                ))
+            }
+        </div>
+    </Container>
+</section>
+<style>
+    .o-layout__item {
+        will-change: transform;
+        transition: transform 0.05s linear;
+    }
+</style>
+<script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+        const items = document.querySelectorAll(".o-layout__item");
+        const itemsArray = Array.from(items);
+        const animatedItems = itemsArray.filter(
+            (item) => parseFloat(item.getAttribute("data-speed") || "0") !== 0,
+        );
+
+        // Cache viewport height and precalculate values
+        let viewportHeight = window.innerHeight;
+        let maxScroll = document.body.scrollHeight - viewportHeight;
+        let maxTranslateY = -0.179407 * viewportHeight;
+        let baseSpeed = maxTranslateY / maxScroll;
+        let itemData = [];
+
+        // Precalculate data for each item
+        animatedItems.forEach((item) => {
+            const speedFactor = parseFloat(
+                item.getAttribute("data-speed") || "0",
+            );
+            itemData.push({
+                element: item,
+                speed: baseSpeed * speedFactor,
+            });
+        });
+
+        // Use requestAnimationFrame for smoother animations
+        let ticking = false;
+        let lastScrollY = window.scrollY;
+
+        function updateTransforms(scrollY) {
+            for (let i = 0; i < itemData.length; i++) {
+                const { element, speed } = itemData[i];
+                const translateY = scrollY * speed;
+                element.style.transform = `translateY(${translateY}px)`;
+            }
+            ticking = false;
+        }
+
+        function onScroll() {
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateTransforms(lastScrollY);
+                });
+                ticking = true;
+            }
+        }
+
+        // Recalculate on resize for responsive behavior
+        function onResize() {
+            viewportHeight = window.innerHeight;
+            maxScroll = document.body.scrollHeight - viewportHeight;
+            maxTranslateY = -0.179407 * viewportHeight;
+            baseSpeed = maxTranslateY / maxScroll;
+
+            // Update item data with new calculations
+            itemData = animatedItems.map((item) => {
+                const speedFactor = parseFloat(
+                    item.getAttribute("data-speed") || "0",
+                );
+                return {
+                    element: item,
+                    speed: baseSpeed * speedFactor,
+                };
+            });
+
+            // Update transforms immediately after resize
+            updateTransforms(lastScrollY);
+        }
+
+        // Add event listeners
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onResize, { passive: true });
+
+        // Initial update
+        onResize();
+        updateTransforms(lastScrollY);
+    });
+</script>
