@@ -3,4 +3,7 @@ import LogoDark from "@assets/logo/cheznous_dark.svg?raw";
 import LogoLight from "@assets/logo/cheznous_light.svg?raw";
 ---
 
-<div class="c-header__logo" data-scroll-toggle set:html={LogoLight} />
+<div class="c-header__logo" data-scroll-toggle>
+    <span class="logo__light" set:html={LogoLight} />
+    <span class="logo__dark" set:html={LogoDark} />
+</div>

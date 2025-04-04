@@ -5,10 +5,14 @@
 /* ============================= */
 
 .o-layout {
-    padding-top: 7.5rem;
+    padding-top: 0;
+
     margin-left: -1.25rem;
     display: flex;
     flex-wrap: wrap;
+    @include breakpoints.breakpoint("md") {
+        padding-top: 7.5rem;
+    }
 }
 
 .o-layout__item {
@@ -19,9 +23,16 @@
 
     @include breakpoints.breakpoint("md") {
         width: 33.3333333333%;
+        flex-direction: row;
     }
 }
 
+.o-layout__item[data-index="1"] {
+    order: -1;
+    @include breakpoints.breakpoint("md") {
+        order: 0;
+    }
+}
 /* ============================= */
 /* Frame */
 /* ============================= */
@@ -48,7 +59,7 @@
 }
 
 .c-frame__heading-text {
-    font-size: 3rem;
+    font-size: var(--font-size-h3);
     font-weight: var(--weight-regular);
 }
 
@@ -117,15 +128,18 @@
 
 .c-frame__heading.-article h2 {
     font-family: var(--font-body);
-    font-size: 3.875rem;
+    font-size: var(--font-size-h2);
     line-height: 1;
     text-transform: uppercase;
     margin-bottom: 1rem;
 }
 
 .c-frame__description.-article {
-    padding-top: var(--grid-margin);
     margin-bottom: 4.5rem;
+    padding-top: var(--grid-margin);
+    @include breakpoints.breakpoint("md") {
+        margin-bottom: 4.5rem;
+    }
 }
 
 .c-frame__description.-article h3 {

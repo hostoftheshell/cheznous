@@ -14,7 +14,6 @@ interface Props {
 const { groupedRestaurants, restaurantText, PAGE_TITLE } = Astro.props;
 ---
 
-<!-- Scroll tracker (only need one per section) -->
 <section id="restaurant" class="c-section -padding-top">
     <Container>
         <div class="o-layout">
@@ -24,7 +23,7 @@ const { groupedRestaurants, restaurantText, PAGE_TITLE } = Astro.props;
                         class="o-layout__item"
                         data-index={index}
                         data-speed={
-                            index === 1 ? "0.8" : index === 2 ? "1.2" : "0"
+                            index === 1 ? "1" : index === 2 ? "1.4" : "0"
                         }
                     >
                         {index === 1 && (
@@ -66,84 +65,23 @@ const { groupedRestaurants, restaurantText, PAGE_TITLE } = Astro.props;
         will-change: transform;
         transition: transform 0.05s linear;
     }
+
+    @media (max-width: 768px) {
+        .o-layout__item {
+            transform: none !important;
+            transition: none !important;
+            will-change: auto;
+        }
+    }
 </style>
+
 <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-        const items = document.querySelectorAll(".o-layout__item");
-        const itemsArray = Array.from(items);
-        const animatedItems = itemsArray.filter(
-            (item) => parseFloat(item.getAttribute("data-speed") || "0") !== 0,
-        );
-
-        // Cache viewport height and precalculate values
-        let viewportHeight = window.innerHeight;
-        let maxScroll = document.body.scrollHeight - viewportHeight;
-        let maxTranslateY = -0.179407 * viewportHeight;
-        let baseSpeed = maxTranslateY / maxScroll;
-        let itemData = [];
-
-        // Precalculate data for each item
-        animatedItems.forEach((item) => {
-            const speedFactor = parseFloat(
-                item.getAttribute("data-speed") || "0",
-            );
-            itemData.push({
-                element: item,
-                speed: baseSpeed * speedFactor,
-            });
-        });
-
-        // Use requestAnimationFrame for smoother animations
-        let ticking = false;
-        let lastScrollY = window.scrollY;
-
-        function updateTransforms(scrollY) {
-            for (let i = 0; i < itemData.length; i++) {
-                const { element, speed } = itemData[i];
-                const translateY = scrollY * speed;
-                element.style.transform = `translateY(${translateY}px)`;
-            }
-            ticking = false;
+    (function () {
+        if (window.innerWidth > 768) {
+            const script = document.createElement("script");
+            script.src = "/src/scripts/scroll-animation.js";
+            script.defer = true;
+            document.head.appendChild(script);
         }
-
-        function onScroll() {
-            lastScrollY = window.scrollY;
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    updateTransforms(lastScrollY);
-                });
-                ticking = true;
-            }
-        }
-
-        // Recalculate on resize for responsive behavior
-        function onResize() {
-            viewportHeight = window.innerHeight;
-            maxScroll = document.body.scrollHeight - viewportHeight;
-            maxTranslateY = -0.179407 * viewportHeight;
-            baseSpeed = maxTranslateY / maxScroll;
-
-            // Update item data with new calculations
-            itemData = animatedItems.map((item) => {
-                const speedFactor = parseFloat(
-                    item.getAttribute("data-speed") || "0",
-                );
-                return {
-                    element: item,
-                    speed: baseSpeed * speedFactor,
-                };
-            });
-
-            // Update transforms immediately after resize
-            updateTransforms(lastScrollY);
-        }
-
-        // Add event listeners
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", onResize, { passive: true });
-
-        // Initial update
-        onResize();
-        updateTransforms(lastScrollY);
-    });
+    })();
 </script>

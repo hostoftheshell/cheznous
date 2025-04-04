@@ -1,4 +1,5 @@
 function handleMobileNavToggle() {
+  const header = document.querySelector(".c-header");
   const toggleButton = document.querySelector(".c-header__mobile-nav-toggle");
   const navOverlay = document.querySelector(".c-mobile-nav-overlay");
   const hamburgerIcon = document.querySelector(
@@ -17,6 +18,7 @@ function handleMobileNavToggle() {
   const newState = !isExpanded;
 
   toggleButton.setAttribute("aria-expanded", String(newState));
+  header.classList.toggle("is-mobile-menu-open", newState);
   navOverlay?.classList.toggle("expanded", newState);
   hamburgerIcon?.classList.toggle("hidden", newState);
   closeIcon?.classList.toggle("hidden", !newState);

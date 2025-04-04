@@ -7,10 +7,12 @@ import Hamburger from "@components/Hamburger.astro";
 
 <div class="scroll-trigger"></div>
 <header class="c-header" data-scroll-toggle>
-    <Nav isMobile={false} />
-    <Logo />
-    <SocialNav />
-    <Hamburger />
+    <div class="c-header__inner" data-scroll-toggle>
+        <Nav isMobile={false} />
+        <Logo />
+        <SocialNav />
+        <Hamburger />
+    </div>
 </header>
 <div class="c-mobile-nav-overlay">
     <Nav isMobile={true} />
@@ -20,31 +22,27 @@ import Hamburger from "@components/Hamburger.astro";
 </script>
 
 <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-        const scrollThreshold = 50; // Must match the 'top' value in HTML
-        const elementsToToggle = document.querySelectorAll(
-            "[data-scroll-toggle]",
-        );
-        const trigger = document.querySelector(".scroll-trigger");
+    const scrollThreshold = 50;
+    const elementsToToggle = document.querySelectorAll("[data-scroll-toggle]");
+    const trigger = document.querySelector(".scroll-trigger");
 
-        if (trigger && elementsToToggle.length) {
-            let isScrolled = false;
+    if (trigger && elementsToToggle.length) {
+        let isScrolled = false;
 
-            new IntersectionObserver(
-                ([entry]) => {
-                    const newState = !entry.isIntersecting;
-                    if (newState !== isScrolled) {
-                        isScrolled = newState;
-                        elementsToToggle.forEach((el) => {
-                            el.classList.toggle("-scrolled", isScrolled);
-                        });
-                    }
-                },
-                {
-                    threshold: 0.1,
-                    rootMargin: `${scrollThreshold}px 0px 0px 0px`,
-                },
-            ).observe(trigger);
-        }
-    });
+        new IntersectionObserver(
+            ([entry]) => {
+                const newState = !entry.isIntersecting;
+                if (newState !== isScrolled) {
+                    isScrolled = newState;
+                    elementsToToggle.forEach((el) => {
+                        el.classList.toggle("-scrolled", isScrolled);
+                    });
+                }
+            },
+            {
+                threshold: 0.1,
+                rootMargin: `${scrollThreshold}px 0px 0px 0px`,
+            },
+        ).observe(trigger);
+    }
 </script>
