@@ -1,6 +1,7 @@
 ---
 import Container from "@components/Container.astro";
 import Frame from "@components/Frame.astro";
+import ScrollAnimation from "@scripts/ScrollAnimation";
 import type { RestaurantEntry } from "../types/restaurant";
 interface Props {
     groupedRestaurants: RestaurantEntry[][];
@@ -59,6 +60,7 @@ const { groupedRestaurants, restaurantText, PAGE_TITLE } = Astro.props;
             }
         </div>
     </Container>
+    <ScrollAnimation client:media="(min-width: 768px)" />
 </section>
 <style>
     .o-layout__item {
@@ -74,14 +76,3 @@ const { groupedRestaurants, restaurantText, PAGE_TITLE } = Astro.props;
         }
     }
 </style>
-
-<script is:inline>
-    (function () {
-        if (window.innerWidth > 768) {
-            const script = document.createElement("script");
-            script.src = "/src/scripts/scroll-animation.js";
-            script.defer = true;
-            document.head.appendChild(script);
-        }
-    })();
-</script>

@@ -1,0 +1,64 @@
+import { useEffect, useState } from "react";
+
+export default function MobileNavToggle() {
+  // Use state to track menu open/closed
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Function to toggle the menu
+  const toggleMenu = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  // Use effect to handle DOM updates when state changes
+  useEffect(() => {
+    // Find all the elements we need to manipulate
+    const header = document.querySelector(".c-header");
+    const toggleButton = document.querySelector(".c-header__mobile-nav-toggle");
+    const navOverlay = document.querySelector(".c-mobile-nav-overlay");
+    const hamburgerIcon = document.querySelector(
+      ".c-header__mobile-nav-toggle-icon--hamburger",
+    );
+    const closeIcon = document.querySelector(
+      ".c-header__mobile-nav-toggle-icon--close",
+    );
+    const socialIcons = document.querySelectorAll(
+      ".c-header__social-icon, .c-header__social-link",
+    );
+
+    // Bail if elements not found
+    if (!toggleButton) return;
+
+    // Update the DOM based on isOpen state
+    toggleButton.setAttribute("aria-expanded", String(isOpen));
+    header.classList.toggle("is-mobile-menu-open", isOpen);
+    navOverlay?.classList.toggle("expanded", isOpen);
+    hamburgerIcon?.classList.toggle("hidden", isOpen);
+    closeIcon?.classList.toggle("hidden", !isOpen);
+    socialIcons?.forEach((icon) =>
+      icon.classList.toggle("-mobile-display", isOpen),
+    );
+    document.body.style.overflow = isOpen ? "hidden" : "";
+
+    // Event cleanup function (only for handling click events outside this effect)
+    return () => {
+      // No need for cleanup since we're just adding a click handler in the component render
+    };
+  }, [isOpen]); // Re-run effect whenever isOpen changes
+
+  // Set up the click handler when component mounts
+  useEffect(() => {
+    const toggleButton = document.querySelector(".c-header__mobile-nav-toggle");
+    if (!toggleButton) return;
+
+    // Add click event listener
+    toggleButton.addEventListener("click", toggleMenu, { passive: true });
+
+    // Clean up when component unmounts
+    return () => {
+      toggleButton.removeEventListener("click", toggleMenu);
+    };
+  }, []); // Empty array ensures this only runs once on mount
+
+  // This component doesn't render anything visible
+  return null;
+}

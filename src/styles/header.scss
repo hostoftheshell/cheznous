@@ -24,13 +24,15 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 12rem;
+    height: 15rem;
     padding: var(--grid-margin) var(--grid-margin) 0 var(--grid-margin);
     box-sizing: border-box;
     z-index: var(--z-index-top);
-    transition: all 0.3s ease-in-out;
-    border: 2px solid transparent;
-    outline: 2px solid transparent;
+    transition:
+        height 0.3s ease-in-out,
+        padding 0.3s ease-in-out;
+    border: 1px solid transparent;
+    outline: 1px solid transparent;
 }
 
 .c-header__inner {
