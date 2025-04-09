@@ -9,6 +9,11 @@ export default function MobileNavToggle() {
     setIsOpen((prevState) => !prevState);
   };
 
+  // Function to close the menu
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   // Use effect to handle DOM updates when state changes
   useEffect(() => {
     // Find all the elements we need to manipulate
@@ -38,27 +43,30 @@ export default function MobileNavToggle() {
       icon.classList.toggle("-mobile-display", isOpen),
     );
     document.body.style.overflow = isOpen ? "hidden" : "";
-
-    // Event cleanup function (only for handling click events outside this effect)
-    return () => {
-      // No need for cleanup since we're just adding a click handler in the component render
-    };
   }, [isOpen]); // Re-run effect whenever isOpen changes
 
-  // Set up the click handler when component mounts
+  // Set up the click handlers when component mounts
   useEffect(() => {
     const toggleButton = document.querySelector(".c-header__mobile-nav-toggle");
+    const navLinks = document.querySelectorAll(".c-header__mobile-nav_link");
+
     if (!toggleButton) return;
 
-    // Add click event listener
+    // Add click event listener to toggle button
     toggleButton.addEventListener("click", toggleMenu, { passive: true });
+
+    // Add click event listeners to all nav links
+    navLinks.forEach((link) => {
+      link.addEventListener("click", closeMenu, { passive: true });
+    });
 
     // Clean up when component unmounts
     return () => {
       toggleButton.removeEventListener("click", toggleMenu);
+      navLinks.forEach((link) => {
+        link.removeEventListener("click", closeMenu);
+      });
     };
   }, []); // Empty array ensures this only runs once on mount
-
-  // This component doesn't render anything visible
   return null;
 }

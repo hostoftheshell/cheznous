@@ -1,9 +1,15 @@
-function setVhVariable() {
-  document.documentElement.style.setProperty(
-    "--vh",
-    `${window.innerHeight / 100}px`,
-  );
+function setVhAndLayoutVariables() {
+  const root = document.documentElement;
+  root.style.setProperty("--vh", `${window.innerHeight / 100}px`);
+
+  // Grab header and banner elements
+
+  const banner = document.querySelector(".c-banner");
+
+  const bannerHeight = banner?.offsetHeight || 0;
+
+  root.style.setProperty("--h-banner", `${bannerHeight}px`);
 }
 
-setVhVariable();
-window.addEventListener("resize", setVhVariable);
+setVhAndLayoutVariables();
+window.addEventListener("resize", setVhAndLayoutVariables);

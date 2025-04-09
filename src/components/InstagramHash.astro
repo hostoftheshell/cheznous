@@ -1,0 +1,145 @@
+---
+import {
+    fetchPostsUsingPredefinedHashtagId,
+    fetchInstagramAccountInfo,
+    type InstagramPost,
+    type InstagramAccountInfo,
+} from "../lib/instagram";
+import { siteConfig } from "@content/config";
+
+const pageTitle = siteConfig.titles.SITE_TITLE;
+const instagram = siteConfig.socials.instagram;
+
+// Initialize variables with proper types
+let posts: InstagramPost[] = [];
+let accountInfo: InstagramAccountInfo | null = null;
+let latestPost: InstagramPost | null = null;
+let formattedCaption = "";
+
+try {
+    // Fetch both Instagram posts and account info in parallel
+    const [postsResult, accountInfoResult] = await Promise.all([
+        fetchPostsUsingPredefinedHashtagId(),
+        fetchInstagramAccountInfo(),
+    ]);
+
+    posts = postsResult;
+    accountInfo = accountInfoResult;
+
+    console.log(`Fetched ${posts.length} posts at build time`);
+
+    // Process the post image if available
+    if (posts.length > 0 && posts[0].media_url) {
+        try {
+            const imageResponse = await fetch(posts[0].media_url);
+            if (imageResponse.ok) {
+                const arrayBuffer = await imageResponse.arrayBuffer();
+                const contentType =
+                    imageResponse.headers.get("content-type") || "image/jpeg";
+                posts[0].data_url = `data:${contentType};base64,${Buffer.from(arrayBuffer).toString("base64")}`;
+            }
+        } catch (error) {
+            console.error(
+                `Failed to fetch image for post ${posts[0].id}:`,
+                error,
+            );
+        }
+    }
+
+    latestPost = posts.length > 0 ? posts[0] : null;
+
+    if (latestPost?.caption) {
+        formattedCaption = latestPost.caption.replace(
+            /#(\w+)/g,
+            '<span class="c-menu-daily__caption-content_hashtag">#$1</span>',
+        );
+    }
+} catch (error) {
+    console.error("Error fetching Instagram data:", error);
+}
+---
+
+<div class="c-menu-daily">
+    <div class="c-menu-daily__heading">
+        <h3 class="c-menu-daily__heading-text">
+            l'ardoise du <span
+                >{
+                    latestPost
+                        ? new Date(latestPost.timestamp).toLocaleDateString(
+                              "fr-FR",
+                              {
+                                  day: "numeric",
+                                  month: "long",
+                                  year: "numeric",
+                              },
+                          )
+                        : "aujourd'hui"
+                }</span
+            >
+        </h3>
+    </div>
+    {
+        latestPost ? (
+            <div class="c-menu-daily__card">
+                {latestPost.data_url ? (
+                    <div class="c-menu-daily__img">
+                        <figure class="c-menu-daily__img-figure">
+                            <img
+                                src={latestPost.data_url}
+                                alt="ardoise du jour"
+                                loading="lazy"
+                            />
+                        </figure>
+                    </div>
+                ) : (
+                    <div class="c-menu-daily__img--placeholder">
+                        Image non disponible
+                    </div>
+                )}
+                <div class="c-menu-daily__infos">
+                    {accountInfo && (
+                        <>
+                            <div class="c-menu-daily__avatar">
+                                <figure class="c-menu-daily__avatar-img">
+                                    {accountInfo.avatarDataUrl && (
+                                        <img
+                                            src={accountInfo.avatarDataUrl}
+                                            alt={`@${accountInfo.username || "instagram"}`}
+                                            width="40"
+                                            height="40"
+                                        />
+                                    )}
+                                </figure>
+                            </div>
+                            <div class="c-menu-daily__caption">
+                                <div class="c-menu-daily__caption-names">
+                                    <span class="c-menu-daily__caption-name">
+                                        {pageTitle}
+                                    </span>
+                                    {accountInfo.username && (
+                                        <span class="c-menu-daily__caption-username">
+                                            <a
+                                                href={instagram}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                @{accountInfo.username}
+                                            </a>
+                                        </span>
+                                    )}
+                                </div>
+                                <div class="c-menu-daily__caption-content">
+                                    <div set:html={formattedCaption} />
+                                </div>
+                            </div>
+                        </>
+                    )}
+                </div>
+            </div>
+        ) : (
+            <p class="c-menu-daily__empty-state">
+                Aucune publication trouvée pour aujourd'hui.
+            </p>
+        )
+    }
+</div>

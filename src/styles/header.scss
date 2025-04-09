@@ -72,7 +72,7 @@
     height: 100%;
     transition: opacity 0.3s ease;
 
-    @include breakpoints.breakpoint("lg") {
+    @include breakpoints.breakpoint("md") {
         top: -0.8rem;
     }
 }
@@ -245,7 +245,7 @@
     height: 6rem;
 
     @include breakpoints.breakpoint("lg") {
-        height: var(--h-header);
+        height: 7.8rem;
     }
 }
 

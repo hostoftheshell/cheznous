@@ -8,14 +8,16 @@
     --color-landing-ui-dark: #432918;
     --color-primary: #432918;
     --color-secondary: #fff4e5;
+    --color-link: #98676a;
 
     /* Font Families */
     --font-title: "Bodoni Moda Variable", serif;
     --font-heading: "Fraunces Variable", serif;
     --font-body: "Metropolis", sans-serif;
-    --font-size-h1: clamp(70px, 0.05 * calc(100 * var(--vw, 1vw)), 100px);
+    --font-size-h1: clamp(70px, 0.05 * calc(100 * var(--vw, 1vw)), 96px);
     --font-size-h2: clamp(34px, 0.034 * calc(100 * var(--vw, 1vw)), 68px);
     --font-size-h3: clamp(34px, 0.029 * calc(100 * var(--vw, 1vw)), 58px);
+    --font-size-h4: clamp(24px, 0.024 * calc(100 * var(--vw, 1vw)), 36px);
 
     /* Font Weights */
     --weight-light: 300;
@@ -34,7 +36,7 @@
     --z-index-top: 1000;
 
     --h-header: 7.8rem;
-    --h-banner: 5.625rem;
+
     --padding-banner: 0.625rem;
 }
 

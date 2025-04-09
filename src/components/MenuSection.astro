@@ -1,3 +1,36 @@
 ---
-
+import Container from "@components/Container.astro";
+import { getCollection } from "astro:content";
+import InstagramHash from "@components/InstagramHash.astro";
+const menuEntries = await getCollection("menu");
+const menuText = menuEntries.find((entry) => entry.slug === "menu-text");
+const items = menuText?.data.menus ?? [];
 ---
+
+<section id="menus" class="c-section">
+    <div class="o-layout__menus">
+        <div class="c-menu-principal">
+            <ul class="c-menu-principal_list">
+                {
+                    items.length > 0 ? (
+                        items.map((item) => (
+                            <li>
+                                <a
+                                    href={item.url}
+                                    class="c-menu-principal_link"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {item.title}
+                                </a>
+                            </li>
+                        ))
+                    ) : (
+                        <li>Aucun élément disponible pour le moment</li>
+                    )
+                }
+            </ul>
+        </div>
+        <InstagramHash />
+    </div>
+</section>

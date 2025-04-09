@@ -2,8 +2,8 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Hero from "@components/Hero.astro";
 import RestaurantSection from "@components/RestaurantSection.astro";
+import MenuSection from "@components/MenuSection.astro";
 import type { RestaurantEntry } from "../types/restaurant";
-
 import { getCollection } from "astro:content";
 const [globalEntries, restaurantEntries] = await Promise.all([
     getCollection("global"),
@@ -21,17 +21,19 @@ const groupedRestaurants: RestaurantEntry[][] = [
     sortedRestaurants.slice(2, 3),
     sortedRestaurants.slice(3, 5),
 ];
-
-const PAGE_TITLE = "Chez Nous";
-const HERO_TITLE = "Pizza,\nPasta,\nDolce vita";
+import { siteConfig } from "@content/config";
+const pageTitle = siteConfig.titles.SITE_TITLE;
+const heroTitle = siteConfig.titles.HERO_TITLE;
 ---
 
-<BaseLayout pageTitle={PAGE_TITLE}>
-    <Hero title={HERO_TITLE} />
+<BaseLayout pageTitle={pageTitle}>
+    <Hero title={heroTitle} />
 
     <RestaurantSection
         groupedRestaurants={groupedRestaurants}
         restaurantText={restaurantText.data}
-        PAGE_TITLE={PAGE_TITLE}
+        PAGE_TITLE={pageTitle}
     />
+
+    <MenuSection pageTitle={pageTitle} />
 </BaseLayout>

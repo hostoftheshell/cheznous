@@ -5,6 +5,7 @@
 @use "hero";
 @use "banner";
 @use "restaurant";
+@use "menus";
 @import "normalize.css";
 
 html {
@@ -54,7 +55,7 @@ figure {
 }
 .c-section.-padding-top {
     padding-top: 6.5rem;
-    @include breakpoints.breakpoint("md") {
+    @include breakpoints.breakpoint("lg") {
         padding-top: 11.25rem;
     }
 }
