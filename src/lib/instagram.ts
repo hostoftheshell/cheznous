@@ -21,8 +21,8 @@ export interface InstagramPost {
 
 export interface InstagramAccountInfo {
   username: string | null;
-  profilePictureUrl: string | null;
-  avatarDataUrl: string | null;
+  profile_picture_url: string | null;
+  avatar_data_url: string | null;
 }
 
 export async function fetchPostsUsingPredefinedHashtagId(): Promise<
@@ -85,8 +85,8 @@ export async function fetchInstagramAccountInfo(): Promise<InstagramAccountInfo 
 
     return {
       username: accountInfo.username || null,
-      profilePictureUrl: accountInfo.profile_picture_url || null,
-      avatarDataUrl: accountInfo.avatar_data_url || null,
+      profile_picture_url: accountInfo.profile_picture_url || null,
+      avatar_data_url: accountInfo.avatar_data_url || null,
     };
   } catch (error) {
     console.error("Error fetching Instagram account info:", error);

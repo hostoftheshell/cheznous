@@ -5,6 +5,7 @@ import {
     type InstagramPost,
     type InstagramAccountInfo,
 } from "../lib/instagram";
+import { convertImageToWebPDataURL } from "../lib/image";
 import { siteConfig } from "@content/config";
 
 const pageTitle = siteConfig.titles.SITE_TITLE;
@@ -28,21 +29,32 @@ try {
 
     console.log(`Fetched ${posts.length} posts at build time`);
 
-    // Process the post image if available
     if (posts.length > 0 && posts[0].media_url) {
         try {
             const imageResponse = await fetch(posts[0].media_url);
             if (imageResponse.ok) {
                 const arrayBuffer = await imageResponse.arrayBuffer();
-                const contentType =
-                    imageResponse.headers.get("content-type") || "image/jpeg";
-                posts[0].data_url = `data:${contentType};base64,${Buffer.from(arrayBuffer).toString("base64")}`;
+                posts[0].data_url =
+                    await convertImageToWebPDataURL(arrayBuffer);
             }
         } catch (error) {
             console.error(
                 `Failed to fetch image for post ${posts[0].id}:`,
                 error,
             );
+        }
+    }
+
+    if (accountInfo && accountInfo.profile_picture_url) {
+        try {
+            const imageResponse = await fetch(accountInfo.profile_picture_url);
+            if (imageResponse.ok) {
+                const arrayBuffer = await imageResponse.arrayBuffer();
+                accountInfo.avatar_data_url =
+                    await convertImageToWebPDataURL(arrayBuffer);
+            }
+        } catch (error) {
+            console.error("Failed to fetch avatar image:", error);
         }
     }
 
@@ -88,6 +100,7 @@ try {
                                 src={latestPost.data_url}
                                 alt="ardoise du jour"
                                 loading="lazy"
+                                decoding="async"
                             />
                         </figure>
                     </div>
@@ -101,12 +114,14 @@ try {
                         <>
                             <div class="c-menu-daily__avatar">
                                 <figure class="c-menu-daily__avatar-img">
-                                    {accountInfo.avatarDataUrl && (
+                                    {accountInfo.avatar_data_url && (
                                         <img
-                                            src={accountInfo.avatarDataUrl}
+                                            src={accountInfo.avatar_data_url}
                                             alt={`@${accountInfo.username || "instagram"}`}
                                             width="40"
                                             height="40"
+                                            loading="lazy"
+                                            decoding="async"
                                         />
                                     )}
                                 </figure>

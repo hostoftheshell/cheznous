@@ -20,5 +20,5 @@ import ScrollObserver from "@scripts/ScrollObserver";
     <Nav isMobile={true} />
 </div>
 
-<MobileNavToggle client:load />
-<ScrollObserver client:load scrollThreshold={50} threshold={0.1} />
+<MobileNavToggle client:idle />
+<ScrollObserver client:idle scrollThreshold={50} threshold={0.1} />

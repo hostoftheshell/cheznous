@@ -34,12 +34,14 @@
         font-size: 3.6rem;
     }
 }
+
 .svg-hero__heading {
     color: var(--color-landing-ui-light);
-    width: 100vw;
+    width: 1867px;
+    height: 180px;
     display: none;
     @include breakpoints.breakpoint("lg") {
-        display: unset;
+        display: block;
     }
 }
 
