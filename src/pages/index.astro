@@ -1,8 +1,11 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import Hero from "@components/Hero.astro";
-import RestaurantSection from "@components/RestaurantSection.astro";
-import MenuSection from "@components/MenuSection.astro";
+import {
+    Hero,
+    RestaurantSection,
+    MenuSection,
+    EventSection,
+} from "@components/index";
 import type { RestaurantEntry } from "../types/restaurant";
 import { getCollection } from "astro:content";
 const [globalEntries, restaurantEntries] = await Promise.all([
@@ -36,4 +39,5 @@ const heroTitle = siteConfig.titles.HERO_TITLE;
     />
 
     <MenuSection pageTitle={pageTitle} />
+    <EventSection />
 </BaseLayout>

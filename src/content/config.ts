@@ -1,5 +1,26 @@
 import { defineCollection, z } from "astro:content";
 
+const eventCollection = defineCollection({
+  schema: ({ image }) =>
+    z.object({
+      isVisible: z.boolean().default(true),
+      heading: z.string().max(50).optional().nullable(),
+      image: z.object({
+        src: image(),
+        alt: z.string().max(500).trim(),
+      }),
+      title: z.string().max(100),
+      date: z.date(),
+      time: z
+        .string()
+        .regex(/^\d{2}:\d{2}$/)
+        .optional()
+        .nullable(),
+      description: z.string().max(1000),
+      link: z.string().url().optional().nullable(),
+    }),
+});
+
 const restaurantCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
@@ -42,6 +63,7 @@ export const collections = {
   restaurant: restaurantCollection,
   global: globalCollection,
   menu: menuCollection,
+  event: eventCollection,
 };
 
 export interface Titles {

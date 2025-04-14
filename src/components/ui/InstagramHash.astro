@@ -4,8 +4,8 @@ import {
     fetchInstagramAccountInfo,
     type InstagramPost,
     type InstagramAccountInfo,
-} from "../lib/instagram";
-import { convertImageToWebPDataURL } from "../lib/image";
+} from "@lib/instagram";
+import { convertImageToWebPDataURL } from "@lib/image";
 import { siteConfig } from "@content/config";
 
 const pageTitle = siteConfig.titles.SITE_TITLE;
@@ -80,12 +80,13 @@ try {
                         ? new Date(latestPost.timestamp).toLocaleDateString(
                               "fr-FR",
                               {
+                                  weekday: "long",
                                   day: "numeric",
                                   month: "long",
                                   year: "numeric",
                               },
                           )
-                        : "aujourd'hui"
+                        : "jour"
                 }</span
             >
         </h3>
@@ -96,12 +97,19 @@ try {
                 {latestPost.data_url ? (
                     <div class="c-menu-daily__img">
                         <figure class="c-menu-daily__img-figure">
-                            <img
-                                src={latestPost.data_url}
-                                alt="ardoise du jour"
-                                loading="lazy"
-                                decoding="async"
-                            />
+                            <a
+                                href={instagram}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Voir le profil Instagram dans un nouvel onglet"
+                            >
+                                <img
+                                    src={latestPost.data_url}
+                                    alt="ardoise du jour"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </a>
                         </figure>
                     </div>
                 ) : (

@@ -1,16 +1,14 @@
 ---
-import "@styles/global.scss";
-import Header from "@components/Header.astro";
+import "@styles/_imports.scss";
 import { Seo } from "astro-seo-meta";
-import Banner from "@components/Banner.astro";
+import { Header, Banner } from "@components/index";
 
-// Import the font styles
-import "@fontsource/metropolis";
-import "@fontsource-variable/fraunces";
+import "@fontsource/metropolis/300.css";
+import "@fontsource/metropolis/400.css";
+import "@fontsource-variable/fraunces/wght.css";
 
-// Import the font files as URLs
-import metropolis400Woff2 from "@fontsource/metropolis/files/metropolis-latin-400-normal.woff2?url";
 import metropolis300Woff2 from "@fontsource/metropolis/files/metropolis-latin-300-normal.woff2?url";
+import metropolis400Woff2 from "@fontsource/metropolis/files/metropolis-latin-400-normal.woff2?url";
 import frauncesWoff2 from "@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url";
 
 const { pageTitle } = Astro.props;
@@ -24,6 +22,13 @@ const { pageTitle } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+        <script is:inline type="module">
+            import { setLayoutVariables } from "/src/scripts/set-layout-variables.js";
+            requestAnimationFrame(() => {
+                setLayoutVariables();
+            });
+            window.addEventListener("resize", setLayoutVariables);
+        </script>
         <!-- Use the imported font URLs for preloading -->
         <link
             rel="preload"
@@ -62,8 +67,5 @@ const { pageTitle } = Astro.props;
             additionalInfo="accessibilité PMR"
             phoneNumber="03 86 51 89 56"
         />
-        <script>
-            import "../scripts/vh-responsive.js";
-        </script>
     </body>
 </html>

@@ -1,0 +1,99 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+interface Props {
+    title?: string;
+}
+
+const { title = "Événements à venir" } = Astro.props;
+
+const allEvents = await getCollection("event");
+const visibleEvents = allEvents.filter(
+    (event) => event.data.isVisible !== false,
+);
+
+const event = allEvents[0];
+---
+
+{
+    visibleEvents.length > 0 && (
+        <section id="events" class="c-section">
+            <div class="o-layout__events">
+                <div class="c-events__left">
+                    <div class="c-events__heading">
+                        <h3 class="c-events__heading-text">
+                            <a
+                                href={event.data.link}
+                                title={`En savoir plus sur l'événement "${event.data.title ?? title}"`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {event.data.heading ?? title}
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="c-events__img">
+                        <figure class="c-events__img-figure">
+                            {event.data.image?.src ? (
+                                <a
+                                    href={event.data.link}
+                                    title={`En savoir plus sur l'événement "${event.data.title}"`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Image
+                                        src={event.data.image.src}
+                                        alt={`Image de l'événement ${event.data.image.alt}`}
+                                        loading="lazy"
+                                    />
+                                </a>
+                            ) : null}
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="c-events__right">
+                    <div class="c-events__content">
+                        <h4 class="c-events__title">
+                            <a
+                                href={event.data.link}
+                                title={`Voir les détails de "${event.data.title}"`}
+                            >
+                                {event.data.title}
+                            </a>
+                        </h4>
+
+                        <time
+                          class="c-events__datetime"
+                          datetime={event.data.date.toISOString().split("T")[0]}
+                        >
+                          {new Date(event.data.date).toLocaleDateString("fr-FR", {
+                            weekday: "long",
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                          <br />
+                          à {event.data.time}
+                        </time>
+
+                        <p class="c-events__description">
+                            {event.data.description}
+                        </p>
+
+                        <a
+                            class="c-events__link"
+                            href={event.data.link}
+                            title={`Plus d'infos sur "${event.data.title}"`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            En savoir plus
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}

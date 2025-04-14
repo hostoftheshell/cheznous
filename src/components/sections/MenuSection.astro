@@ -1,7 +1,6 @@
 ---
-import Container from "@components/Container.astro";
+import InstagramHash from "@components/ui/InstagramHash.astro";
 import { getCollection } from "astro:content";
-import InstagramHash from "@components/InstagramHash.astro";
 const menuEntries = await getCollection("menu");
 const menuText = menuEntries.find((entry) => entry.slug === "menu-text");
 const items = menuText?.data.menus ?? [];

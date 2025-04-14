@@ -1,11 +1,12 @@
-@use "breakpoints";
+@use "../utilities/breakpoints";
+@use "../utilities/mixins";
 
 #menus {
     padding-top: 6.5rem;
-    @include breakpoints.breakpoint("md") {
+    @include mixins.breakpoint("md") {
         padding-top: 0;
     }
-    @include breakpoints.breakpoint("lg") {
+    @include mixins.breakpoint("lg") {
         padding-top: 11rem;
     }
 }
@@ -14,25 +15,23 @@
     font-size: clamp(2rem, 0.05 * calc(100 * var(--vw, 1vw)), 6rem);
     font-weight: var(--weight-light);
     font-family: var(--font-heading);
-    @include breakpoints.breakpoint("xl") {
+    @include mixins.breakpoint("xl") {
         display: none;
     }
 }
 .o-layout__menus {
     position: relative;
-    //min-height: calc(100 * var(--vh, 1vh) - var(--h-banner) - var(--h-header));
     box-sizing: border-box;
     margin-bottom: var(--h-banner);
-    padding: 0 var(--grid-margin);
+    padding: var(--grid-margin) var(--grid-margin) 0 var(--grid-margin);
 }
 .o-layout__menus {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    row-gap: 4.5rem;
-    padding-top: var(--grid-margin);
-    @include breakpoints.breakpoint("xl") {
+    row-gap: 8.5rem;
+    @include mixins.breakpoint("xl") {
         flex-direction: row;
     }
 }
@@ -45,10 +44,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    @include breakpoints.breakpoint("md") {
+    @include mixins.breakpoint("md") {
         width: 50%;
     }
-    @include breakpoints.breakpoint("xl") {
+    @include mixins.breakpoint("xl") {
         width: 22%;
     }
 }
@@ -58,7 +57,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    @include breakpoints.breakpoint("xl") {
+    @include mixins.breakpoint("xl") {
         width: 60%;
     }
 }
@@ -82,14 +81,14 @@
         font-weight 0.3s ease,
         color 0.3s ease,
         border-bottom 0.3s ease;
-    @include breakpoints.breakpoint("xl") {
+    @include mixins.breakpoint("xl") {
         padding: 1.625rem 0;
     }
 }
 
 .c-menu-principal_link:hover {
     color: var(--color-link);
-    font-weight: var(--weight-semibold);
+    font-weight: var(--weight-medium);
     border-bottom: 1px solid var(--color-link);
 }
 
@@ -118,6 +117,14 @@
 /* Image */
 /* ============================= */
 
+.c-menu-daily__img-figure {
+    border-radius: 8px;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+}
+
 .c-menu-daily__img::before {
     content: "";
     position: absolute;
@@ -129,16 +136,12 @@
 }
 
 .c-menu-daily__img {
-    position: relative;
     width: 100%;
     padding: var(--grid-margin);
-    box-sizing: border-box;
-}
-
-.c-menu-daily__img-figure {
-    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    overflow: hidden;
     box-sizing: border-box;
 }
 
@@ -148,6 +151,12 @@
     object-fit: cover;
     display: block;
     border-radius: inherit;
+    transform: scale(1.07);
+    transition: transform 0.5s cubic-bezier(0.38, 0.005, 0.215, 1);
+}
+
+.c-menu-daily__img-figure:hover img {
+    transform: scale(1);
 }
 
 .c-menu-daily__infos {
@@ -160,6 +169,7 @@
 }
 
 .c-menu-daily__avatar {
+    border: solid 1px var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: center;

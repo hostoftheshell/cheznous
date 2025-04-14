@@ -1,8 +1,7 @@
 ---
-import Container from "@components/Container.astro";
-import Frame from "@components/Frame.astro";
+import { Container, Frame } from "@components/index";
 import ScrollAnimation from "@scripts/ScrollAnimation";
-import type { RestaurantEntry } from "../types/restaurant";
+import type { RestaurantEntry } from "../../types/restaurant";
 interface Props {
     groupedRestaurants: RestaurantEntry[][];
     restaurantText: {

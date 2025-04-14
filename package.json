@@ -1,6 +1,11 @@
 {
   "name": "cheznous89270",
   "type": "module",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
@@ -19,5 +24,11 @@
     "react-dom": "^19.1.0",
     "sass": "^1.86.0",
     "sharp": "^0.34.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "css-declaration-sorter": "^7.2.0",
+    "cssnano": "^7.0.6",
+    "postcss": "^8.5.3"
   }
 }
