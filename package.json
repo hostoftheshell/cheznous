@@ -1,17 +1,17 @@
 {
   "name": "cheznous89270",
   "type": "module",
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ],
+  
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run styles && astro build && npm run postbuild",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "sass": "sass --load-path=node_modules src/styles/_imports.scss src/styles/index.raw.css",
+    "postcss": "postcss src/styles/index.raw.css -o src/styles/index.css",
+    "styles": "npm run sass && npm run postcss",
+    "postbuild": "grep -r '\\-webkit\\-' ./dist || echo 'No -webkit- found (autoprefixer may not be working)'"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.3",
@@ -29,6 +29,7 @@
     "autoprefixer": "^10.4.21",
     "css-declaration-sorter": "^7.2.0",
     "cssnano": "^7.0.6",
-    "postcss": "^8.5.3"
+    "postcss": "^8.4.35",
+    "postcss-cli": "^11.0.0"
   }
 }
