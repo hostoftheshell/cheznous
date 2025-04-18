@@ -10,10 +10,10 @@
       "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"],
       "@styles/*": ["src/styles/*"],
-      "@types/*": ["src/types/*"],
       "@scripts/*": ["src/scripts/*"],
       "@content/*": ["src/content/*"],
-      "@lib/*": ["src/lib/*"]
+      "@lib/*": ["src/lib/*"],
+      "@types*/": ["src/types/*"]
     }
   }
 }

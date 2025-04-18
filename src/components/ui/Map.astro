@@ -1,0 +1,70 @@
+---
+interface Props {
+    src: string;
+    title?: string;
+    width?: number;
+    height?: number;
+    ratio?: "16/9" | "4/3" | "1/1" | "21/9";
+    loading?: "lazy" | "eager";
+    allowFullScreen?: boolean;
+}
+
+const {
+    src,
+    title = "Carte interactive",
+    width,
+    height,
+    ratio = "16/9",
+    loading = "lazy",
+    allowFullScreen = true,
+} = Astro.props;
+
+const hasFixedSize = width && height;
+
+const ratioMap = {
+    "16/9": "56.25%",
+    "4/3": "75%",
+    "1/1": "100%",
+    "21/9": "42.85%",
+};
+const paddingBottom = ratioMap[ratio] ?? "56.25%";
+---
+
+<div
+    class="c-iframe-embed"
+    style={hasFixedSize
+        ? `width: ${width}px; height: ${height}px;`
+        : `--aspect-ratio: ${paddingBottom};`}
+>
+    <iframe
+        src={src}
+        title={title}
+        loading={loading}
+        allowfullscreen={allowFullScreen}
+        referrerpolicy="no-referrer-when-downgrade"
+        style="border: 0;"></iframe>
+</div>
+
+<style>
+    .c-iframe-embed {
+        position: relative;
+        width: 100%;
+        max-width: 590px;
+        margin-inline: auto;
+    }
+
+    .c-iframe-embed::before {
+        content: "";
+        display: block;
+        padding-bottom: 76.27%; /* ≈ 450px / 590px for your ratio */
+    }
+
+    .c-iframe-embed iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+</style>

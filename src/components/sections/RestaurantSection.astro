@@ -1,7 +1,7 @@
 ---
-import { Container, Frame } from "@components/index";
-import ScrollAnimation from "@scripts/ScrollAnimation";
-import type { RestaurantEntry } from "../../types/restaurant";
+import { ContentSection } from "@components/index";
+import type { RestaurantEntry } from "../../types/content";
+
 interface Props {
     groupedRestaurants: RestaurantEntry[][];
     restaurantText: {
@@ -9,69 +9,13 @@ interface Props {
         subheading?: string;
         paragraph?: string;
     };
-    PAGE_TITLE: string;
 }
-const { groupedRestaurants, restaurantText, PAGE_TITLE } = Astro.props;
+
+const { groupedRestaurants, restaurantText } = Astro.props;
 ---
 
-<section id="restaurant" class="c-section -padding-top">
-    <Container>
-        <div class="o-layout">
-            {
-                groupedRestaurants.map((group, index) => (
-                    <div
-                        class="o-layout__item"
-                        data-index={index}
-                        data-speed={
-                            index === 1 ? "1" : index === 2 ? "1.4" : "0"
-                        }
-                    >
-                        {index === 1 && (
-                            <div class="c-frame -article">
-                                <div class="c-frame__heading -article">
-                                    <h1>{PAGE_TITLE}</h1>
-                                    <h2>
-                                        {restaurantText.heading ??
-                                            "Titre non disponible."}
-                                    </h2>
-                                </div>
-                                <div class="c-frame__description -article">
-                                    <h3>
-                                        {restaurantText.subheading ??
-                                            "Sous-titre non disponible."}
-                                    </h3>
-                                    <div style="white-space: pre-line;">
-                                        {restaurantText.paragraph ??
-                                            "Texte non disponible."}
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                        {group.map(({ data }) => (
-                            <Frame
-                                title={data.title}
-                                description={data.description}
-                                image={data.image ?? undefined}
-                            />
-                        ))}
-                    </div>
-                ))
-            }
-        </div>
-    </Container>
-    <ScrollAnimation client:media="(min-width: 768px)" />
-</section>
-<style>
-    .o-layout__item {
-        will-change: transform;
-        transition: transform 0.05s linear;
-    }
-
-    @media (max-width: 768px) {
-        .o-layout__item {
-            transform: none !important;
-            transition: none !important;
-            will-change: auto;
-        }
-    }
-</style>
+<ContentSection
+    groupedItems={groupedRestaurants}
+    sectionText={restaurantText}
+    sectionId="restaurant"
+/>

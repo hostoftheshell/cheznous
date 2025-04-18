@@ -1,26 +1,27 @@
 ---
-import FacebookIcon from "@assets/icons/facebook.svg?raw";
-import InstagramIcon from "@assets/icons/instagram.svg?raw";
-
-interface Props {
-    facebookIcon?: string;
-    instagramIcon?: string;
-}
-
-const { facebookIcon = FacebookIcon, instagramIcon = InstagramIcon } =
-    Astro.props;
+import { siteConfig } from "@content/config";
+import Facebook from "@assets/icons/facebook.svg";
+import Instagram from "@assets/icons/instagram.svg";
 ---
 
 <div class="c-header__social">
     <ul class="c-header__social-list">
         <li class="c-header__social-item">
-            <a href="#" aria-label="Facebook" class="c-header__social-link"
-                >{facebookIcon && <Fragment set:html={facebookIcon} />}</a
+            <a
+                href={siteConfig.socials.facebook}
+                aria-label="Facebook"
+                class="c-header__social-link"
+                target="_blank"
+                rel="noopener noreferrer"><Facebook /></a
             >
         </li>
         <li class="c-header__social-item">
-            <a href="#" aria-label="Instagram" class="c-header__social-link"
-                >{instagramIcon && <Fragment set:html={instagramIcon} />}</a
+            <a
+                href={siteConfig.socials.instagram}
+                aria-label="Instagram"
+                class="c-header__social-link"
+                target="_blank"
+                rel="noopener noreferrer"><Instagram /></a
             >
         </li>
     </ul>

@@ -17,8 +17,10 @@
 @use "components/header";
 @use "components/hero";
 @use "components/menus";
-@use "components/restaurant";
+@use "components/content";
 @use "components/events";
+@use "components/infos";
+@use "components/footer";
 
 // External dependencies
 @import "normalize.css";

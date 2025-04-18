@@ -1,0 +1,120 @@
+@use "../utilities/breakpoints";
+@use "../utilities/mixins";
+
+footer {
+    width: 100%;
+
+    background: var(--color-primary);
+    bottom: 0px;
+    z-index: -1;
+    display: flex;
+
+    justify-content: center;
+    color: var(--color-secondary);
+}
+
+.o-layout__footer {
+    width: 100%;
+    padding: var(--grid-margin) var(--grid-margin) 0 var(--grid-margin);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    min-height: calc(100 * var(--vh, 1vh) - var(--h-banner) - var(--h-header));
+
+    @include mixins.breakpoint("lg") {
+        justify-content: flex-start;
+        min-height: calc(
+            100 * var(--vh, 1vh) - (var(--h-banner) * 2) - var(--h-header)
+        );
+    }
+}
+
+.c-footer-slogan {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: var(--h-banner);
+    font-size: clamp(2.125rem, 0.034 * 100 * var(--vw, 1vw), 3.75rem);
+    font-weight: var(--font-weight-regular);
+}
+
+.c-footer-slogan h2 {
+    font-size: clamp(2.125rem, 0.034 * 100 * var(--vw, 1vw), 3.75rem);
+    font-weight: var(--font-weight-regular);
+    text-align: center;
+}
+.c-footer__logo {
+    margin-top: 2rem;
+    @include mixins.breakpoint("sm") {
+        margin-top: 4rem;
+    }
+    @include mixins.breakpoint("lg") {
+        margin-top: 6.875rem;
+    }
+}
+
+.c-footer__logo {
+    position: relative;
+    width: 13rem;
+    height: 10.241rem;
+    height: auto;
+    transition: width 0.3s ease-out;
+
+    @include mixins.breakpoint("sm") {
+        width: 15rem;
+        height: 11.703rem;
+    }
+    @include mixins.breakpoint("lg") {
+        width: 20rem;
+        height: 13.375rem;
+    }
+}
+
+.c-footer__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+    @include mixins.breakpoint("lg") {
+        margin-top: 3.125rem;
+    }
+}
+
+.c-footer__info p {
+    margin: 0.2rem;
+}
+
+.c-footer__info-contact a,
+.c-footer__nav a {
+    text-decoration: none;
+    color: var(--color-secondary);
+}
+
+.c-footer__info-contact a:hover,
+.c-footer__nav a:hover {
+    text-decoration: underline;
+}
+
+.c-footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.875rem;
+    margin-top: 2rem;
+    @include mixins.breakpoint("lg") {
+        margin-top: 5rem;
+    }
+}
+
+.c-footer__nav-item:not(:first-child)::before {
+    content: "|";
+    margin: 0 0.2rem;
+    opacity: 0.5;
+}

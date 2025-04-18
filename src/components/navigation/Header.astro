@@ -2,20 +2,27 @@
 import { Nav, SocialNav, Logo, Hamburger } from "@components/index";
 import MobileNavToggle from "@scripts/MobileNavToggle";
 import ScrollObserver from "@scripts/ScrollObserver";
+import { getCollection } from "astro:content";
+
+// Check if there are visible events
+const allEvents = await getCollection("event");
+const visibleEvents = allEvents.filter(
+    (event) => event.data.isVisible !== false,
+);
+const hasVisibleEvents = visibleEvents.length > 0;
 ---
 
 <div class="scroll-trigger"></div>
 <header class="c-header" data-scroll-toggle>
     <div class="c-header__inner" data-scroll-toggle>
-        <Nav isMobile={false} />
+        <Nav isMobile={false} hasVisibleEvents={hasVisibleEvents} />
         <Logo />
         <SocialNav />
         <Hamburger />
     </div>
 </header>
 <div class="c-mobile-nav-overlay">
-    <Nav isMobile={true} />
+    <Nav isMobile={true} hasVisibleEvents={hasVisibleEvents} />
 </div>
-
 <MobileNavToggle client:idle />
 <ScrollObserver client:idle scrollThreshold={50} threshold={0.1} />

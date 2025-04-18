@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-
 interface Props {
     title: string;
     description?: string;
@@ -11,16 +10,29 @@ interface Props {
         width?: number;
         height?: number;
     };
+    url?: string | null;
 }
+const { title, description, image, url } = Astro.props as Props;
 
-const { title, description, image } = Astro.props as Props;
+const linkAttributes = url
+    ? { href: url, target: "_blank", rel: "noopener noreferrer" }
+    : {};
 
 const imageWidth = image?.src.width ?? 500;
+const imageHeight = image?.height ?? image?.src.height;
 ---
 
 <div class="c-frame">
     <div class="c-frame__heading">
-        <h2 class="c-frame__heading-text">{title}</h2>
+        {
+            url ? (
+                <a {...linkAttributes}>
+                    <h2 class="c-frame__heading-text">{title}</h2>
+                </a>
+            ) : (
+                <h2 class="c-frame__heading-text">{title}</h2>
+            )
+        }
     </div>
 
     {
@@ -34,14 +46,29 @@ const imageWidth = image?.src.width ?? 500;
     {
         image && (
             <div class="c-frame__img">
-                <figure class="c-frame__img-figure">
-                    <Image
-                        src={image.src as ImageMetadata}
-                        alt={image.alt}
-                        width={imageWidth || 500}
-                        loading="lazy"
-                    />
-                </figure>
+                {url ? (
+                    <figure class="c-frame__img-figure -link">
+                        <a {...linkAttributes}>
+                            <Image
+                                src={image.src as ImageMetadata}
+                                alt={image.alt}
+                                width={imageWidth}
+                                height={imageHeight}
+                                loading="lazy"
+                            />
+                        </a>
+                    </figure>
+                ) : (
+                    <figure class="c-frame__img-figure">
+                        <Image
+                            src={image.src as ImageMetadata}
+                            alt={image.alt}
+                            width={imageWidth}
+                            height={imageHeight}
+                            loading="lazy"
+                        />
+                    </figure>
+                )}
             </div>
         )
     }

@@ -1,9 +1,26 @@
 ---
 import LogoDark from "@assets/logo/cheznous_dark.svg?raw";
 import LogoLight from "@assets/logo/cheznous_light.svg?raw";
+
+const {
+    variant = "both", // "light", "dark", or "both"
+    class: className = "c-header__logo", // optional class override
+} = Astro.props;
 ---
 
-<div class="c-header__logo" data-scroll-toggle>
-    <span class="logo__light" set:html={LogoLight} />
-    <span class="logo__dark" set:html={LogoDark} />
+<div
+    class={className}
+    data-scroll-toggle={variant === "both" ? true : undefined}
+>
+    {
+        variant === "light" || variant === "both" ? (
+            <span class="logo__light" set:html={LogoLight} />
+        ) : null
+    }
+
+    {
+        variant === "dark" || variant === "both" ? (
+            <span class="logo__dark" set:html={LogoDark} />
+        ) : null
+    }
 </div>

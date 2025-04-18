@@ -14,23 +14,17 @@ const visibleEvents = allEvents.filter(
 );
 
 const event = allEvents[0];
+const hasVisibleEvents = visibleEvents.length > 0;
 ---
 
 {
     visibleEvents.length > 0 && (
-        <section id="events" class="c-section">
+        <section id="events" class="c-section c-section--events">
             <div class="o-layout__events">
                 <div class="c-events__left">
                     <div class="c-events__heading">
                         <h3 class="c-events__heading-text">
-                            <a
-                                href={event.data.link}
-                                title={`En savoir plus sur l'événement "${event.data.title ?? title}"`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {event.data.heading ?? title}
-                            </a>
+                            {event.data.heading ?? title}
                         </h3>
                     </div>
                     <div class="c-events__img">
@@ -65,17 +59,21 @@ const event = allEvents[0];
                         </h4>
 
                         <time
-                          class="c-events__datetime"
-                          datetime={event.data.date.toISOString().split("T")[0]}
+                            class="c-events__datetime"
+                            datetime={
+                                event.data.date.toISOString().split("T")[0]
+                            }
                         >
-                          {new Date(event.data.date).toLocaleDateString("fr-FR", {
-                            weekday: "long",
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
-                          <br />
-                          à {event.data.time}
+                            {new Date(event.data.date).toLocaleDateString(
+                                "fr-FR",
+                                {
+                                    weekday: "long",
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                },
+                            )}
+                            <br />à {event.data.time}
                         </time>
 
                         <p class="c-events__description">

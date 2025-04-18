@@ -8,15 +8,14 @@ interface NavItem {
 interface Props {
     isMobile?: boolean;
     items?: NavItem[];
+    hasVisibleEvents?: boolean;
 }
 
-const { isMobile = false, items } = Astro.props;
+const { isMobile = false, items, hasVisibleEvents = true } = Astro.props;
 
 const navItems: NavItem[] = [
-    //{ text: "Chez nous", href: "#home" },
     { text: "Menus & vins", href: "#menus" },
-    { text: "Agenda", href: "#agenda" },
-    //{ text: "Alentours", href: "#alentours" },
+    ...(hasVisibleEvents ? [{ text: "Agenda", href: "#events" }] : []),
     { text: "Infos pratiques", href: "#infos" },
 ];
 

@@ -1,0 +1,12 @@
+---
+interface Props {
+    textSlogan: string;
+}
+const { textSlogan } = Astro.props;
+---
+
+<div class="c-footer-slogan">
+    <h2>
+        {textSlogan}
+    </h2>
+</div>

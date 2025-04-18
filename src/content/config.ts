@@ -40,6 +40,26 @@ const restaurantCollection = defineCollection({
     }),
 });
 
+const nearbyCollection = defineCollection({
+  schema: ({ image }) =>
+    z.object({
+      id: z.number().int().positive(),
+      title: z.string().max(50),
+      description: z
+        .string()
+        .max(2000)
+        .optional()
+        .default("Aucune description fournie."),
+      image: z
+        .object({
+          src: image(),
+          alt: z.string().max(500).trim(),
+        })
+        .optional(),
+      url: z.string().url().optional().nullable(),
+    }),
+});
+
 const globalCollection = defineCollection({
   schema: z.object({
     heading: z.string().max(50),
@@ -59,28 +79,68 @@ const menuCollection = defineCollection({
   }),
 });
 
+const workinghoursCollection = defineCollection({
+  schema: z.object({
+    working_hours: z.object({
+      lundi: z.object({
+        midi: z.string(),
+        soir: z.string(),
+      }),
+      mardi: z.object({
+        midi: z.string(),
+        soir: z.string(),
+      }),
+      mercredi: z.object({
+        midi: z.string(),
+        soir: z.string(),
+      }),
+      jeudi: z.object({
+        midi: z.string(),
+        soir: z.string(),
+      }),
+      vendredi: z.object({
+        midi: z.string(),
+        soir: z.string(),
+      }),
+      samedi: z.object({
+        midi: z.string(),
+        soir: z.string(),
+      }),
+      dimanche: z.object({
+        midi: z.string(),
+        soir: z.string(),
+      }),
+    }),
+  }),
+});
+
 export const collections = {
   restaurant: restaurantCollection,
+  nearby: nearbyCollection,
   global: globalCollection,
   menu: menuCollection,
   event: eventCollection,
+  workinghours: workinghoursCollection,
 };
 
-export interface Titles {
-  SITE_TITLE: string;
-  HERO_TITLE: string;
-}
-
-export interface SocialLinks {
-  instagram: string;
-  facebook?: string;
-  [key: string]: string | undefined;
-}
-
 export interface SiteConfig {
-  titles: Titles;
-  socials: SocialLinks;
+  titles: {
+    SITE_TITLE: string;
+    HERO_TITLE: string;
+  };
+  socials: {
+    instagram: string;
+    facebook: string;
+  };
   url: string;
+  contact: {
+    address: string;
+    phone: string;
+    phoneLink: string;
+    email: string;
+  };
+  openingHours: string;
+  slogan: string;
 }
 
 export const siteConfig: SiteConfig = {
@@ -93,4 +153,15 @@ export const siteConfig: SiteConfig = {
     facebook: "https://www.facebook.com/cheznous89270/",
   },
   url: "https://cheznous89270.netlify.app/",
+
+  contact: {
+    address: "7 place de la Convention – 89270 Vermenton",
+    phone: "03 86 51 89 56",
+    phoneLink: "+33686518956",
+    email: "contact@cheznous89270.com",
+  },
+
+  openingHours:
+    "Ouvert du mardi au samedi de 11h30 à 14h30 et de 18h30 à 21h. Le dimanche, uniquement le midi de 11h30 à 14h30.",
+  slogan: "Pizzas artisanales préparées à la maison",
 };

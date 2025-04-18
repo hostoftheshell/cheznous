@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+const workingHoursEntries = await getCollection("workinghours");
+const hours = workingHoursEntries[0];
+---
+
+<div class="c-infos__workinghours-table">
+    <h2 class="workinghours-table__heading">Horaires d'Ouverture</h2>
+    <table>
+        <tbody>
+            {
+                Object.entries(hours.data.working_hours).map(([day, times]) => {
+                    const midiOpen = times.midi !== "fermé";
+                    const soirOpen = times.soir !== "fermé";
+
+                    return (
+                        <tr>
+                            <th class="workinghours-table__day">
+                                {day.charAt(0).toUpperCase() + day.slice(1)}
+                            </th>
+
+                            <td class="workinghours-table__times">
+                                {!midiOpen && !soirOpen ? (
+                                    <span class="closed">Fermé</span>
+                                ) : (
+                                    <div class="td-flex">
+                                        {midiOpen && <span>{times.midi}</span>}
+
+                                        {midiOpen && soirOpen && (
+                                            <span class="separator"> | </span>
+                                        )}
+
+                                        {soirOpen ? (
+                                            <span>{times.soir}</span>
+                                        ) : (
+                                            midiOpen && (
+                                                <>
+                                                    <span class="separator">
+                                                        {" "}
+                                                        |{" "}
+                                                    </span>
+                                                    <span class="closed">
+                                                        Fermé
+                                                    </span>
+                                                </>
+                                            )
+                                        )}
+                                    </div>
+                                )}
+                            </td>
+                        </tr>
+                    );
+                })
+            }
+        </tbody>
+    </table>
+</div>

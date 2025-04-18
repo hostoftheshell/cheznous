@@ -1,0 +1,45 @@
+---
+import { Logo } from "@components/index";
+import { siteConfig } from "@content/config";
+import BannerAnimationController from "@scripts/BannerAnimationController";
+---
+
+<footer>
+    <div class="o-layout__footer">
+        <Logo class="c-footer__logo" variant="light" />
+        <div class="c-footer__info">
+            <p class="c-footer__info-address">
+                {siteConfig.contact.address}
+            </p>
+
+            <p class="c-footer__info-opening-hours">
+                {siteConfig.openingHours}
+            </p>
+
+            <p class="c-footer__info-contact">
+                <span class="c-footer__info-email">
+                    <a href={`mailto:${siteConfig.contact.email}`}>
+                        {siteConfig.contact.email}
+                    </a>
+                </span>
+                <span class="c-footer__info-separator"> | </span>
+                <span class="c-footer__info-phone">
+                    <a href={`tel:${siteConfig.contact.phoneLink}`}>
+                        {siteConfig.contact.phone}
+                    </a>
+                </span>
+            </p>
+        </div>
+        <div class="c-footer__nav">
+            <span class="c-footer__nav-item">@2025 Chez Nous</span>
+            <span class="c-footer__nav-item">Tous droits réservés</span>
+            <a href="/mentions-legales" class="c-footer__nav-item"
+                >Mentions légales</a
+            >
+            <a href="/politique-de-confidentialite" class="c-footer__nav-item"
+                >Politique de cookies</a
+            >
+        </div>
+    </div>
+</footer>
+<BannerAnimationController client:idle />

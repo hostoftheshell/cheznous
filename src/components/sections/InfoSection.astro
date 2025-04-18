@@ -1,0 +1,62 @@
+---
+import { Map, WorkingHours } from "@components/index";
+import { siteConfig } from "@content/config";
+
+import MapPin from "@assets/icons/map-pin.svg";
+import Phone from "@assets/icons/phone.svg";
+import Mail from "@assets/icons/mail.svg";
+
+const { address, phone, phoneLink, email } = siteConfig.contact;
+const mapUrl =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2686.9890980988002!2d3.730887976768513!3d47.66520818392796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47ee3f6fecc1a687%3A0xf0430b4cb2defd14!2sChez%20Nous!5e0!3m2!1sfr!2sfr!4v1744877272805!5m2!1sfr!2sfr";
+---
+
+<section id="infos" class="c-section c-section--infos">
+    <div class="o-layout__infos">
+        <div class="c-infos__left">
+            <div class="c-infos__heading">
+                <h1>Chez Nous<br />Vermenton 89270</h1>
+            </div>
+
+            <div class="c-infos__workinghours">
+                <WorkingHours />
+            </div>
+        </div>
+
+        <div class="c-infos__contact">
+            <div class="c-infos__contact-map">
+                <Map src={mapUrl} loading="lazy" />
+            </div>
+            <div class="c-infos__contact-details">
+                <p class="contact-details__adress">
+                    <span class="contact-details__icon">
+                        <MapPin />
+                    </span>
+                    <span class="contact-details__text">
+                        {address}
+                    </span>
+                </p>
+                <p class="contact-details__phone">
+                    <span class="contact-details__icon">
+                        <Phone />
+                    </span>
+                    <span class="contact-details__text">
+                        <a href={`tel:${phoneLink}`}>
+                            {phone}
+                        </a>
+                    </span>
+                </p>
+                <p class="contact-details__email">
+                    <span class="contact-details__icon">
+                        <Mail />
+                    </span>
+                    <span class="contact-details__text">
+                        <a href={`mailto:${email}`}>
+                            {email}
+                        </a>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

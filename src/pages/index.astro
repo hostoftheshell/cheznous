@@ -5,17 +5,30 @@ import {
     RestaurantSection,
     MenuSection,
     EventSection,
+    NearbySection,
+    InfoSection,
 } from "@components/index";
-import type { RestaurantEntry } from "../types/restaurant";
+//import BusinessHours from "@scripts/BusinessHours.jsx";
+import type { RestaurantEntry, NearbyEntry } from "../types/content";
 import { getCollection } from "astro:content";
-const [globalEntries, restaurantEntries] = await Promise.all([
+const [globalEntries, restaurantEntries, nearbyEntries] = await Promise.all([
     getCollection("global"),
     getCollection("restaurant"),
+    getCollection("nearby"),
 ]);
 
 const restaurantText = globalEntries.find((e) => e.slug === "restaurant-text");
 if (!restaurantText) throw new Error("'restaurant-text' est manquant");
+const nearbyText = globalEntries.find((e) => e.slug === "nearby-text");
+if (!nearbyText) throw new Error("'nearby-text' est manquant");
 
+const sortedNearbies = [...nearbyEntries].sort((a, b) => a.data.id - b.data.id);
+
+const groupedNearbies: NearbyEntry[][] = [
+    sortedNearbies.slice(0, 2),
+    sortedNearbies.slice(2, 3),
+    sortedNearbies.slice(3, 5),
+];
 const sortedRestaurants = [...restaurantEntries].sort(
     (a, b) => a.data.id - b.data.id,
 );
@@ -25,6 +38,8 @@ const groupedRestaurants: RestaurantEntry[][] = [
     sortedRestaurants.slice(3, 5),
 ];
 import { siteConfig } from "@content/config";
+import { Code } from "astro:components";
+import { Container } from "postcss";
 const pageTitle = siteConfig.titles.SITE_TITLE;
 const heroTitle = siteConfig.titles.HERO_TITLE;
 ---
@@ -35,9 +50,14 @@ const heroTitle = siteConfig.titles.HERO_TITLE;
     <RestaurantSection
         groupedRestaurants={groupedRestaurants}
         restaurantText={restaurantText.data}
-        PAGE_TITLE={pageTitle}
     />
 
     <MenuSection pageTitle={pageTitle} />
     <EventSection />
+    <!-- <BusinessHours client:load /> -->
+    <NearbySection
+        groupedNearbies={groupedNearbies}
+        nearbyText={nearbyText.data}
+    />
+    <InfoSection />
 </BaseLayout>

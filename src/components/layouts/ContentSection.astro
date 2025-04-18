@@ -1,0 +1,83 @@
+---
+import { Container, Frame } from "@components/index";
+import { siteConfig } from "@content/config";
+import type { RestaurantEntry, NearbyEntry } from "../../types/content";
+export type ContentItem = RestaurantEntry | NearbyEntry;
+import ScrollAnimation from "@scripts/ScrollAnimation";
+
+interface Props {
+    groupedItems: ContentItem[][];
+    sectionText: {
+        heading?: string;
+        subheading?: string;
+        paragraph?: string;
+    };
+
+    sectionId: string;
+}
+
+const { groupedItems, sectionText, sectionId } = Astro.props;
+---
+
+<section id={sectionId} class="c-section -padding-top">
+    <Container>
+        <div class="o-layout">
+            {
+                groupedItems.map((group, index) => (
+                    <div
+                        class="o-layout__item"
+                        data-index={index}
+                        data-speed={
+                            index === 1 ? "1" : index === 2 ? "1.4" : "0"
+                        }
+                    >
+                        {index === 1 && (
+                            <div class="c-frame -article">
+                                <div class="c-frame__heading -article">
+                                    <p>{siteConfig.titles.SITE_TITLE}</p>
+                                    <h2>
+                                        {sectionText.heading ??
+                                            "Titre non disponible."}
+                                    </h2>
+                                </div>
+                                <div class="c-frame__description -article">
+                                    <h3>
+                                        {sectionText.subheading ??
+                                            "Sous-titre non disponible."}
+                                    </h3>
+                                    <div style="white-space: pre-line;">
+                                        {sectionText.paragraph ??
+                                            "Texte non disponible."}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        {group.map(({ data }) => (
+                            <Frame
+                                title={data.title}
+                                description={data.description}
+                                image={data.image ?? undefined}
+                                url={"url" in data ? data.url : undefined}
+                            />
+                        ))}
+                    </div>
+                ))
+            }
+        </div>
+    </Container>
+    <ScrollAnimation client:media="(min-width: 768px)" />
+</section>
+<style>
+    .o-layout__item {
+        will-change: transform;
+        transition: transform 0.05s linear;
+    }
+
+    @media (max-width: 768px) {
+        .o-layout__item {
+            transform: none !important;
+            transition: none !important;
+            will-change: auto;
+        }
+    }
+</style>

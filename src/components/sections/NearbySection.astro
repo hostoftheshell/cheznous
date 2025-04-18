@@ -1,0 +1,21 @@
+---
+import { ContentSection } from "@components/index";
+import type { NearbyEntry } from "../../types/content";
+
+interface Props {
+    groupedNearbies: NearbyEntry[][];
+    nearbyText: {
+        heading?: string;
+        subheading?: string;
+        paragraph?: string;
+    };
+}
+
+const { groupedNearbies, nearbyText } = Astro.props;
+---
+
+<ContentSection
+    groupedItems={groupedNearbies}
+    sectionText={nearbyText}
+    sectionId="nearby"
+/>

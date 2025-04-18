@@ -1,7 +1,8 @@
 ---
-import "@styles/index.css";
+//import "@styles/index.css";
+import "@styles/_imports.scss";
 import { Seo } from "astro-seo-meta";
-import { Header, Banner } from "@components/index";
+import { Header, Banner, Footer, FooterSlogan } from "@components/index";
 
 import "@fontsource/metropolis/300.css";
 import "@fontsource/metropolis/400.css";
@@ -11,7 +12,7 @@ import metropolis300Woff2 from "@fontsource/metropolis/files/metropolis-latin-30
 import metropolis400Woff2 from "@fontsource/metropolis/files/metropolis-latin-400-normal.woff2?url";
 import frauncesWoff2 from "@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url";
 
-const { pageTitle } = Astro.props;
+import { siteConfig } from "@content/config";
 ---
 
 <!doctype html>
@@ -22,14 +23,40 @@ const { pageTitle } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-        <script is:inline type="module">
-            import { setLayoutVariables } from "/src/scripts/set-layout-variables.js";
-            requestAnimationFrame(() => {
-                setLayoutVariables();
-            });
-            window.addEventListener("resize", setLayoutVariables);
+        <script is:inline>
+            (() => {
+                function setLayoutVariables() {
+                    const vh = window.innerHeight * 0.01;
+                    const vw = window.innerWidth * 0.01;
+
+                    document.documentElement.style.setProperty(
+                        "--vh",
+                        `${vh}px`,
+                    );
+                    document.documentElement.style.setProperty(
+                        "--vw",
+                        `${vw}px`,
+                    );
+
+                    const banner = document.querySelector("[data-banner]");
+
+                    if (banner) {
+                        const hBanner = banner.offsetHeight;
+                        document.documentElement.style.setProperty(
+                            "--h-banner",
+                            `${hBanner}px`,
+                        );
+                    }
+                }
+
+                requestAnimationFrame(() => {
+                    setLayoutVariables();
+                });
+
+                window.addEventListener("resize", setLayoutVariables);
+            })();
         </script>
-        <!-- Use the imported font URLs for preloading -->
+
         <link
             rel="preload"
             href={metropolis400Woff2}
@@ -53,7 +80,7 @@ const { pageTitle } = Astro.props;
         />
 
         <Seo
-            title={pageTitle}
+            title={siteConfig.titles.SITE_TITLE}
             description="Chez Nous, pizzeria artisanale à Vermenton (89270). Dégustez des pizzas faites maison, sur place, dans une ambiance conviviale avec des ingrédients frais et de qualité."
         />
     </head>
@@ -65,7 +92,8 @@ const { pageTitle } = Astro.props;
         <Banner
             generalInfo="réservations & privatisation : "
             additionalInfo="accessibilité PMR"
-            phoneNumber="03 86 51 89 56"
         />
+        <FooterSlogan textSlogan={siteConfig.slogan} />
+        <Footer />
     </body>
 </html>

@@ -2,6 +2,7 @@
 @use "../utilities/mixins";
 
 #menus {
+    scroll-margin-top: -3.5rem;
     padding-top: 6.5rem;
     @include mixins.breakpoint("md") {
         padding-top: 0;
@@ -24,13 +25,14 @@
     box-sizing: border-box;
     margin-bottom: var(--h-banner);
     padding: var(--grid-margin) var(--grid-margin) 0 var(--grid-margin);
-}
-.o-layout__menus {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    row-gap: 8.5rem;
+    row-gap: 5.5rem;
+    @include mixins.breakpoint("lg") {
+        row-gap: 8.5rem;
+    }
     @include mixins.breakpoint("xl") {
         flex-direction: row;
     }
@@ -69,7 +71,6 @@
 
 .c-menu-principal_link {
     display: block;
-
     text-decoration: none;
     color: var(--color-text);
     font-size: clamp(3rem, 0.05 * calc(100 * var(--vw, 1vw)), 6rem);

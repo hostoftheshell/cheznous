@@ -4,30 +4,31 @@
 
 /* Base styles */
 html {
-  font-family: var(--font-body);
-  font-weight: var(--weight-regular);
-  font-size: var(--font-size-base);
+    font-family: var(--font-body);
+    font-weight: var(--weight-regular);
+    font-size: var(--font-size-base);
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-text);
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: var(--weight-regular);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: var(--weight-regular);
 }
 
 /* Typography */
 h1 {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-h1);
-  font-weight: var(--weight-regular);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h1);
+    font-weight: var(--weight-regular);
+    font-style: italic;
 }
 
 h1,
 h2,
 h3 {
-  margin: 0;
+    margin: 0;
 }
 
 h2,
@@ -35,48 +36,53 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-heading);
-  font-weight: var(--weight-bold);
+    font-family: var(--font-heading);
+    font-weight: var(--weight-bold);
 }
 
 /* Base elements */
 svg {
-  max-width: 100%;
-  box-sizing: border-box;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 figure {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 /* Utility classes */
 .c-section {
-  position: relative;
+    position: relative;
 }
 
 .c-section.-padding-top {
-  padding-top: 6.5rem;
-  @include breakpoint("lg") {
-    padding-top: 11.25rem;
-  }
+    padding-top: 6.5rem;
+    @include breakpoint("lg") {
+        padding-top: 11.25rem;
+    }
 }
 
 /* Responsive font sizes */
 @include range("xl") {
-  :root {
-    --font-size-base: 14px;
-  }
+    :root {
+        --font-size-base: 14px;
+    }
 }
 
 @include range("xl", "2xl") {
-  :root {
-    --font-size-base: 15px;
-  }
+    :root {
+        --font-size-base: 15px;
+    }
 }
 
 @include breakpoint("md") {
-  :root {
-    --grid-margin: 1.25rem;
-  }
+    :root {
+        --grid-margin: 1.25rem;
+    }
+}
+
+#main {
+    position: relative;
+    z-index: var(--z-index-base);
 }
