@@ -1,7 +1,24 @@
 @use "../utilities/breakpoints";
 @use "../utilities/mixins";
 #events {
-    scroll-margin: 7.2rem;
+    scroll-margin-top: calc(6rem - (var(--grid-margin) / 2) - 8rem);
+    @include mixins.breakpoint("lg") {
+        scroll-margin-top: calc(7.8rem - (var(--grid-margin) / 2));
+    }
+}
+
+.o-layout__events::after {
+    content: "═════ ◈ ═════";
+    font-size: clamp(2rem, 0.05 * calc(100 * var(--vw, 1vw)), 6rem);
+    font-weight: var(--weight-light);
+    font-family: var(--font-heading);
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 4rem;
+    @include mixins.breakpoint("lg") {
+        display: none;
+    }
 }
 
 .o-layout__events {
@@ -10,7 +27,7 @@
     margin-bottom: var(--h-banner);
     padding: var(--grid-margin) var(--grid-margin) 0 var(--grid-margin);
     display: flex;
-
+    row-gap: var(--grid-margin);
     flex-direction: column-reverse;
     align-items: stretch;
     justify-content: center;
@@ -89,7 +106,7 @@
 .c-events__right {
     position: relative;
     width: 100%;
-    padding: calc(var(--grid-margin) * 2);
+    padding: 0 calc(var(--grid-margin) * 2) calc(var(--grid-margin) * 2);
     box-sizing: border-box;
     display: flex;
     justify-content: center;

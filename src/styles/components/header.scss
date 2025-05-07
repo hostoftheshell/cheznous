@@ -185,6 +185,13 @@
     transition: fill 0.3s ease-in-out;
 }
 
+.is-mobile-menu-open .c-header__social-icon {
+    fill: var(--color-landing-ui-dark);
+}
+.is-mobile-menu-open .c-header__social-link {
+    border-color: var(--color-landing-ui-dark);
+}
+
 /* ========== MOBILE MENU TOGGLE ========== */
 .c-header__mobile-nav-toggle {
     color: var(--color-landing-ui-light);
@@ -322,4 +329,30 @@
 
 .c-header.is-mobile-menu-open .logo__dark {
     opacity: 1;
+}
+
+/* ========== LEGALES PAGES STATE ========== */
+.c-header.__legales {
+    .c-header__nav-item {
+        border-color: var(--color-landing-ui-dark);
+        color: var(--color-landing-ui-dark);
+        a {
+            color: var(--color-landing-ui-dark);
+        }
+    }
+    .c-header__logo {
+        .logo__light {
+            opacity: 0;
+        }
+        .logo__dark {
+            opacity: 1;
+        }
+    }
+
+    .c-header__social-link {
+        border-color: var(--color-landing-ui-dark);
+        svg {
+            fill: var(--color-landing-ui-dark);
+        }
+    }
 }

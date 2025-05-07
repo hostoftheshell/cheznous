@@ -4,16 +4,36 @@
 /* ============================= */
 /* Layout */
 /* ============================= */
+.c-section-nearby::before {
+    content: "═════ ◈ ═════";
+    font-size: clamp(2rem, 0.05 * calc(100 * var(--vw, 1vw)), 6rem);
+    font-weight: var(--weight-light);
+    font-family: var(--font-heading);
+    margin-bottom: 5rem;
+    @include mixins.breakpoint("xl") {
+        display: none;
+    }
+}
+.c-section-restaurant {
+    padding-top: 5rem;
+}
+.c-section-nearby,
+.c-section-restaurant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 5rem;
 
+    @include mixins.breakpoint("lg") {
+        padding-top: 7.5rem;
+    }
+}
 .o-layout {
     padding-top: 0;
     margin-left: -1.25rem;
     display: flex;
     flex-wrap: wrap;
-
-    @include mixins.breakpoint("md") {
-        padding-top: 7.5rem;
-    }
 }
 
 .o-layout__item {
@@ -156,10 +176,11 @@
     line-height: 1;
     text-transform: uppercase;
     margin-bottom: 1rem;
+    text-wrap: balance;
 }
 
 .c-frame__description.-article {
-    margin-bottom: 4.5rem;
+    margin-bottom: 1.5rem;
     padding-top: var(--grid-margin);
     @include mixins.breakpoint("md") {
         margin-bottom: 4.5rem;

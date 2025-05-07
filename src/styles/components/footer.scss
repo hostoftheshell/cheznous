@@ -18,16 +18,17 @@ footer {
     padding: var(--grid-margin) var(--grid-margin) 0 var(--grid-margin);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     box-sizing: border-box;
-
-    min-height: calc(100 * var(--vh, 1vh) - var(--h-banner) - var(--h-header));
-
-    @include mixins.breakpoint("lg") {
-        justify-content: flex-start;
+    min-height: calc(100 * var(--vh, 1vh) - var(--h-slogan) - var(--h-header));
+    @include mixins.breakpoint("md") {
+        justify-content: center;
         min-height: calc(
-            100 * var(--vh, 1vh) - (var(--h-banner) * 2) - var(--h-header)
+            100 *
+                var(--vh, 1vh) - var(--h-banner) - var(--h-slogan) - var(
+                    --h-header
+                )
         );
     }
 }
@@ -37,7 +38,7 @@ footer {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: var(--h-banner);
+    padding: 0.625rem 0;
     font-size: clamp(2.125rem, 0.034 * 100 * var(--vw, 1vw), 3.75rem);
     font-weight: var(--font-weight-regular);
 }
@@ -46,15 +47,6 @@ footer {
     font-size: clamp(2.125rem, 0.034 * 100 * var(--vw, 1vw), 3.75rem);
     font-weight: var(--font-weight-regular);
     text-align: center;
-}
-.c-footer__logo {
-    margin-top: 2rem;
-    @include mixins.breakpoint("sm") {
-        margin-top: 4rem;
-    }
-    @include mixins.breakpoint("lg") {
-        margin-top: 6.875rem;
-    }
 }
 
 .c-footer__logo {
@@ -86,7 +78,11 @@ footer {
 }
 
 .c-footer__info p {
-    margin: 0.2rem;
+    margin: 0.4rem;
+    text-align: center;
+    @include mixins.breakpoint("lg") {
+        margin: 0.2rem;
+    }
 }
 
 .c-footer__info-contact a,

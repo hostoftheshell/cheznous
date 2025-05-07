@@ -14,9 +14,11 @@ interface Props {
 const { isMobile = false, items, hasVisibleEvents = true } = Astro.props;
 
 const navItems: NavItem[] = [
-    { text: "Menus & vins", href: "#menus" },
-    ...(hasVisibleEvents ? [{ text: "Agenda", href: "#events" }] : []),
-    { text: "Infos pratiques", href: "#infos" },
+    { text: "Menus & vins", href: "http://localhost:4321#menus" },
+    ...(hasVisibleEvents
+        ? [{ text: "Agenda", href: "http://localhost:4321#events" }]
+        : []),
+    { text: "Infos pratiques", href: "http://localhost:4321#infos" },
 ];
 
 const finalItems = items || navItems;

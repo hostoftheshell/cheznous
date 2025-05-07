@@ -25,3 +25,4 @@ export { default as Banner } from "./ui/Banner.astro";
 export { default as FooterSlogan } from "./ui/FooterSlogan.astro";
 export { default as Map } from "./ui/Map.astro";
 export { default as WorkingHours } from "./ui/WorkingHours.astro";
+export { default as PopUpClosure } from "./ui/PopUpClosure.astro";

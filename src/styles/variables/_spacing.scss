@@ -1,12 +1,13 @@
 :root {
-  /* Container Widths */
-  --grid-margin: 0.625rem;
-  --container-width: calc(100% - 2 * var(--grid-margin));
+    /* Container Widths */
+    --grid-margin: 0.625rem;
+    --container-width: calc(100% - 2 * var(--grid-margin));
 
-  /* Heights */
-  --h-header: 7.8rem;
-  --h-banner: 5.8rem;
+    /* Heights */
 
-  /* Padding */
-  --padding-banner: 0.625rem;
+    --h-banner: 5.8rem;
+    --h-slogan: 3.5rem;
+
+    /* Padding */
+    --padding-banner: 0.625rem;
 }

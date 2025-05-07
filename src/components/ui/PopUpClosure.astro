@@ -1,0 +1,54 @@
+---
+import { siteConfig } from "@content/config";
+import CircleX from "@assets/icons/circle-x.svg";
+interface Props {
+    closureData: {
+        title: string;
+        description: string;
+        tag: string;
+    };
+}
+
+const { closureData } = Astro.props;
+const { title, description, tag } = closureData;
+const socialInstagram = siteConfig.socials.instagram;
+---
+
+<div class="closure-popup-overlay">
+    <div class="closure-popup">
+        <button class="close-button" aria-label="Fermer"
+            ><CircleX width="24" height="24" />
+        </button>
+        <div class="popup-content">
+            <h2 class="popup-content__title">{title}</h2>
+            <p class="popup-content__description">{description}</p>
+            <span class="popup-content__tag">{tag}</span>
+            <span class="popup-content__social">
+                <a
+                    href={siteConfig.socials.instagram}
+                    aria-label="Instagram"
+                    class="popup-content__social-link"
+                    target="_blank"
+                    rel="noopener noreferrer">@cheznous89270</a
+                >
+            </span>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector(".close-button")?.addEventListener("click", () => {
+        document.querySelector(".closure-popup-overlay")?.remove();
+    });
+
+    const popupOverlay = document.querySelector(".closure-popup-overlay");
+    const popupContent = document.querySelector(".closure-popup");
+
+    if (popupOverlay && popupContent) {
+        popupOverlay.addEventListener("click", (event) => {
+            if (event.target === popupOverlay) {
+                popupOverlay.remove();
+            }
+        });
+    }
+</script>

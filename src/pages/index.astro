@@ -1,4 +1,9 @@
 ---
+// Configuration & Types
+import { siteConfig } from "@content/config";
+import type { RestaurantEntry, NearbyEntry } from "../types/content";
+
+// Layouts & Components
 import BaseLayout from "@layouts/BaseLayout.astro";
 import {
     Hero,
@@ -9,26 +14,23 @@ import {
     InfoSection,
 } from "@components/index";
 
-import type { RestaurantEntry, NearbyEntry } from "../types/content";
-import { getCollection } from "astro:content";
+// Data loading
+import { getCollection, getEntry } from "astro:content";
+
+// Load all content collections in parallel
 const [globalEntries, restaurantEntries, nearbyEntries] = await Promise.all([
     getCollection("global"),
     getCollection("restaurant"),
     getCollection("nearby"),
 ]);
 
+// Get global text content
 const restaurantText = globalEntries.find((e) => e.slug === "restaurant-text");
 if (!restaurantText) throw new Error("'restaurant-text' est manquant");
+
 const nearbyText = globalEntries.find((e) => e.slug === "nearby-text");
 if (!nearbyText) throw new Error("'nearby-text' est manquant");
 
-const sortedNearbies = [...nearbyEntries].sort((a, b) => a.data.id - b.data.id);
-
-const groupedNearbies: NearbyEntry[][] = [
-    sortedNearbies.slice(0, 2),
-    sortedNearbies.slice(2, 3),
-    sortedNearbies.slice(3, 5),
-];
 const sortedRestaurants = [...restaurantEntries].sort(
     (a, b) => a.data.id - b.data.id,
 );
@@ -37,9 +39,24 @@ const groupedRestaurants: RestaurantEntry[][] = [
     sortedRestaurants.slice(2, 3),
     sortedRestaurants.slice(3, 5),
 ];
-import { siteConfig } from "@content/config";
-import { Code } from "astro:components";
-import { Container } from "postcss";
+
+const sortedNearbies = [...nearbyEntries].sort((a, b) => a.data.id - b.data.id);
+const columns: NearbyEntry[][] = [[], [], []];
+
+columns[0].push(...sortedNearbies.slice(0, 2));
+columns[1].push(...sortedNearbies.slice(2, 3));
+columns[2].push(...sortedNearbies.slice(3, 6));
+
+if (sortedNearbies.length > 6) {
+    for (let i = 6; i < sortedNearbies.length; i++) {
+        const mod = (i - 6) % 3;
+        if (mod === 0) columns[0].push(sortedNearbies[i]);
+        else if (mod === 1) columns[1].push(sortedNearbies[i]);
+        else columns[2].push(sortedNearbies[i]);
+    }
+}
+
+// Page metadata
 const pageTitle = siteConfig.titles.SITE_TITLE;
 const heroTitle = siteConfig.titles.HERO_TITLE;
 ---
@@ -55,9 +72,6 @@ const heroTitle = siteConfig.titles.HERO_TITLE;
     <MenuSection pageTitle={pageTitle} />
     <EventSection />
     <!-- <BusinessHours client:load /> -->
-    <NearbySection
-        groupedNearbies={groupedNearbies}
-        nearbyText={nearbyText.data}
-    />
+    <NearbySection groupedNearbies={columns} nearbyText={nearbyText.data} />
     <InfoSection />
 </BaseLayout>

@@ -3,7 +3,6 @@
 
 #menus {
     scroll-margin-top: -3.5rem;
-    padding-top: 6.5rem;
     @include mixins.breakpoint("md") {
         padding-top: 0;
     }
@@ -52,6 +51,9 @@
     @include mixins.breakpoint("xl") {
         width: 22%;
     }
+    @media screen and (max-height: 768px) {
+        width: 39%;
+    }
 }
 .c-menu-principal {
     width: 100%;
@@ -98,7 +100,7 @@
 /* ============================= */
 
 .c-menu-daily__heading {
-    padding: 1.094rem;
+    padding: 1rem;
     border-bottom: 1px solid var(--color-text);
     display: flex;
     align-items: center;
@@ -124,6 +126,9 @@
     box-sizing: border-box;
     position: relative;
     display: inline-block;
+    @media screen and (max-height: 768px) {
+        width: 50%;
+    }
 }
 
 .c-menu-daily__img::before {

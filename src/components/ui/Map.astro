@@ -49,10 +49,11 @@ const paddingBottom = ratioMap[ratio] ?? "56.25%";
     .c-iframe-embed {
         position: relative;
         width: 100%;
-        max-width: 590px;
         margin-inline: auto;
+        @include min-width(1024px) {
+            max-width: 590px;
+        }
     }
-
     .c-iframe-embed::before {
         content: "";
         display: block;

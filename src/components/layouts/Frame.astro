@@ -26,9 +26,14 @@ const imageHeight = image?.height ?? image?.src.height;
     <div class="c-frame__heading">
         {
             url ? (
-                <a {...linkAttributes}>
-                    <h2 class="c-frame__heading-text">{title}</h2>
-                </a>
+                <h2 class="c-frame__heading-text">
+                    <a
+                        {...linkAttributes}
+                        aria-label={`En savoir plus sur ${title}`}
+                    >
+                        {title}
+                    </a>
+                </h2>
             ) : (
                 <h2 class="c-frame__heading-text">{title}</h2>
             )

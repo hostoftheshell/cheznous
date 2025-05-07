@@ -1,13 +1,13 @@
 ---
 # Afficher la section true/false
-isVisible: false
+isVisible: true
 # Titre de la section
 heading: A presto Chez Nous ! 🎉
 # URL et texte alternatif de l'image de l'événement
 image :
   src: "./images/dummy-event.png"
   alt: >
-    Illustration d'un poster pour un événement de musique rock, avec un style graphique rétro.
+    un événement de musique rock, avec un style graphique rétro.
 # Titre de l'événement
 title: Soirée Pizza & Rock
 # Date de l'événement (au format ISO)

@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { Container } from "@components/index";
+const pageTitle = "Mentions Légales";
+import { Content } from "@content/legal/mentions-legales.md";
+---
+
+<BaseLayout pageTitle={pageTitle} isLegalPage={true}>
+    <Container>
+        <div class="page-under-header"><Content /></div>
+    </Container>
+</BaseLayout>
+
+<style lang="css">
+    .page-under-header {
+        margin-top: var(--h-header);
+        padding: 8rem 2rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+    }
+</style>

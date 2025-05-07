@@ -19,7 +19,7 @@ interface Props {
 const { groupedItems, sectionText, sectionId } = Astro.props;
 ---
 
-<section id={sectionId} class="c-section -padding-top">
+<section id={sectionId} class={`c-section-${sectionId}`}>
     <Container>
         <div class="o-layout">
             {

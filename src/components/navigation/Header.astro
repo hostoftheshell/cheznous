@@ -10,10 +10,15 @@ const visibleEvents = allEvents.filter(
     (event) => event.data.isVisible !== false,
 );
 const hasVisibleEvents = visibleEvents.length > 0;
+
+const { isLegalPage = false } = Astro.props;
 ---
 
 <div class="scroll-trigger"></div>
-<header class="c-header" data-scroll-toggle>
+<header
+    data-scroll-toggle
+    class:list={["c-header", { __legales: isLegalPage }]}
+>
     <div class="c-header__inner" data-scroll-toggle>
         <Nav isMobile={false} hasVisibleEvents={hasVisibleEvents} />
         <Logo />
@@ -25,4 +30,9 @@ const hasVisibleEvents = visibleEvents.length > 0;
     <Nav isMobile={true} hasVisibleEvents={hasVisibleEvents} />
 </div>
 <MobileNavToggle client:idle />
-<ScrollObserver client:idle scrollThreshold={50} threshold={0.1} />
+<ScrollObserver
+    client:idle
+    scrollThreshold={50}
+    threshold={0.1}
+    excludedPages={["mentions-legales"]}
+/>

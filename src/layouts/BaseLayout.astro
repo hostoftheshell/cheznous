@@ -2,7 +2,15 @@
 //import "@styles/index.css";
 import "@styles/_imports.scss";
 import { Seo } from "astro-seo-meta";
-import { Header, Banner, Footer, FooterSlogan } from "@components/index";
+import {
+    Header,
+    Banner,
+    Footer,
+    FooterSlogan,
+    PopUpClosure,
+} from "@components/index";
+
+const { isLegalPage = false } = Astro.props;
 
 import "@fontsource/metropolis/300.css";
 import "@fontsource/metropolis/400.css";
@@ -13,6 +21,11 @@ import metropolis400Woff2 from "@fontsource/metropolis/files/metropolis-latin-40
 import frauncesWoff2 from "@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url";
 
 import { siteConfig } from "@content/config";
+
+import { getCollection, getEntry } from "astro:content";
+
+const closureEntry = await getEntry("closure", "closure-text");
+const isPopupVisible = closureEntry?.data?.closure?.isVisible;
 ---
 
 <!doctype html>
@@ -28,7 +41,6 @@ import { siteConfig } from "@content/config";
                 function setLayoutVariables() {
                     const vh = window.innerHeight * 0.01;
                     const vw = window.innerWidth * 0.01;
-
                     document.documentElement.style.setProperty(
                         "--vh",
                         `${vh}px`,
@@ -37,23 +49,67 @@ import { siteConfig } from "@content/config";
                         "--vw",
                         `${vw}px`,
                     );
-
                     const banner = document.querySelector("[data-banner]");
-
+                    const header = document.querySelector("header");
+                    const slogan = document.querySelector(".c-footer-slogan");
+                    let hBanner = 0;
+                    let hHeader = 0;
+                    let hSlogan = 0;
                     if (banner) {
-                        const hBanner = banner.offsetHeight;
+                        hBanner = banner.offsetHeight;
                         document.documentElement.style.setProperty(
                             "--h-banner",
                             `${hBanner}px`,
                         );
                     }
+                    if (header) {
+                        hHeader = header.offsetHeight;
+                        document.documentElement.style.setProperty(
+                            "--h-header",
+                            `${hHeader}px`,
+                        );
+                    }
+                    if (slogan) {
+                        hSlogan = slogan.offsetHeight;
+                        document.documentElement.style.setProperty(
+                            "--h-slogan",
+                            `${hSlogan}px`,
+                        );
+                    }
                 }
-
+                // Initial setup
                 requestAnimationFrame(() => {
                     setLayoutVariables();
                 });
-
+                // Update on resize
                 window.addEventListener("resize", setLayoutVariables);
+                // Update on scroll - to capture header height changes when scrolling
+                let scrollTimeout;
+                window.addEventListener("scroll", () => {
+                    // Use debouncing to avoid excessive updates
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        const header = document.querySelector("header");
+                        const slogan =
+                            document.querySelector(".c-footer-slogan");
+
+                        if (header) {
+                            const hHeader = header.offsetHeight;
+                            document.documentElement.style.setProperty(
+                                "--h-header",
+                                `${hHeader}px`,
+                            );
+                        }
+
+                        if (slogan) {
+                            const hSlogan = slogan.offsetHeight;
+                            document.documentElement.style.setProperty(
+                                "--h-slogan",
+                                `${hSlogan}px`,
+                            );
+                        }
+                    }, 100);
+                });
             })();
         </script>
 
@@ -85,8 +141,14 @@ import { siteConfig } from "@content/config";
         />
     </head>
     <body>
-        <Header />
-        <main id="main" class="o-main">
+        <Header isLegalPage={isLegalPage} />
+        {
+            isPopupVisible && (
+                <PopUpClosure closureData={closureEntry.data.closure} />
+            )
+        }
+
+        <main id="main" class:list={["o-main", { "-secondary": isLegalPage }]}>
             <slot />
         </main>
         <Banner

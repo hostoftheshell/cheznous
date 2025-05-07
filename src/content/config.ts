@@ -79,6 +79,17 @@ const menuCollection = defineCollection({
   }),
 });
 
+const closureCollection = defineCollection({
+  schema: z.object({
+    closure: z.object({
+      isVisible: z.boolean().default(false),
+      title: z.string().default(""),
+      description: z.string().default(""),
+      tag: z.string().default(""),
+    }),
+  }),
+});
+
 const workinghoursCollection = defineCollection({
   schema: z.object({
     working_hours: z.object({
@@ -120,6 +131,7 @@ export const collections = {
   global: globalCollection,
   menu: menuCollection,
   event: eventCollection,
+  closure: closureCollection,
   workinghours: workinghoursCollection,
 };
 
