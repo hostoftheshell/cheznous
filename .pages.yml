@@ -1,130 +1,129 @@
-types:
-  # Collection types
-  event:
-    name: Event
-    directory: src/content/event
-    schema:
-      title: text
-      heading: text?
-      isVisible: boolean
-      date: date
-      time: text?
-      description: textarea
-      link: text?
-      image:
+# Collection types
+event:
+  name: Event
+  directory: src/content/event
+  schema:
+    title: text
+    heading: text?
+    isVisible: boolean
+    date: date
+    time: text?
+    description: textarea
+    link: text?
+    image:
+      type: object
+      fields:
+        src: image(folder=src/content/event/images)
+        alt: text
+
+restaurant:
+  name: Restaurant
+  directory: src/content/restaurant
+  schema:
+    id: number
+    title: text
+    description: textarea?
+    image:
+      type: object
+      fields:
+        src: image(folder=src/content/restaurant/images)
+        alt: text
+
+nearby:
+  name: Nearby Places
+  directory: src/content/nearby
+  schema:
+    id: number
+    title: text
+    description: textarea?
+    url: text?
+    image:
+      type: object
+      fields:
+        src: image(folder=src/content/nearby/images)
+        alt: text
+
+global:
+  name: Global Content
+  directory: src/content/global
+  schema:
+    heading: text
+    subheading: text
+    paragraph: textarea?
+
+menu:
+  name: Menu
+  directory: src/content/menu
+  schema:
+    menus:
+      type: array
+      items:
         type: object
         fields:
-          src: image(folder=src/content/event/images)
-          alt: text
+          title: text
+          url: text
 
-  restaurant:
-    name: Restaurant
-    directory: src/content/restaurant
-    schema:
-      id: number
-      title: text
-      description: textarea?
-      image:
-        type: object
-        fields:
-          src: image(folder=src/content/restaurant/images)
-          alt: text
+closure:
+  name: Closure Information
+  directory: src/content/closure
+  schema:
+    closure:
+      type: object
+      fields:
+        isVisible: boolean
+        title: text
+        description: textarea
+        tag: text
 
-  nearby:
-    name: Nearby Places
-    directory: src/content/nearby
-    schema:
-      id: number
-      title: text
-      description: textarea?
-      url: text?
-      image:
-        type: object
-        fields:
-          src: image(folder=src/content/nearby/images)
-          alt: text
-
-  global:
-    name: Global Content
-    directory: src/content/global
-    schema:
-      heading: text
-      subheading: text
-      paragraph: textarea?
-
-  menu:
-    name: Menu
-    directory: src/content/menu
-    schema:
-      menus:
-        type: array
-        items:
+workinghours:
+  name: Working Hours
+  directory: src/content/workinghours
+  schema:
+    working_hours:
+      type: object
+      fields:
+        lundi:
           type: object
           fields:
-            title: text
-            url: text
+            midi: text
+            soir: text
+        mardi:
+          type: object
+          fields:
+            midi: text
+            soir: text
+        mercredi:
+          type: object
+          fields:
+            midi: text
+            soir: text
+        jeudi:
+          type: object
+          fields:
+            midi: text
+            soir: text
+        vendredi:
+          type: object
+          fields:
+            midi: text
+            soir: text
+        samedi:
+          type: object
+          fields:
+            midi: text
+            soir: text
+        dimanche:
+          type: object
+          fields:
+            midi: text
+            soir: text
 
-  closure:
-    name: Closure Information
-    directory: src/content/closure
-    schema:
-      closure:
-        type: object
-        fields:
-          isVisible: boolean
-          title: text
-          description: textarea
-          tag: text
-
-  workinghours:
-    name: Working Hours
-    directory: src/content/workinghours
-    schema:
-      working_hours:
-        type: object
-        fields:
-          lundi:
-            type: object
-            fields:
-              midi: text
-              soir: text
-          mardi:
-            type: object
-            fields:
-              midi: text
-              soir: text
-          mercredi:
-            type: object
-            fields:
-              midi: text
-              soir: text
-          jeudi:
-            type: object
-            fields:
-              midi: text
-              soir: text
-          vendredi:
-            type: object
-            fields:
-              midi: text
-              soir: text
-          samedi:
-            type: object
-            fields:
-              midi: text
-              soir: text
-          dimanche:
-            type: object
-            fields:
-              midi: text
-              soir: text
-
-  legal:
-    name: Legal Pages
-    directory: src/content/legal
-    schema:
-      title: text
-      content: markdown
+legal:
+  name: Legal Pages
+  directory: src/content/legal
+  schema:
+    title: text
+    content: markdown
 
 # Dashboard configuration
 dashboard:
