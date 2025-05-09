@@ -1,82 +1,23 @@
 content:
-  name: Horraire
+  name: POPUP INFOS
   label: test
   type: file
-  path: src/content/workinghours
-  filename: "workinghours-text.md"
+  path: src/content/closure
+  filename: "closure-text.md"
   format: yaml-frontmatter
   fields:
-    - label: "Working Hours Details"
-      name: "working_hours"
-      widget: "object"
-      fields: # Define each day as an object
-        - {
-            label: "Lundi (Monday)",
-            name: "lundi",
-            widget: "object",
-            fields:
-              [
-                { label: "Midi (Lunch)", name: "midi", widget: "string" },
-                { label: "Soir (Evening)", name: "soir", widget: "string" },
-              ],
-          }
-        - {
-            label: "Mardi (Tuesday)",
-            name: "mardi",
-            widget: "object",
-            fields:
-              [
-                { label: "Midi (Lunch)", name: "midi", widget: "string" },
-                { label: "Soir (Evening)", name: "soir", widget: "string" },
-              ],
-          }
-        - {
-            label: "Mercredi (Wednesday)",
-            name: "mercredi",
-            widget: "object",
-            fields:
-              [
-                { label: "Midi (Lunch)", name: "midi", widget: "string" },
-                { label: "Soir (Evening)", name: "soir", widget: "string" },
-              ],
-          }
-        - {
-            label: "Jeudi (Thursday)",
-            name: "jeudi",
-            widget: "object",
-            fields:
-              [
-                { label: "Midi (Lunch)", name: "midi", widget: "string" },
-                { label: "Soir (Evening)", name: "soir", widget: "string" },
-              ],
-          }
-        - {
-            label: "Vendredi (Friday)",
-            name: "vendredi",
-            widget: "object",
-            fields:
-              [
-                { label: "Midi (Lunch)", name: "midi", widget: "string" },
-                { label: "Soir (Evening)", name: "soir", widget: "string" },
-              ],
-          }
-        - {
-            label: "Samedi (Saturday)",
-            name: "samedi",
-            widget: "object",
-            fields:
-              [
-                { label: "Midi (Lunch)", name: "midi", widget: "string" },
-                { label: "Soir (Evening)", name: "soir", widget: "string" },
-              ],
-          }
-        - {
-            label: "Dimanche (Sunday)",
-            name: "dimanche",
-            widget: "object",
-            fields:
-              [
-                { label: "Midi (Lunch)", name: "midi", widget: "string" },
-                { label: "Soir (Evening)", name: "soir", widget: "string" },
-              ],
-          }
+    - {
+        label: "Display Closure Notice?",
+        name: "isVisible",
+        type: "boolean",
+        default: false,
+      }
+    - {
+        label: "Notice Title",
+        name: "title",
+        type: "string",
+        default: "",
+        required: false,
+      }
+    - { label: "Notice Description", name: "description", type: "string" }
+    - { label: "Notice Tag", name: "tag", type: "string" }
