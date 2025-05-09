@@ -1,7 +1,0 @@
-content:
-  name: POPUP INFOS
-  label: test
-  type: file
-  path: src/content/closure
-  filename: "closure-text.md"
-  format: yaml-frontmatter
