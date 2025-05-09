@@ -5,19 +5,3 @@ content:
   path: src/content/closure
   filename: "closure-text.md"
   format: yaml-frontmatter
-  fields:
-    - {
-        label: "Display Closure Notice?",
-        name: "isVisible",
-        type: "boolean",
-        default: false,
-      }
-    - {
-        label: "Notice Title",
-        name: "title",
-        type: "string",
-        default: "",
-        required: false,
-      }
-    - { label: "Notice Description", name: "description", type: "string" }
-    - { label: "Notice Tag", name: "tag", type: "string" }
