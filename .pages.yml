@@ -1,27 +1,3 @@
-# .pages.yml
-
-# Backend Configuration:
-# You'll need to configure this section to connect PagesCMS to your Git repository.
-# Example for GitHub:
-# backend:
-#   name: github
-#   repo: your-username/your-project-repo # Replace with your GitHub repository
-#   branch: main # Or your default branch
-#   cms_branch: pages-cms # Optional: A specific branch for CMS commits
-#   # For OAuth authentication with Netlify/GitHub:
-#   base_url: https://your-live-site-url.netlify.app # Your deployed site URL
-#   auth_type: implicit # or pkce (pkce is generally recommended for new setups)
-#   app_id: your-github-oauth-app-id # If using GitHub OAuth
-
-# Default Media Folders:
-# These can be overridden per collection.
-# This configuration assumes you want to store images uploaded via the CMS
-# in specific subdirectories within each content collection's `images` folder.
-# Note: The global media_folder and public_folder are commented out because
-# we are defining them per collection for finer control matching your structure.
-# media_folder: "src/assets/uploads" # Default path for new images if not overridden
-# public_folder: "/assets/uploads" # Default public path for images if not overridden
-
 content:
   # Event Collection (assuming event-text.md is a single configuration file for event details)
   # If you plan to have multiple distinct event entries, this should be a 'folder' collection.
