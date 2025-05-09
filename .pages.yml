@@ -1,144 +1,482 @@
-# Collection types
-event:
-  name: Event
-  directory: src/content/event
-  schema:
-    title: text
-    heading: text?
-    isVisible: boolean
-    date: date
-    time: text?
-    description: textarea
-    link: text?
-    image:
-      type: object
-      fields:
-        src: image(folder=src/content/event/images)
-        alt: text
+# .pages.yml
 
-restaurant:
-  name: Restaurant
-  directory: src/content/restaurant
-  schema:
-    id: number
-    title: text
-    description: textarea?
-    image:
-      type: object
-      fields:
-        src: image(folder=src/content/restaurant/images)
-        alt: text
+# Backend Configuration:
+# You'll need to configure this section to connect PagesCMS to your Git repository.
+# Example for GitHub:
+# backend:
+#   name: github
+#   repo: your-username/your-project-repo # Replace with your GitHub repository
+#   branch: main # Or your default branch
+#   cms_branch: pages-cms # Optional: A specific branch for CMS commits
+#   # For OAuth authentication with Netlify/GitHub:
+#   base_url: https://your-live-site-url.netlify.app # Your deployed site URL
+#   auth_type: implicit # or pkce (pkce is generally recommended for new setups)
+#   app_id: your-github-oauth-app-id # If using GitHub OAuth
 
-nearby:
-  name: Nearby Places
-  directory: src/content/nearby
-  schema:
-    id: number
-    title: text
-    description: textarea?
-    url: text?
-    image:
-      type: object
-      fields:
-        src: image(folder=src/content/nearby/images)
-        alt: text
+# Default Media Folders:
+# These can be overridden per collection.
+# This configuration assumes you want to store images uploaded via the CMS
+# in specific subdirectories within each content collection's `images` folder.
+# Note: The global media_folder and public_folder are commented out because
+# we are defining them per collection for finer control matching your structure.
+# media_folder: "src/assets/uploads" # Default path for new images if not overridden
+# public_folder: "/assets/uploads" # Default public path for images if not overridden
 
-global:
-  name: Global Content
-  directory: src/content/global
-  schema:
-    heading: text
-    subheading: text
-    paragraph: textarea?
+collections:
+  # Event Collection (assuming event-text.md is a single configuration file for event details)
+  # If you plan to have multiple distinct event entries, this should be a 'folder' collection.
+  - label: "Event Configuration"
+    name: "event_config" # Unique identifier for this collection
+    files: # Defines a list of specific files to be managed
+      - label: "Current Event Details"
+        name: "event_details" # Unique name for this file entry
+        file: "src/content/event/event-text.md" # Path to the markdown file
+        media_folder: "src/content/event/images" # Uploads for this file go here
+        public_folder: "/src/content/event/images" # How Astro should reference these images. Ensure Astro can resolve paths like /src/content/...
+        fields: # Defines the editable fields in the frontmatter
+          - {
+              label: "Is Visible",
+              name: "isVisible",
+              widget: "boolean",
+              default: true,
+            }
+          - {
+              label: "Heading",
+              name: "heading",
+              widget: "string",
+              required: false,
+              hint: "Max 50 characters. Optional.",
+            }
+          - label: "Image"
+            name: "image"
+            widget: "object"
+            fields:
+              - { label: "Image File", name: "src", widget: "image" }
+              - {
+                  label: "Alternative Text",
+                  name: "alt",
+                  widget: "string",
+                  hint: "Max 500 characters. Describes the image.",
+                }
+          - {
+              label: "Title",
+              name: "title",
+              widget: "string",
+              hint: "Max 100 characters.",
+            }
+          - {
+              label: "Date",
+              name: "date",
+              widget: "datetime",
+              format: "YYYY-MM-DD",
+              date_format: "YYYY-MM-DD",
+              time_format: false,
+            }
+          - {
+              label: "Time (HH:MM)",
+              name: "time",
+              widget: "string",
+              required: false,
+              pattern:
+                ['^\\d{2}:\\d{2}$', "Must be in HH:MM format. Optional."],
+            }
+          - {
+              label: "Description",
+              name: "description",
+              widget: "markdown",
+              hint: "Max 1000 characters.",
+            } # Use 'text' for plain multi-line string
+          - {
+              label: "Link URL",
+              name: "link",
+              widget: "string",
+              required: false,
+              hint: "Optional. e.g., https://example.com",
+            }
 
-menu:
-  name: Menu
-  directory: src/content/menu
-  schema:
-    menus:
-      type: array
-      items:
-        type: object
+  # Restaurant Sections (multiple markdown files in src/content/restaurant/)
+  - label: "Restaurant Sections"
+    name: "restaurant"
+    folder: "src/content/restaurant" # Path to the folder containing restaurant items
+    create: true # Allow users to create new restaurant sections
+    slug: "{{slug}}" # Generates filename from a field (usually 'title')
+    identifier_field: "title" # Field to display in the collection list
+    extension: "md" # File extension for new items
+    format: "frontmatter" # Assumes markdown files with YAML frontmatter
+    media_folder: "src/content/restaurant/images" # Images for this collection
+    public_folder: "/src/content/restaurant/images" # Public path for these images for Astro
+    fields:
+      - {
+          label: "ID",
+          name: "id",
+          widget: "number",
+          value_type: "int",
+          min: 1,
+          hint: "Unique positive integer ID.",
+        }
+      - {
+          label: "Title",
+          name: "title",
+          widget: "string",
+          hint: "Max 50 characters.",
+        }
+      - {
+          label: "Description",
+          name: "description",
+          widget: "markdown",
+          required: false,
+          default: "Aucune description fournie.",
+          hint: "Max 200 characters. Optional.",
+        }
+      - label: "Image"
+        name: "image"
+        widget: "object"
+        required: false
         fields:
-          title: text
-          url: text
+          - { label: "Image File", name: "src", widget: "image" }
+          - {
+              label: "Alternative Text",
+              name: "alt",
+              widget: "string",
+              hint: "Max 500 characters.",
+            }
 
-closure:
-  name: Closure Information
-  directory: src/content/closure
-  schema:
-    closure:
-      type: object
-      fields:
-        isVisible: boolean
-        title: text
-        description: textarea
-        tag: text
+  # Nearby Attractions (multiple markdown files in src/content/nearby/)
+  - label: "Nearby Attractions"
+    name: "nearby"
+    folder: "src/content/nearby"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    extension: "md"
+    format: "frontmatter"
+    media_folder: "src/content/nearby/images"
+    public_folder: "/src/content/nearby/images"
+    fields:
+      - { label: "ID", name: "id", widget: "number", value_type: "int", min: 1 }
+      - {
+          label: "Title",
+          name: "title",
+          widget: "string",
+          hint: "Max 50 characters.",
+        }
+      - {
+          label: "Description",
+          name: "description",
+          widget: "markdown",
+          required: false,
+          default: "Aucune description fournie.",
+          hint: "Max 2000 characters. Optional.",
+        }
+      - label: "Image"
+        name: "image"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Image File", name: "src", widget: "image" }
+          - {
+              label: "Alternative Text",
+              name: "alt",
+              widget: "string",
+              hint: "Max 500 characters.",
+            }
+      - {
+          label: "URL",
+          name: "url",
+          widget: "string",
+          required: false,
+          hint: "Optional link to the attraction.",
+        }
 
-workinghours:
-  name: Working Hours
-  directory: src/content/workinghours
-  schema:
-    working_hours:
-      type: object
-      fields:
-        lundi:
-          type: object
-          fields:
-            midi: text
-            soir: text
-        mardi:
-          type: object
-          fields:
-            midi: text
-            soir: text
-        mercredi:
-          type: object
-          fields:
-            midi: text
-            soir: text
-        jeudi:
-          type: object
-          fields:
-            midi: text
-            soir: text
-        vendredi:
-          type: object
-          fields:
-            midi: text
-            soir: text
-        samedi:
-          type: object
-          fields:
-            midi: text
-            soir: text
-        dimanche:
-          type: object
-          fields:
-            midi: text
-            soir: text
+  # Global Content Snippets (specific files in src/content/global/)
+  - label: "Global Content Sections"
+    name: "global_content"
+    files:
+      - label: "Nearby Text Section (Global)"
+        name: "global_nearby_text"
+        file: "src/content/global/nearby-text.md"
+        fields:
+          - {
+              label: "Heading",
+              name: "heading",
+              widget: "string",
+              hint: "Max 50 characters.",
+            }
+          - {
+              label: "Subheading",
+              name: "subheading",
+              widget: "string",
+              hint: "Max 50 characters.",
+            }
+          - {
+              label: "Paragraph",
+              name: "paragraph",
+              widget: "markdown",
+              required: false,
+              default: "Aucun texte fournie.",
+              hint: "Max 1500 characters. Optional.",
+            }
+      - label: "Restaurant Text Section (Global)"
+        name: "global_restaurant_text"
+        file: "src/content/global/restaurant-text.md"
+        fields: # Assuming same schema as globalCollection
+          - {
+              label: "Heading",
+              name: "heading",
+              widget: "string",
+              hint: "Max 50 characters.",
+            }
+          - {
+              label: "Subheading",
+              name: "subheading",
+              widget: "string",
+              hint: "Max 50 characters.",
+            }
+          - {
+              label: "Paragraph",
+              name: "paragraph",
+              widget: "markdown",
+              required: false,
+              default: "Aucun texte fournie.",
+              hint: "Max 1500 characters. Optional.",
+            }
 
-legal:
-  name: Legal Pages
-  directory: src/content/legal
-  schema:
-    title: text
-    content: markdown
+  # Menu Configuration (single file: src/content/menu/menu-text.md)
+  - label: "Website Menu"
+    name: "menu_config"
+    files:
+      - label: "Navigation Menu Items"
+        name: "menu_items"
+        file: "src/content/menu/menu-text.md"
+        fields:
+          - label: "Menus"
+            name: "menus"
+            widget: "list" # For arrays
+            fields: # Fields for each item in the list
+              - {
+                  label: "Item Title",
+                  name: "title",
+                  widget: "string",
+                  hint: "Max 50 characters. e.g., Home, About",
+                }
+              - {
+                  label: "Item URL",
+                  name: "url",
+                  widget: "string",
+                  hint: "e.g., /, /about, https://external.link",
+                }
 
-# Dashboard configuration
-dashboard:
-  title: Chez Nous Admin
-  logo: /images/logo.png
-  collections:
-    - name: Content
-      items:
-        - restaurant
-        - nearby
-        - event
-        - global
-        - menu
-    - name: Settings
-      items:
-        - closure
-        - workinghours
-        - legal
+  # Closure Information (single file: src/content/closure/closure-text.md)
+  - label: "Closure Notice"
+    name: "closure_config"
+    files:
+      - label: "Closure Details"
+        name: "closure_details"
+        file: "src/content/closure/closure-text.md"
+        fields:
+          - label: "Closure Settings"
+            name: "closure"
+            widget: "object" # For nested objects
+            fields:
+              - {
+                  label: "Display Closure Notice?",
+                  name: "isVisible",
+                  widget: "boolean",
+                  default: false,
+                }
+              - {
+                  label: "Notice Title",
+                  name: "title",
+                  widget: "string",
+                  default: "",
+                  required: false,
+                }
+              - {
+                  label: "Notice Description",
+                  name: "description",
+                  widget: "text",
+                  default: "",
+                  required: false,
+                } # 'text' for multi-line plain text
+              - {
+                  label: "Notice Tag",
+                  name: "tag",
+                  widget: "string",
+                  default: "",
+                  required: false,
+                  hint: "Short tag, e.g., Maintenance, Holiday. Optional.",
+                }
+
+  # Working Hours (single file: src/content/workinghours/workinghours-text.md)
+  - label: "Working Hours"
+    name: "workinghours_config"
+    files:
+      - label: "Weekly Opening Hours"
+        name: "weekly_hours"
+        file: "src/content/workinghours/workinghours-text.md"
+        fields:
+          - label: "Working Hours Details"
+            name: "working_hours"
+            widget: "object"
+            fields: # Define each day as an object
+              - {
+                  label: "Lundi (Monday)",
+                  name: "lundi",
+                  widget: "object",
+                  fields:
+                    [
+                      { label: "Midi (Lunch)", name: "midi", widget: "string" },
+                      {
+                        label: "Soir (Evening)",
+                        name: "soir",
+                        widget: "string",
+                      },
+                    ],
+                }
+              - {
+                  label: "Mardi (Tuesday)",
+                  name: "mardi",
+                  widget: "object",
+                  fields:
+                    [
+                      { label: "Midi (Lunch)", name: "midi", widget: "string" },
+                      {
+                        label: "Soir (Evening)",
+                        name: "soir",
+                        widget: "string",
+                      },
+                    ],
+                }
+              - {
+                  label: "Mercredi (Wednesday)",
+                  name: "mercredi",
+                  widget: "object",
+                  fields:
+                    [
+                      { label: "Midi (Lunch)", name: "midi", widget: "string" },
+                      {
+                        label: "Soir (Evening)",
+                        name: "soir",
+                        widget: "string",
+                      },
+                    ],
+                }
+              - {
+                  label: "Jeudi (Thursday)",
+                  name: "jeudi",
+                  widget: "object",
+                  fields:
+                    [
+                      { label: "Midi (Lunch)", name: "midi", widget: "string" },
+                      {
+                        label: "Soir (Evening)",
+                        name: "soir",
+                        widget: "string",
+                      },
+                    ],
+                }
+              - {
+                  label: "Vendredi (Friday)",
+                  name: "vendredi",
+                  widget: "object",
+                  fields:
+                    [
+                      { label: "Midi (Lunch)", name: "midi", widget: "string" },
+                      {
+                        label: "Soir (Evening)",
+                        name: "soir",
+                        widget: "string",
+                      },
+                    ],
+                }
+              - {
+                  label: "Samedi (Saturday)",
+                  name: "samedi",
+                  widget: "object",
+                  fields:
+                    [
+                      { label: "Midi (Lunch)", name: "midi", widget: "string" },
+                      {
+                        label: "Soir (Evening)",
+                        name: "soir",
+                        widget: "string",
+                      },
+                    ],
+                }
+              - {
+                  label: "Dimanche (Sunday)",
+                  name: "dimanche",
+                  widget: "object",
+                  fields:
+                    [
+                      { label: "Midi (Lunch)", name: "midi", widget: "string" },
+                      {
+                        label: "Soir (Evening)",
+                        name: "soir",
+                        widget: "string",
+                      },
+                    ],
+                }
+
+  # Legal Documents (multiple files in src/content/legal/)
+  # Schema is inferred as 'title' and 'body' since it's not in your Zod collections.
+  - label: "Legal Documents"
+    name: "legal"
+    folder: "src/content/legal"
+    create: true # Set to false if you don't want new legal docs created via CMS
+    slug: "{{slug}}"
+    identifier_field: "title" # Assumes a 'title' field in the frontmatter
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" } # Frontmatter field
+      - { label: "Content", name: "body", widget: "markdown" } # Represents the main content of the MD file
+
+  # Site Configuration (from your config.ts, moved to a JSON/YAML file)
+  # This section assumes you move `siteConfig` to a separate data file like `src/data/siteConfig.json`.
+  # If you do this, create the file `src/data/siteConfig.json` with your existing `siteConfig` data.
+  # Then, import this JSON file into your `src/content/config.ts`.
+  - label: "Site Configuration"
+    name: "site_config"
+    files:
+      - label: "General Site Settings"
+        name: "general_site_settings"
+        file: "src/data/siteConfig.json" # Path to your site configuration JSON file
+        format: "json" # Or "yaml" if you prefer YAML
+        fields:
+          - label: "Titles"
+            name: "titles"
+            widget: "object"
+            fields:
+              - { label: "Site Title", name: "SITE_TITLE", widget: "string" }
+              - {
+                  label: "Hero Title",
+                  name: "HERO_TITLE",
+                  widget: "text",
+                  hint: "Use Shift+Enter for new lines.",
+                }
+          - label: "Social Media Links"
+            name: "socials"
+            widget: "object"
+            fields:
+              - { label: "Instagram URL", name: "instagram", widget: "string" }
+              - { label: "Facebook URL", name: "facebook", widget: "string" }
+          - { label: "Website URL", name: "url", widget: "string" }
+          - label: "Contact Information"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Address", name: "address", widget: "string" }
+              - { label: "Phone Number", name: "phone", widget: "string" }
+              - {
+                  label: "Phone Link (tel:)",
+                  name: "phoneLink",
+                  widget: "string",
+                }
+              - { label: "Email Address", name: "email", widget: "string" }
+          - {
+              label: "Opening Hours Text",
+              name: "openingHours",
+              widget: "text",
+            }
+          - { label: "Slogan", name: "slogan", widget: "string" }
