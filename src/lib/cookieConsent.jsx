@@ -5,7 +5,6 @@ import * as CookieConsent from "vanilla-cookieconsent";
 
 export default function CookieConsentComponent() {
   useEffect(() => {
-    console.log("COOKIE RUNS");
     const runCookieConsent = async () => {
       const cc = await CookieConsent.run({
         root: "body",
@@ -105,10 +104,8 @@ export default function CookieConsentComponent() {
       if (cc) {
         window.cookieConsent = cc;
 
-        // Dispatch initialization event
         window.dispatchEvent(new Event("cookieConsentInitialized"));
 
-        // Immediately trigger the event with the current state on initialization
         const mapsConsented = cc.acceptedCategory("maps");
         window.dispatchEvent(
           new CustomEvent("cookieConsentChanged", {
@@ -119,10 +116,7 @@ export default function CookieConsentComponent() {
     };
 
     runCookieConsent();
-
-    // No cleanup function needed for vanilla-cookieconsent in this typical setup,
-    // as it manages its own DOM elements globally.
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []);
 
   return null;
 }

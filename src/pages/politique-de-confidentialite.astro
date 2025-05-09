@@ -1,6 +1,12 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { Container } from "@components/index";
 const pageTitle = "Politique de confidentialité";
+import { Content } from "@content/legal/politique-de-confidentialite.md";
 ---
 
-<BaseLayout pageTitle={pageTitle} />
+<BaseLayout pageTitle={pageTitle} isLegalPage={true}>
+    <Container>
+        <div class="c-legales__container"><Content /></div>
+    </Container>
+</BaseLayout>

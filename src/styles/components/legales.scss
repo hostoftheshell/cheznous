@@ -1,0 +1,12 @@
+.c-legales__container {
+    max-width: 1280px;
+    margin: var(--h-header) auto 0;
+    padding: 8rem 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.c-legales__container h1 {
+    margin: 0.67em 0;
+}
