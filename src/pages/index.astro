@@ -2,7 +2,7 @@
 // Configuration & Types
 import { siteConfig } from "@content/config";
 import type { RestaurantEntry, NearbyEntry } from "../types/content";
-
+import CookieConsentProvider from "../components/ui/CookieConsentComponent";
 // Layouts & Components
 import BaseLayout from "@layouts/BaseLayout.astro";
 import {
@@ -74,4 +74,5 @@ const heroTitle = siteConfig.titles.HERO_TITLE;
     <!-- <BusinessHours client:load /> -->
     <NearbySection groupedNearbies={columns} nearbyText={nearbyText.data} />
     <InfoSection />
+    <CookieConsentProvider client:load />
 </BaseLayout>

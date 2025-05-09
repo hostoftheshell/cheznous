@@ -1,7 +1,6 @@
 ---
-import { Map, WorkingHours } from "@components/index";
+import { WorkingHours, Map } from "@components/index";
 import { siteConfig } from "@content/config";
-
 import MapPin from "@assets/icons/map-pin.svg";
 import Phone from "@assets/icons/phone.svg";
 import Mail from "@assets/icons/mail.svg";
@@ -17,12 +16,10 @@ const mapUrl =
             <div class="c-infos__heading">
                 <h1>Chez Nous<br />Vermenton 89270</h1>
             </div>
-
             <div class="c-infos__workinghours">
                 <WorkingHours />
             </div>
         </div>
-
         <div class="c-infos__contact">
             <div class="c-infos__contact-map">
                 <Map src={mapUrl} loading="lazy" />
