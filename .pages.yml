@@ -22,7 +22,7 @@
 # media_folder: "src/assets/uploads" # Default path for new images if not overridden
 # public_folder: "/assets/uploads" # Default public path for images if not overridden
 
-collections:
+content:
   # Event Collection (assuming event-text.md is a single configuration file for event details)
   # If you plan to have multiple distinct event entries, this should be a 'folder' collection.
   - label: "Event Configuration"
