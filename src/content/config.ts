@@ -70,12 +70,18 @@ const globalCollection = defineCollection({
 
 const menuCollection = defineCollection({
   schema: z.object({
-    menus: z.array(
-      z.object({
-        title: z.string().max(50),
-        url: z.string(),
-      }),
-    ),
+    carte: z.object({
+      title: z.string().max(50),
+      url: z.string(),
+    }),
+    vins: z.object({
+      title: z.string().max(50),
+      url: z.string(),
+    }),
+    special: z.object({
+      title: z.string().max(50),
+      url: z.string(),
+    }),
   }),
 });
 

@@ -1,0 +1,349 @@
+media:
+  - name: hero-images
+    label: Images de couverture
+    input: src/assets/images
+    output: /assets/images
+    categories: [image]
+
+  - name: event-images
+    label: Images de la section Agenda
+    input: src/content/event/images
+    output: /content/event/images
+    categories: [image]
+
+  - name: restaurant-images
+    label: Images de la section Restaurant
+    input: src/content/restaurant/images
+    output: /content/restaurant/images
+    categories: [image]
+
+  - name: nearby-images
+    label: Images de la section À Proximité
+    input: src/content/nearby/images
+    output: /content/nearby/images
+    categories: [image]
+
+  - name: docs-menus
+    label: PDF des menus et cartes
+    input: public/docs/menus
+    output: /docs/menus
+    categories: [document]
+
+content:
+  # General Site Information & Settings
+  - name: closure
+    label: "PopUp d'information"
+    type: file
+    path: src/content/closure/closure-text.md
+    fields:
+      - name: isVisible
+        label: Afficher
+        type: boolean
+        default: false
+      - name: title
+        label: Titre
+        type: string
+        default: "fermeture exceptionnelle"
+      - name: description
+        label: Message
+        type: string
+        default: >
+          Le 21 novembre, notre établissement sera exceptionnellement fermé.
+          Nous vous retrouverons dès le 22 novembre à partir de 11h30, Chez Nous !
+      - name: tag
+        label: Formules de départ personnalisées
+        type: string
+        default: "À bientôt !"
+
+  - name: working-hours
+    label: Horaires d'ouverture
+    type: file
+    path: src/content/workinghours/workinghours-text.md
+    fields:
+      - name: working_hours
+        label: Jours de la semaine
+        type: object
+        fields:
+          - name: lundi
+            label: Lundi
+            type: object
+            fields:
+              - { name: midi, label: Midi, type: string, default: "fermé" }
+              - { name: soir, label: Soir, type: string, default: "fermé" }
+          - name: mardi
+            label: Mardi
+            type: object
+            fields:
+              - {
+                  name: midi,
+                  label: Midi,
+                  type: string,
+                  default: "11:30-14:30",
+                }
+              - {
+                  name: soir,
+                  label: Soir,
+                  type: string,
+                  default: "18:30-21:00",
+                }
+          - name: mercredi
+            label: Mercredi
+            type: object
+            fields:
+              - {
+                  name: midi,
+                  label: Midi,
+                  type: string,
+                  default: "11:30-14:30",
+                }
+              - {
+                  name: soir,
+                  label: Soir,
+                  type: string,
+                  default: "18:30-21:00",
+                }
+          - name: jeudi
+            label: Jeudi
+            type: object
+            fields:
+              - {
+                  name: midi,
+                  label: Midi,
+                  type: string,
+                  default: "11:30-14:30",
+                }
+              - {
+                  name: soir,
+                  label: Soir,
+                  type: string,
+                  default: "18:30-21:00",
+                }
+          - name: vendredi
+            label: Vendredi
+            type: object
+            fields:
+              - {
+                  name: midi,
+                  label: Midi,
+                  type: string,
+                  default: "11:30-14:30",
+                }
+              - {
+                  name: soir,
+                  label: Soir,
+                  type: string,
+                  default: "18:30-21:00",
+                }
+          - name: samedi
+            label: Samedi
+            type: object
+            fields:
+              - {
+                  name: midi,
+                  label: Midi,
+                  type: string,
+                  default: "11:30-14:30",
+                }
+              - {
+                  name: soir,
+                  label: Soir,
+                  type: string,
+                  default: "18:30-21:00",
+                }
+          - name: dimanche
+            label: Dimanche
+            type: object
+            fields:
+              - {
+                  name: midi,
+                  label: Midi,
+                  type: string,
+                  default: "11:30-14:30",
+                }
+              - { name: soir, label: Soir, type: string, default: "fermé" }
+
+  # Restaurant & Nearby Locations Specific Content
+  - name: global
+    label: Paragraphes des sections Restaurant et À proximité
+    path: src/content/global
+    type: collection
+    fields:
+      - name: heading
+        label: "Titre"
+        type: string
+        default: "Titre"
+      - name: subheading
+        label: "Sous-Titre"
+        type: string
+        default: "Soustitre"
+      - name: paragraph
+        label: "Paragraphe"
+        type: text
+        default: "paragraphe"
+
+  # Restaurant Specific Content
+  - name: restaurant
+    label: Restaurant
+    type: collection
+    path: src/content/restaurant
+    fields:
+      - name: id
+        label: ID
+        type: number
+      - name: title
+        label: Titre
+        type: string
+      - name: description
+        label: Description
+        type: string
+      - name: image
+        label: Images
+        type: object
+        fields:
+          - name: src
+            label: "Chemin vers le fichier de l'image"
+            type: string
+          - name: alt
+            label: "Texte alternatif de l'image"
+            type: string
+
+  # Nearby Locations Content
+  - name: nearby
+    label: À proximité
+    type: collection
+    path: src/content/nearby
+    fields:
+      - name: id
+        label: ID
+        type: number
+      - name: title
+        label: Titre
+        type: string
+      - name: description
+        label: Description
+        type: string
+      - name: image
+        label: Images
+        type: object
+        fields:
+          - name: src
+            label: "Chemin vers le fichier de l'image"
+            type: string
+          - name: alt
+            label: "Texte alternatif de l'image"
+            type: string
+      - name: url
+        label: "lien vers la ressource"
+        type: string
+
+  - name: menus
+    label: Liste des Cartes
+    type: file
+    path: src/content/menu/menu-text.md
+    fields:
+      - name: carte
+        label: La Carte
+        type: object
+        fields:
+          - name: title
+            label: Titre
+            type: string
+            default: La carte
+          - name: url
+            label: URL
+            type: string
+            default: /docs/menus/cheznous_carte.pdf
+      - name: vins
+        label: Les Vins
+        type: object
+        fields:
+          - name: title
+            label: Titre
+            type: string
+            default: Les vins
+          - name: url
+            label: URL
+            type: string
+            default: /docs/menus/cheznous_carte_vins.pdf
+      - name: special
+        label: Menu Spécial
+        type: object
+        fields:
+          - name: title
+            label: Titre
+            type: string
+            default: "Menu spécial"
+          - name: url
+            label: URL
+            type: string
+            default: "/docs/menus/cheznous_menu_special.pdf"
+
+  # Event Specific Content
+  - name: event
+    label: "Agenda"
+    type: file
+    path: src/content/event/event-text.md
+    fields:
+      - name: isVisible
+        label: "Afficher l'évenement sur le site"
+        type: boolean
+        default: false
+      - name: heading
+        label: "Phrase d'accroche"
+        type: string
+        default: "A presto Chez Nous ! 🎉"
+      - name: image
+        label: "Image"
+        type: object
+        fields:
+          - name: src
+            label: "Chemin vers le fichier de l'image"
+            type: string
+            default: "./images/dummy-event.png"
+          - name: alt
+            label: "Texte alternatif de l'image"
+            type: string
+            default: "un événement de musique rock, avec un style graphique rétro."
+      - name: title
+        label: "Titre de l'événement"
+        type: string
+        default: "Soirée Pizza & Rock"
+      - name: date
+        label: "Date de l'événement (au format ISO)"
+        type: date
+        options:
+          format: YYYY-MM-DD
+        default: "2024-11-21" # Note: This date is in the past.
+      - name: time
+        label: "Heure de début de l'événement (au format 24h)"
+        type: string
+        default: "19:00"
+      - name: description
+        label: "Description de l'événement"
+        type: text
+        default: >
+          Partagez un moment convivial autour de nos meilleures pizzas, dans une ambiance rock et festive!
+          Réservez votre table au 03 86 51 89 56.
+      - name: link
+        label: "Lien vers l'événement"
+        type: string
+        default: "https://example.com/"
+
+  # Legal Content
+  - name: mentions-legales
+    label: Mentions Légales
+    type: file
+    path: src/content/legal/mentions-legales.md
+    fields:
+      - name: body
+        label: Page mentions légales
+        type: rich-text
+
+  - name: politique-de-confidentialite
+    label: Politique de Confidentialité
+    type: file
+    path: src/content/legal/politique-de-confidentialite.md
+    fields:
+      - name: body
+        label: Page politique de confidentialité (RGPD)
+        type: rich-text
