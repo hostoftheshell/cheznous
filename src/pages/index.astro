@@ -1,6 +1,5 @@
 ---
 // Configuration & Types
-import { siteConfig } from "@content/config";
 import type { RestaurantEntry, NearbyEntry } from "../types/content";
 import CookieConsentProvider from "../components/ui/CookieConsentComponent";
 // Layouts & Components
@@ -56,22 +55,18 @@ if (sortedNearbies.length > 6) {
     }
 }
 
-// Page metadata
-const pageTitle = siteConfig.titles.SITE_TITLE;
-const heroTitle = siteConfig.titles.HERO_TITLE;
+const siteConfig = await getEntry("site", "settings");
+const { site_title: pageTitle, hero_title: heroTitle } = siteConfig?.data ?? {};
 ---
 
 <BaseLayout pageTitle={pageTitle}>
     <Hero title={heroTitle} />
-
     <RestaurantSection
         groupedRestaurants={groupedRestaurants}
         restaurantText={restaurantText.data}
     />
-
     <MenuSection pageTitle={pageTitle} />
     <EventSection />
-    <!-- <BusinessHours client:load /> -->
     <NearbySection groupedNearbies={columns} nearbyText={nearbyText.data} />
     <InfoSection />
     <CookieConsentProvider client:load />

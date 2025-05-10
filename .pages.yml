@@ -31,6 +31,74 @@ media:
 
 content:
   # General Site Information & Settings
+  - name: site
+    label: "Informations"
+    type: file
+    path: src/content/site/settings.md
+    fields:
+      - name: site_title
+        label: "Titre du site"
+        type: string
+        default: "Chez Nous"
+      - name: hero_title
+        label: "Sous-titre du site"
+        type: string
+        default: >
+          Pizza,
+          Pasta,
+          Dolce vita
+      - name: socials
+        label: "Liens des réseaux sociaux"
+        type: object
+        fields:
+          - {
+              name: instagram,
+              label: Instagram,
+              type: string,
+              default: "https://www.instagram.com/cheznous89270/",
+            }
+          - {
+              name: facebook,
+              label: Facebook,
+              type: string,
+              default: "https://www.facebook.com/cheznous89270/",
+            }
+      - name: contact
+        label: "Information de contact"
+        type: object
+        fields:
+          - {
+              name: address,
+              label: Adresse,
+              type: string,
+              default: "7 place de la Convention – 89270 Vermenton",
+            }
+          - {
+              name: phone,
+              label: "Téléphone (affiché)",
+              type: string,
+              default: "03 86 51 89 56",
+            }
+          - {
+              name: phone_link,
+              label: "Téléphone (lien cliquable)",
+              type: string,
+              default: "+33686518956",
+            }
+          - {
+              name: email,
+              label: Adresse email,
+              type: string,
+              default: "contact@cheznous89270.com",
+            }
+      - name: opening_hours
+        label: "Horaires d'ouverture"
+        type: string
+        default: "Ouvert du mardi au samedi de 11h30 à 14h30 et de 18h30 à 21h. Le dimanche, uniquement le midi de 11h30 à 14h30."
+      - name: slogan
+        label: "Slogan du site"
+        type: string
+        default: "Pizzas artisanales préparées à la maison"
   - name: closure
     label: "PopUp d'information"
     type: file

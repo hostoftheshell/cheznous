@@ -1,6 +1,7 @@
 ---
-import { siteConfig } from "@content/config";
+import { getEntry } from "astro:content";
 import CircleX from "@assets/icons/circle-x.svg";
+
 interface Props {
     closureData: {
         title: string;
@@ -8,16 +9,18 @@ interface Props {
         tag: string;
     };
 }
-
 const { closureData } = Astro.props;
 const { title, description, tag } = closureData;
-const socialInstagram = siteConfig.socials.instagram;
+
+const siteConfig = await getEntry("site", "settings");
+const { socials } = siteConfig?.data ?? {};
+const { instagram } = socials ?? {};
 ---
 
 <div class="closure-popup-overlay">
     <div class="closure-popup">
-        <button class="close-button" aria-label="Fermer"
-            ><CircleX width="24" height="24" />
+        <button class="close-button" aria-label="Fermer">
+            <CircleX width="24" height="24" />
         </button>
         <div class="popup-content">
             <h2 class="popup-content__title">{title}</h2>
@@ -25,12 +28,14 @@ const socialInstagram = siteConfig.socials.instagram;
             <span class="popup-content__tag">{tag}</span>
             <span class="popup-content__social">
                 <a
-                    href={siteConfig.socials.instagram}
+                    href={instagram}
                     aria-label="Instagram"
                     class="popup-content__social-link"
                     target="_blank"
-                    rel="noopener noreferrer">@cheznous89270</a
+                    rel="noopener noreferrer"
                 >
+                    @cheznous89270
+                </a>
             </span>
         </div>
     </div>

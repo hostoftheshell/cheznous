@@ -1,7 +1,11 @@
 ---
 import { Logo } from "@components/index";
-import { siteConfig } from "@content/config";
+import { getEntry } from "astro:content";
 import BannerAnimationController from "@scripts/BannerAnimationController";
+
+const siteConfig = await getEntry("site", "settings");
+const { contact, opening_hours: openingHours } = siteConfig?.data ?? {};
+const { address, email, phone_link: phoneLink, phone } = contact ?? {};
 ---
 
 <footer>
@@ -9,23 +13,23 @@ import BannerAnimationController from "@scripts/BannerAnimationController";
         <Logo class="c-footer__logo" variant="light" />
         <div class="c-footer__info">
             <p class="c-footer__info-address">
-                {siteConfig.contact.address}
+                {address}
             </p>
 
             <p class="c-footer__info-opening-hours">
-                {siteConfig.openingHours}
+                {openingHours}
             </p>
 
             <p class="c-footer__info-contact">
                 <span class="c-footer__info-email">
-                    <a href={`mailto:${siteConfig.contact.email}`}>
-                        {siteConfig.contact.email}
+                    <a href={`mailto:${email}`}>
+                        {email}
                     </a>
                 </span>
                 <span class="c-footer__info-separator"> | </span>
                 <span class="c-footer__info-phone">
-                    <a href={`tel:${siteConfig.contact.phoneLink}`}>
-                        {siteConfig.contact.phone}
+                    <a href={`tel:${phoneLink}`}>
+                        {phone}
                     </a>
                 </span>
             </p>

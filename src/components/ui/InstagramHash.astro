@@ -1,4 +1,5 @@
 ---
+import { getEntry } from "astro:content";
 import {
     fetchPostsUsingPredefinedHashtagId,
     fetchInstagramAccountInfo,
@@ -6,19 +7,17 @@ import {
     type InstagramAccountInfo,
 } from "@lib/instagram";
 import { convertImageToWebPDataURL } from "@lib/image";
-import { siteConfig } from "@content/config";
 
-const pageTitle = siteConfig.titles.SITE_TITLE;
-const instagram = siteConfig.socials.instagram;
+const siteConfig = await getEntry("site", "settings");
+const { site_title: pageTitle, socials } = siteConfig?.data ?? {};
+const { instagram } = socials ?? {};
 
-// Initialize variables with proper types
 let posts: InstagramPost[] = [];
 let accountInfo: InstagramAccountInfo | null = null;
 let latestPost: InstagramPost | null = null;
 let formattedCaption = "";
 
 try {
-    // Fetch both Instagram posts and account info in parallel
     const [postsResult, accountInfoResult] = await Promise.all([
         fetchPostsUsingPredefinedHashtagId(),
         fetchInstagramAccountInfo(),
@@ -26,39 +25,24 @@ try {
 
     posts = postsResult;
     accountInfo = accountInfoResult;
-
-    console.log(`Fetched ${posts.length} posts at build time`);
-
-    if (posts.length > 0 && posts[0].media_url) {
-        try {
-            const imageResponse = await fetch(posts[0].media_url);
-            if (imageResponse.ok) {
-                const arrayBuffer = await imageResponse.arrayBuffer();
-                posts[0].data_url =
-                    await convertImageToWebPDataURL(arrayBuffer);
-            }
-        } catch (error) {
-            console.error(
-                `Failed to fetch image for post ${posts[0].id}:`,
-                error,
-            );
-        }
-    }
-
-    if (accountInfo && accountInfo.profile_picture_url) {
-        try {
-            const imageResponse = await fetch(accountInfo.profile_picture_url);
-            if (imageResponse.ok) {
-                const arrayBuffer = await imageResponse.arrayBuffer();
-                accountInfo.avatar_data_url =
-                    await convertImageToWebPDataURL(arrayBuffer);
-            }
-        } catch (error) {
-            console.error("Failed to fetch avatar image:", error);
-        }
-    }
-
     latestPost = posts.length > 0 ? posts[0] : null;
+
+    if (latestPost?.media_url) {
+        const imageResponse = await fetch(latestPost.media_url);
+        if (imageResponse.ok) {
+            const arrayBuffer = await imageResponse.arrayBuffer();
+            latestPost.data_url = await convertImageToWebPDataURL(arrayBuffer);
+        }
+    }
+
+    if (accountInfo?.profile_picture_url) {
+        const imageResponse = await fetch(accountInfo.profile_picture_url);
+        if (imageResponse.ok) {
+            const arrayBuffer = await imageResponse.arrayBuffer();
+            accountInfo.avatar_data_url =
+                await convertImageToWebPDataURL(arrayBuffer);
+        }
+    }
 
     if (latestPost?.caption) {
         formattedCaption = latestPost.caption.replace(
@@ -74,8 +58,9 @@ try {
 <div class="c-menu-daily">
     <div class="c-menu-daily__heading">
         <h3 class="c-menu-daily__heading-text">
-            l'ardoise du <span
-                >{
+            l'ardoise du
+            <span>
+                {
                     latestPost
                         ? new Date(latestPost.timestamp).toLocaleDateString(
                               "fr-FR",
@@ -87,10 +72,11 @@ try {
                               },
                           )
                         : "jour"
-                }</span
-            >
+                }
+            </span>
         </h3>
     </div>
+
     {
         latestPost ? (
             <div class="c-menu-daily__card">
@@ -117,6 +103,7 @@ try {
                         Image non disponible
                     </div>
                 )}
+
                 <div class="c-menu-daily__infos">
                     {accountInfo && (
                         <>
@@ -134,6 +121,7 @@ try {
                                     )}
                                 </figure>
                             </div>
+
                             <div class="c-menu-daily__caption">
                                 <div class="c-menu-daily__caption-names">
                                     <span class="c-menu-daily__caption-name">
@@ -151,6 +139,7 @@ try {
                                         </span>
                                     )}
                                 </div>
+
                                 <div class="c-menu-daily__caption-content">
                                     <div set:html={formattedCaption} />
                                 </div>

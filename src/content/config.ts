@@ -131,6 +131,30 @@ const workinghoursCollection = defineCollection({
   }),
 });
 
+const settingsCollection = defineCollection({
+  schema: z.object({
+    site_title: z.string(),
+    hero_title: z.string(),
+    socials: z.object({
+      instagram: z.string().url(),
+      facebook: z.string().url(),
+    }),
+    contact: z.object({
+      address: z.string(),
+      phone: z.string(),
+      phone_link: z.string(),
+      email: z.string().email(),
+    }),
+    opening_hours: z.string(),
+    slogan: z.string(),
+  }),
+});
+
+const legalCollection = defineCollection({
+  type: "content",
+  schema: undefined,
+});
+
 export const collections = {
   restaurant: restaurantCollection,
   nearby: nearbyCollection,
@@ -139,47 +163,6 @@ export const collections = {
   event: eventCollection,
   closure: closureCollection,
   workinghours: workinghoursCollection,
-};
-
-export interface SiteConfig {
-  titles: {
-    SITE_TITLE: string;
-    HERO_TITLE: string;
-  };
-  socials: {
-    instagram: string;
-    facebook: string;
-  };
-  url: string;
-  contact: {
-    address: string;
-    phone: string;
-    phoneLink: string;
-    email: string;
-  };
-  openingHours: string;
-  slogan: string;
-}
-
-export const siteConfig: SiteConfig = {
-  titles: {
-    SITE_TITLE: "Chez Nous",
-    HERO_TITLE: "Pizza,\nPasta,\nDolce vita",
-  },
-  socials: {
-    instagram: "https://www.instagram.com/cheznous89270/",
-    facebook: "https://www.facebook.com/cheznous89270/",
-  },
-  url: "https://cheznous89270.netlify.app/",
-
-  contact: {
-    address: "7 place de la Convention – 89270 Vermenton",
-    phone: "03 86 51 89 56",
-    phoneLink: "+33686518956",
-    email: "contact@cheznous89270.com",
-  },
-
-  openingHours:
-    "Ouvert du mardi au samedi de 11h30 à 14h30 et de 18h30 à 21h. Le dimanche, uniquement le midi de 11h30 à 14h30.",
-  slogan: "Pizzas artisanales préparées à la maison",
+  site: settingsCollection,
+  legal: legalCollection,
 };

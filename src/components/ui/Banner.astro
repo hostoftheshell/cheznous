@@ -1,5 +1,5 @@
 ---
-import { siteConfig } from "@content/config";
+import { getEntry } from "astro:content";
 import Phone from "@assets/icons/phone.svg";
 import Accessibility from "@assets/icons/accessibility.svg";
 
@@ -7,8 +7,12 @@ interface Props {
     generalInfo: string;
     additionalInfo: string;
 }
-const { phoneLink, phone } = siteConfig.contact;
+
 const { generalInfo, additionalInfo } = Astro.props;
+
+const siteConfig = await getEntry("site", "settings");
+const { contact } = siteConfig?.data ?? {};
+const { phone_link: phoneLink, phone } = contact ?? {};
 ---
 
 <div class="c-banner">

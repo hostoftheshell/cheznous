@@ -1,14 +1,18 @@
 ---
-import { siteConfig } from "@content/config";
+import { getEntry } from "astro:content";
 import Facebook from "@assets/icons/facebook.svg";
 import Instagram from "@assets/icons/instagram.svg";
+
+const siteConfig = await getEntry("site", "settings");
+const { socials } = siteConfig?.data ?? {};
+const { facebook, instagram } = socials ?? {};
 ---
 
 <div class="c-header__social">
     <ul class="c-header__social-list">
         <li class="c-header__social-item">
             <a
-                href={siteConfig.socials.facebook}
+                href={facebook}
                 aria-label="Facebook"
                 class="c-header__social-link"
                 target="_blank"
@@ -17,7 +21,7 @@ import Instagram from "@assets/icons/instagram.svg";
         </li>
         <li class="c-header__social-item">
             <a
-                href={siteConfig.socials.instagram}
+                href={instagram}
                 aria-label="Instagram"
                 class="c-header__social-link"
                 target="_blank"

@@ -20,12 +20,13 @@ import metropolis300Woff2 from "@fontsource/metropolis/files/metropolis-latin-30
 import metropolis400Woff2 from "@fontsource/metropolis/files/metropolis-latin-400-normal.woff2?url";
 import frauncesWoff2 from "@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url";
 
-import { siteConfig } from "@content/config";
-
-import { getCollection, getEntry } from "astro:content";
+import { getEntry } from "astro:content";
 
 const closureEntry = await getEntry("closure", "closure-text");
 const isPopupVisible = closureEntry?.data?.closure?.isVisible;
+
+const siteConfig = await getEntry("site", "settings");
+const { slogan: siteSlogan, site_title: siteTitle } = siteConfig?.data ?? {};
 ---
 
 <!doctype html>
@@ -34,8 +35,8 @@ const isPopupVisible = closureEntry?.data?.closure?.isVisible;
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="generator" content={Astro.generator} />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
+        <link rel="icon" type="image/png" href="/favicon.png?" />
+        <link rel="sitemap" href="/sitemap-index.xml" />
         <script is:inline>
             (() => {
                 function setLayoutVariables() {
@@ -77,16 +78,15 @@ const isPopupVisible = closureEntry?.data?.closure?.isVisible;
                         );
                     }
                 }
-                // Initial setup
+
                 requestAnimationFrame(() => {
                     setLayoutVariables();
                 });
-                // Update on resize
+
                 window.addEventListener("resize", setLayoutVariables);
-                // Update on scroll - to capture header height changes when scrolling
+
                 let scrollTimeout;
                 window.addEventListener("scroll", () => {
-                    // Use debouncing to avoid excessive updates
                     clearTimeout(scrollTimeout);
                     scrollTimeout = setTimeout(() => {
                         const header = document.querySelector("header");
@@ -136,7 +136,7 @@ const isPopupVisible = closureEntry?.data?.closure?.isVisible;
         />
 
         <Seo
-            title={siteConfig.titles.SITE_TITLE}
+            title={siteTitle}
             description="Chez Nous, pizzeria artisanale à Vermenton (89270). Dégustez des pizzas faites maison, sur place, dans une ambiance conviviale avec des ingrédients frais et de qualité."
         />
     </head>
@@ -155,7 +155,7 @@ const isPopupVisible = closureEntry?.data?.closure?.isVisible;
             generalInfo="réservations & privatisation : "
             additionalInfo="accessibilité PMR"
         />
-        <FooterSlogan textSlogan={siteConfig.slogan} />
+        {siteSlogan && <FooterSlogan textSlogan={siteSlogan} />}
         <Footer />
     </body>
 </html>

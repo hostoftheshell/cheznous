@@ -1,9 +1,10 @@
 ---
 import { Container, Frame } from "@components/index";
-import { siteConfig } from "@content/config";
-import type { RestaurantEntry, NearbyEntry } from "../../types/content";
-export type ContentItem = RestaurantEntry | NearbyEntry;
 import ScrollAnimation from "@scripts/ScrollAnimation";
+import { getEntry } from "astro:content";
+import type { RestaurantEntry, NearbyEntry } from "../../types/content";
+
+export type ContentItem = RestaurantEntry | NearbyEntry;
 
 interface Props {
     groupedItems: ContentItem[][];
@@ -12,9 +13,11 @@ interface Props {
         subheading?: string;
         paragraph?: string;
     };
-
     sectionId: string;
 }
+
+const siteConfig = await getEntry("site", "settings");
+const { site_title: siteTitle } = siteConfig?.data ?? {};
 
 const { groupedItems, sectionText, sectionId } = Astro.props;
 ---
@@ -34,7 +37,7 @@ const { groupedItems, sectionText, sectionId } = Astro.props;
                         {index === 1 && (
                             <div class="c-frame -article">
                                 <div class="c-frame__heading -article">
-                                    <p>{siteConfig.titles.SITE_TITLE}</p>
+                                    <p>{siteTitle}</p>
                                     <h2>
                                         {sectionText.heading ??
                                             "Titre non disponible."}
@@ -67,6 +70,7 @@ const { groupedItems, sectionText, sectionId } = Astro.props;
     </Container>
     <ScrollAnimation client:media="(min-width: 768px)" />
 </section>
+
 <style>
     .o-layout__item {
         will-change: transform;

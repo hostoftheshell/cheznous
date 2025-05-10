@@ -1,11 +1,15 @@
 ---
 import { WorkingHours, Map } from "@components/index";
-import { siteConfig } from "@content/config";
 import MapPin from "@assets/icons/map-pin.svg";
 import Phone from "@assets/icons/phone.svg";
 import Mail from "@assets/icons/mail.svg";
 
-const { address, phone, phoneLink, email } = siteConfig.contact;
+import { getEntry } from "astro:content";
+
+const siteConfig = await getEntry("site", "settings");
+const { contact } = siteConfig?.data ?? {};
+const { address, phone, phone_link: phoneLink, email } = contact ?? {};
+
 const mapUrl =
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2686.9890980988002!2d3.730887976768513!3d47.66520818392796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47ee3f6fecc1a687%3A0xf0430b4cb2defd14!2sChez%20Nous!5e0!3m2!1sfr!2sfr!4v1744877272805!5m2!1sfr!2sfr";
 ---

@@ -1,8 +1,7 @@
 ---
-import InstagramHash from "@components/ui/InstagramHash.astro";
 import { getCollection } from "astro:content";
+import InstagramHash from "@components/ui/InstagramHash.astro";
 
-// Define the type for the menu data based on the updated schema
 interface MenuData {
     carte: { title: string; url: string };
     vins: { title: string; url: string };
@@ -11,7 +10,7 @@ interface MenuData {
 
 const menuEntries = await getCollection("menu");
 const menuText = menuEntries.find((entry) => entry.slug === "menu-text");
-const items = menuText?.data as MenuData | undefined; // Explicitly type the data
+const items = menuText?.data as MenuData | undefined;
 ---
 
 <section id="menus" class="c-section">
