@@ -13,12 +13,13 @@ interface Props {
 
 const { isMobile = false, items, hasVisibleEvents = true } = Astro.props;
 
+const baseUrl = Astro.site?.toString() || "";
 const navItems: NavItem[] = [
-    { text: "Menus & vins", href: "http://localhost:4321#menus" },
+    { text: "Menus & vins", href: `${baseUrl}#menus` },
     ...(hasVisibleEvents
-        ? [{ text: "Agenda", href: "http://localhost:4321#events" }]
+        ? [{ text: "Agenda", href: `${baseUrl}#events` }]
         : []),
-    { text: "Infos pratiques", href: "http://localhost:4321#infos" },
+    { text: "Infos pratiques", href: `${baseUrl}#infos` },
 ];
 
 const finalItems = items || navItems;
