@@ -134,6 +134,7 @@ const workinghoursCollection = defineCollection({
 const settingsCollection = defineCollection({
   schema: z.object({
     site_title: z.string(),
+    description: z.string(),
     hero_title: z.string(),
     socials: z.object({
       instagram: z.string().url(),

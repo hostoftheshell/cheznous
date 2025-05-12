@@ -10,20 +10,6 @@
     }
 }
 
-.o-layout__infos::before {
-    content: "═════ ◈ ═════";
-    font-size: clamp(2rem, 0.05 * calc(100 * var(--vw, 1vw)), 6rem);
-    font-weight: var(--weight-light);
-    font-family: var(--font-heading);
-    display: block;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 4rem;
-    @include mixins.breakpoint("lg") {
-        display: none;
-    }
-}
-
 .o-layout__infos {
     margin-bottom: var(--h-banner);
     padding: var(--grid-margin);

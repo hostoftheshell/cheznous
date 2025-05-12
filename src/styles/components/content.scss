@@ -4,16 +4,7 @@
 /* ============================= */
 /* Layout */
 /* ============================= */
-.c-section-nearby::before {
-    content: "═════ ◈ ═════";
-    font-size: clamp(2rem, 0.05 * calc(100 * var(--vw, 1vw)), 6rem);
-    font-weight: var(--weight-light);
-    font-family: var(--font-heading);
-    margin-bottom: 5rem;
-    @include mixins.breakpoint("xl") {
-        display: none;
-    }
-}
+
 .c-section-restaurant {
     padding-top: 5rem;
 }

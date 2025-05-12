@@ -10,15 +10,7 @@
         padding-top: 11rem;
     }
 }
-.o-layout__menus::before {
-    content: "═════ ◈ ═════";
-    font-size: clamp(2rem, 0.05 * calc(100 * var(--vw, 1vw)), 6rem);
-    font-weight: var(--weight-light);
-    font-family: var(--font-heading);
-    @include mixins.breakpoint("xl") {
-        display: none;
-    }
-}
+
 .o-layout__menus {
     position: relative;
     box-sizing: border-box;

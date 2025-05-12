@@ -40,6 +40,10 @@ content:
         label: "Titre du site"
         type: string
         default: "Chez Nous"
+      - name: site_description
+        label: "Chez Nous, pizzeria artisanale à Vermenton (89270). Dégustez des pizzas faites maison, sur place, dans une ambiance conviviale avec des ingrédients frais et de qualité."
+        type: string
+        default: "Chez Nous"
       - name: hero_title
         label: "Sous-titre du site"
         type: string

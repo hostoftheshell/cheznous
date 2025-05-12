@@ -1,7 +1,7 @@
 // Core utilities and settings
 @use "utilities/_breakpoints" as *;
 @use "utilities/_fonts";
-@use "utilities/_mixins" as *;
+@use "utilities/mixins" as mixins;
 
 // Variables
 @use "variables/_colors";
@@ -23,6 +23,7 @@
 @use "components/footer";
 @use "components/popup";
 @use "components/legales";
+@use "components/separator";
 
 // External dependencies
 @import "normalize.css";

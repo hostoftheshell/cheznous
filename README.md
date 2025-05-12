@@ -1,47 +1,67 @@
-# Astro Starter Kit: Minimal
+# Chez Nous 89270
 
-```sh
-npm create astro@latest -- --template minimal
-```
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9143624e-c4cb-42f7-a932-c9804d9eb5c8/deploy-status)](https://app.netlify.com/sites/cheznous89270/deploys)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Déploiement
 
-## 🚀 Project Structure
+Ce dépôt contient le code source du site [cheznous89270.fr](https://cheznous89270.fr), réalisé avec le framework [Astro](https://astro.build/) déployé automatiquement sur [Netlify](https://www.netlify.com/). Le contenu éditorial est administrable via [PageCMS](https://pagescms.org/).
 
-Inside of your Astro project, you'll see the following folders and files:
+Le site permet notamment :
+
+  - la consultation des menus au format PDF
+  - la mise en valeur du restaurant à travers des galeries photo
+  - l’intégration automatique chaque jour de l’**ardoise du jour** publiée sur Instagram
+  - l’affichage d’une carte interactive
+
+
+## 📁 Structure du projet
 
 ```text
 /
 ├── public/
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+    ├── assets
+    ├── components
+    ├── content
+    ├── layouts
+    ├── lib
+    ├── pages
+    ├── scripts
+    ├── styles
+    └── types
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## ⚙️ Installation
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Instructions pour cloner le projet et le faire tourner en local :
 
-Any static assets, like images, can be placed in the `public/` directory.
+```bash
+git clone https://github.com/cheznous89270/cheznous.git
+cd nom-du-projet
+npm install
+npm run dev
+```
 
-## 🧞 Commands
+## ⏰ Déploiement planifié
 
-All commands are run from the root of the project, from a terminal:
+Un déploiement est automatiquement déclenché chaque jour à 12h (heure de Paris) via une GitHub Action.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## ✅ Fonctionnalités
 
-## 👀 Want to learn more?
+  - Design responsive
+  - Contenu généré statiquement
+  - Intégration des publications Instagram avec un hashtag spécifique
+  - Optimisation des images (WebP, lazy-loading…)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📄 Licence
+
+Ce projet est distribué sous la licence MIT.
+
+    Le code source est librement réutilisable dans les conditions de la licence MIT.
+    ⚠️ Les contenus liés à l’établissement (textes, images, horaires, ardoise du jour, menus, etc.) restent la propriété exclusive du restaurant Chez Nous.
+    Leur utilisation ou reproduction est interdite sans autorisation préalable.
+
+## 👀 Dévelloppeur Web
+
+    Réalisé par [hostoftheshell](https://github.com/hostoftheshell)

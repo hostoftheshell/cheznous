@@ -1,0 +1,25 @@
+@use "../utilities/breakpoints";
+@use "../utilities/mixins" as *;
+
+.o-layout__events::after {
+    @include section-divider;
+    margin-bottom: 4rem;
+    @include hide-on("lg");
+}
+
+.o-layout__menus::before {
+    @include section-divider;
+    @include hide-on("xl");
+}
+
+.c-section-nearby::before {
+    @include section-divider;
+    margin-bottom: 5rem;
+    @include hide-on("xl");
+}
+
+.o-layout__infos::before {
+    @include section-divider;
+    margin-bottom: 4rem;
+    @include hide-on("lg");
+}
