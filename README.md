@@ -58,10 +58,10 @@ Un déploiement est automatiquement déclenché chaque jour à 12h (heure de Par
 
 Ce projet est distribué sous la licence MIT.
 
-    Le code source est librement réutilisable dans les conditions de la licence MIT.
-    ⚠️ Les contenus liés à l’établissement (textes, images, horaires, ardoise du jour, menus, etc.) restent la propriété exclusive du restaurant Chez Nous.
-    Leur utilisation ou reproduction est interdite sans autorisation préalable.
+  Le code source est librement réutilisable dans les conditions de la licence MIT.
+  ⚠️ Les contenus liés à l’établissement (textes, images, horaires, ardoise du jour, menus, etc.) restent la propriété exclusive du restaurant Chez Nous.
+  Leur utilisation ou reproduction est interdite sans autorisation préalable.
 
 ## 👀 Dévelloppeur Web
 
-    Réalisé par [hostoftheshell](https://github.com/hostoftheshell)
+  Réalisé par [hostoftheshell](https://github.com/hostoftheshell)
