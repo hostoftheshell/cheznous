@@ -111,24 +111,24 @@ content:
     fields:
       - name: closure
         label: Clôture
-        widget: object
+        type: object
         fields:
           - name: isVisible
             label: Afficher
-            widget: boolean
+            type: boolean
             default: false
           - name: title
             label: Titre
-            widget: string
+            type: string
             default: "Le site est en ligne !"
           - name: description
             label: Message
-            widget: text
+            type: text
             default: >
               Il reste encore quelques ingrédients à parsemer par-ci par-là, mais la base est là !
           - name: tag
             label: Formules de départ personnalisées
-            widget: string
+            type: string
             default: "Bon appétit !"
 
   - name: working-hours
