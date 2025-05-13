@@ -1,6 +1,6 @@
 ---
 # Afficher la section true/false
-isVisible: true
+isVisible: false
 # Titre de la section
 heading: A presto Chez Nous ! 🎉
 # URL et texte alternatif de l'image de l'événement

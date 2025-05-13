@@ -1506,6 +1506,7 @@ footer {
   height: 10.241rem;
   height: auto;
   transition: width 0.3s ease-out;
+  margin-top: 2rem;
 }
 @media (min-width: 640px) {
   .c-footer__logo {
@@ -1515,6 +1516,7 @@ footer {
 }
 @media (min-width: 1024px) {
   .c-footer__logo {
+    margin-top: 0;
     width: 20rem;
     height: 13.375rem;
   }

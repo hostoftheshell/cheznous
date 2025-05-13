@@ -55,9 +55,15 @@ La langue de référence pour tout contentieux est le français.
 
 ## 7. Propriété intellectuelle
 
-Le contenu du site (textes, images, graphismes, logos, vidéos, sons, etc.) est la propriété exclusive de **CHEZ NOUS**, sauf mention contraire (ex : AdobeStock, ShutterStock, FontAwesome, Freepik).
+Le contenu du site (textes, images, graphismes, logos, vidéos, sons, etc.) est la propriété exclusive de CHEZ NOUS, sauf mention contraire.
 
-Toute reproduction, modification ou diffusion, même partielle, est interdite sans autorisation écrite préalable de **CHEZ NOUS**.
+Les icônes utilisées sur ce site proviennent des bibliothèques suivantes :
+
+    [Lucide](https://lucide.dev/) — Icônes open source sous licence MIT
+
+    [Simple Icons](https://simpleicons.org/) — Logos de marques sous licence CC0
+
+Merci de respecter les droits d’auteur et les licences associées aux ressources tierces.
 
 ## 8. Prestataire technique
 
