@@ -78,10 +78,12 @@ const menuCollection = defineCollection({
       title: z.string().max(50),
       url: z.string(),
     }),
-    special: z.object({
-      title: z.string().max(50).optional(),
-      url: z.string().optional(),
-    }),
+    special: z
+      .object({
+        title: z.string().max(50),
+        url: z.string(),
+      })
+      .optional(),
   }),
 });
 
