@@ -79,8 +79,8 @@ const menuCollection = defineCollection({
       url: z.string(),
     }),
     special: z.object({
-      title: z.string().max(50),
-      url: z.string(),
+      title: z.string().max(50).optional(),
+      url: z.string().optional(),
     }),
   }),
 });
