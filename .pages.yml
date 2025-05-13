@@ -120,17 +120,16 @@ content:
           - name: title
             label: Titre
             widget: string
-            default: "fermeture exceptionnelle"
+            default: "Le site est en ligne !"
           - name: description
             label: Message
             widget: text
             default: >
-              Le 21 novembre, notre établissement sera exceptionnellement fermé.
-              Nous vous retrouverons dès le 22 novembre à partir de 11h30, Chez Nous !
+              Il reste encore quelques ingrédients à parsemer par-ci par-là, mais la base est là !
           - name: tag
             label: Formules de départ personnalisées
             widget: string
-            default: "À bientôt !"
+            default: "Bon appétit !"
 
   - name: working-hours
     label: Horaires d'ouverture

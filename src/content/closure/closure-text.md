@@ -1,7 +1,7 @@
 ---
 closure:
   isVisible: true
-  title: "fermeture exceptionnelle"
-  description: "Le 21 novembre, notre établissement sera exceptionnellement fermé. Nous vous retrouverons dès le 22 novembre à partir de 11h30, Chez Nous !"
-  tag: "À bientôt !"
+  title: "Le site est en ligne !"
+  description: "Il reste encore quelques ingrédients à parsemer par-ci par-là, mais la base est là !"
+  tag: "Bon appétit !"
 ---
