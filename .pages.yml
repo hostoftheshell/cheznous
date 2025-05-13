@@ -104,33 +104,33 @@ content:
         type: string
         default: "Pizzas artisanales préparées à la maison"
 
+  - name: closure
+    label: "PopUp d'information"
+    type: file
+    path: src/content/closure/closure-text.md
+    fields:
       - name: closure
-        label: "PopUp d'information"
-        type: file
-        path: src/content/closure/closure-text.md
+        label: Clôture
+        widget: object
         fields:
-          - name: closure
-            label: Clôture
-            widget: object
-            fields:
-              - name: isVisible
-                label: Afficher
-                widget: boolean
-                default: false
-              - name: title
-                label: Titre
-                widget: string
-                default: "fermeture exceptionnelle"
-              - name: description
-                label: Message
-                widget: text
-                default: >
-                  Le 21 novembre, notre établissement sera exceptionnellement fermé.
-                  Nous vous retrouverons dès le 22 novembre à partir de 11h30, Chez Nous !
-              - name: tag
-                label: Formules de départ personnalisées
-                widget: string
-                default: "À bientôt !"
+          - name: isVisible
+            label: Afficher
+            widget: boolean
+            default: false
+          - name: title
+            label: Titre
+            widget: string
+            default: "fermeture exceptionnelle"
+          - name: description
+            label: Message
+            widget: text
+            default: >
+              Le 21 novembre, notre établissement sera exceptionnellement fermé.
+              Nous vous retrouverons dès le 22 novembre à partir de 11h30, Chez Nous !
+          - name: tag
+            label: Formules de départ personnalisées
+            widget: string
+            default: "À bientôt !"
 
   - name: working-hours
     label: Horaires d'ouverture
