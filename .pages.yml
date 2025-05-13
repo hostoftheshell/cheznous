@@ -384,7 +384,7 @@ content:
         label: "Date de l'événement (au format ISO)"
         type: date
         options:
-          format: yyyy-MM-DD
+          format: yyyy-MM-dd
         default: "2025-01-01"
       - name: time
         label: "Heure de début de l'événement (au format 24h)"
