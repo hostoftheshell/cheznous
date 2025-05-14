@@ -57,7 +57,7 @@ content:
               default: "Consultez les mentions légales du site Chez Nous (Vermenton, 89270). Retrouvez les informations sur la propriété, l'hébergement, la responsabilité et les conditions d'utilisation de notre site web artisanale.",
             }
           - {
-              name: politique_de_confidentialité,
+              name: politique_de_confidentialite,
               label: "méta-descriptions de la page de politique de confidentialité",
               type: string,
               default: "Découvrez la politique de confidentialité de Chez Nous. Informez-vous sur la manière dont nous collectons, utilisons et protégeons vos données personnelles lorsque vous naviguez sur notre site de pizzeria à Vermenton.",
@@ -86,6 +86,7 @@ content:
               type: string,
               default: "https://www.facebook.com/cheznous89270/",
             }
+
       - name: contact
         label: "Information de contact"
         type: object
