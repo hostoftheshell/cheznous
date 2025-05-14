@@ -1,6 +1,9 @@
 ---
 site_title: "Chez Nous"
-description: "Chez Nous, pizzeria artisanale à Vermenton (89270). Dégustez des pizzas faites maison, sur place, dans une ambiance conviviale avec des ingrédients frais et de qualité."
+description: 
+  accueil: "Chez Nous, pizzeria artisanale à Vermenton (89270). Dégustez des pizzas faites maison, sur place, dans une ambiance conviviale avec des ingrédients frais et de qualité."
+  mentions_legales: "Consultez les mentions légales du site Chez Nous (Vermenton, 89270). Retrouvez les informations sur la propriété, l'hébergement, la responsabilité et les conditions d'utilisation de notre pizzeria artisanale."
+  politique_de_confidentialite: "Découvrez la politique de confidentialité de Chez Nous. Informez-vous sur la manière dont nous collectons, utilisons et protégeons vos données personnelles lorsque vous naviguez sur notre site de pizzeria à Vermenton."
 hero_title: |
   Pizza,
   Pasta,

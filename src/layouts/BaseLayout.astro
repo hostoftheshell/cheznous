@@ -29,8 +29,24 @@ const siteConfig = await getEntry("site", "settings");
 const {
     slogan: siteSlogan,
     site_title: siteTitle,
-    description: siteDexscription,
+    description: siteDescription,
 } = siteConfig?.data ?? {};
+const {
+    accueil,
+    mentions_legales: mentionsLegales,
+    politique_de_confidentialite: politiqueDeConfidentialite,
+} = siteDescription ?? {};
+
+const currentPath = Astro.url.pathname;
+console.log("Current path:", currentPath);
+
+const getDescriptionForPath = (path: string) => {
+    if (path === "/" || path === "/accueil") return accueil;
+    if (path === "/mentions-legales") return mentionsLegales;
+    if (path === "/politique-de-confidentialite")
+        return politiqueDeConfidentialite;
+    return accueil;
+};
 ---
 
 <!doctype html>
@@ -39,6 +55,7 @@ const {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="generator" content={Astro.generator} />
+
         <meta
             name="google-site-verification"
             content="CluXYYgdmPn5vVxP7zl9IhlhrKKLqmLcds1aO_-kW4w"
@@ -153,7 +170,7 @@ const {
                 logo: "https://cheznous89270.fr/facebook.png",
                 description:
                     "Restaurant familial à Vermenton, cuisine maison à base de produits frais et locaux.",
-                servesCuisine: ["Italienne", "Pizza", "Fait maison"],
+                servesCuisine: ["Italienne", "Pizza", "Vins"],
                 telephone: "+33 3 86 51 89 56",
                 url: "https://www.cheznous89270.fr",
                 priceRange: "€€",
@@ -374,7 +391,7 @@ const {
 
         <Seo
             title={siteTitle}
-            description={siteDexscription}
+            description={getDescriptionForPath(currentPath)}
             keywords={[
                 "Dîner en famille terrasse Vermenton",
                 "Pizzeria près de Chablis",
