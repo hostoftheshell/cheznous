@@ -40,7 +40,7 @@ content:
         label: "Titre du site"
         type: string
         default: "Chez Nous"
-      - name: site_description
+      - name: description
         label: "méta-descriptions des pages"
         type: object
         fields:
