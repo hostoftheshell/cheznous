@@ -62,7 +62,6 @@ content:
               type: string,
               default: "Découvrez la politique de confidentialité de Chez Nous. Informez-vous sur la manière dont nous collectons, utilisons et protégeons vos données personnelles lorsque vous naviguez sur notre site de pizzeria à Vermenton.",
             }
-
       - name: hero_title
         label: "Sous-titre du site"
         type: string
