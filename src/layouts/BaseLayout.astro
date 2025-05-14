@@ -1,5 +1,6 @@
 ---
 import "@styles/index.css";
+import { Schema } from "astro-seo-schema";
 import { Seo } from "astro-seo-meta";
 import {
     Header,
@@ -136,6 +137,235 @@ const {
             as="font"
             type="font/woff2"
             crossorigin="anonymous"
+        />
+
+        <Schema
+            item={{
+                "@context": "https://schema.org",
+                "@type": "Restaurant",
+                name: "Chez Nous",
+                alternateName: "Chez Nous 89270",
+                image: "https://cheznous89270.fr/facebook.png",
+                logo: "https://cheznous89270.fr/facebook.png",
+                description:
+                    "Restaurant familial à Vermenton, cuisine maison à base de produits frais et locaux.",
+                servesCuisine: ["Italienne", "Pizza", "Fait maison"],
+                telephone: "+33 3 86 51 89 56",
+                url: "https://www.cheznous89270.fr",
+                priceRange: "€€",
+                address: {
+                    "@type": "PostalAddress",
+                    streetAddress: "7 Pl. de la Convention",
+                    addressLocality: "Vermenton",
+                    postalCode: "89270",
+                    addressCountry: "FR",
+                },
+                geo: {
+                    "@type": "GeoCoordinates",
+                    latitude: 47.66532740384989,
+                    longitude: 3.7334521684032285,
+                },
+                sameAs: [
+                    "https://www.facebook.com/cheznous89270",
+                    "https://www.instagram.com/cheznous89270",
+                ],
+                openingHoursSpecification: [
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        dayOfWeek: [
+                            "Tuesday",
+                            "Wednesday",
+                            "Thursday",
+                            "Friday",
+                            "Saturday",
+                        ],
+                        opens: "11:30",
+                        closes: "14:30",
+                    },
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        dayOfWeek: [
+                            "Tuesday",
+                            "Wednesday",
+                            "Thursday",
+                            "Friday",
+                            "Saturday",
+                        ],
+                        opens: "18:30",
+                        closes: "21:00",
+                    },
+                    {
+                        "@type": "OpeningHoursSpecification",
+                        dayOfWeek: ["Sunday"],
+                        opens: "11:30",
+                        closes: "14:30",
+                    },
+                ],
+                acceptsReservations: "True",
+                amenityFeature: [
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        name: "Terrasse",
+                        value: "True",
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        name: "Accès PMR",
+                        value: "True",
+                    },
+                    {
+                        "@type": "LocationFeatureSpecification",
+                        name: "Wi-Fi gratuit",
+                        value: "True",
+                    },
+                ],
+                hasMenu: [
+                    {
+                        "@type": "Menu",
+                        name: "Carte des Pizzas",
+                        hasMenuItem: [
+                            {
+                                "@type": "MenuItem",
+                                name: "La Simplette",
+                                description: "Tomate, mozzarella, jambon.",
+                                offers: {
+                                    "@type": "Offer",
+                                    price: "10.00",
+                                    priceCurrency: "EUR",
+                                },
+                            },
+                            {
+                                "@type": "MenuItem",
+                                name: "La Miele",
+                                description: "Tomate, fromage, chèvre, miel.",
+                                offers: {
+                                    "@type": "Offer",
+                                    price: "13.00",
+                                    priceCurrency: "EUR",
+                                },
+                            },
+                            {
+                                "@type": "MenuItem",
+                                name: "La Végétarienne",
+                                description:
+                                    "Tomate, fromage, aubergines, poivrons, champignons, artichauts.",
+                                offers: {
+                                    "@type": "Offer",
+                                    price: "14.00",
+                                    priceCurrency: "EUR",
+                                },
+                            },
+                            {
+                                "@type": "MenuItem",
+                                name: "L'Epoisses",
+                                description: "Base Crème fromage, époisses.",
+                                offers: {
+                                    "@type": "Offer",
+                                    price: "14.00",
+                                    priceCurrency: "EUR",
+                                },
+                            },
+                            {
+                                "@type": "MenuItem",
+                                name: "La 4 fromages",
+                                description:
+                                    "Tomate, fromage, chèvre, gorgonzolla, bleu.",
+                                offers: {
+                                    "@type": "Offer",
+                                    price: "15.00",
+                                    priceCurrency: "EUR",
+                                },
+                            },
+                            {
+                                "@type": "MenuItem",
+                                name: "La Royale",
+                                description:
+                                    "Tomate, fromage, jambon, champignon, œuf bio, olives.",
+                                offers: {
+                                    "@type": "Offer",
+                                    price: "15.00",
+                                    priceCurrency: "EUR",
+                                },
+                            },
+                            {
+                                "@type": "MenuItem",
+                                name: "La Bouguignonne",
+                                description:
+                                    "Tomate, fromage, escargots, persillade, lardons, œuf bio.",
+                                offers: {
+                                    "@type": "Offer",
+                                    price: "15.00",
+                                    priceCurrency: "EUR",
+                                },
+                            },
+                            {
+                                "@type": "MenuItem",
+                                name: "La Parma",
+                                description:
+                                    "Tomate, fromage, jambon de Parme, burratta, roquette.",
+                                offers: {
+                                    "@type": "Offer",
+                                    price: "15.00",
+                                    priceCurrency: "EUR",
+                                },
+                            },
+                            {
+                                "@type": "MenuItem",
+                                name: "La Sicilienne",
+                                description:
+                                    "Tomate, fromage, spanietta piccante, poivrons, anchois, câpres.",
+                                offers: {
+                                    "@type": "Offer",
+                                    price: "15.00",
+                                    priceCurrency: "EUR",
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        "@type": "Menu",
+                        name: "Desserts",
+                        hasMenuItem: [
+                            {
+                                "@type": "MenuItem",
+                                name: "Panna cotta",
+                                offers: {
+                                    "@type": "Offer",
+                                    price: "5.00",
+                                    priceCurrency: "EUR",
+                                },
+                            },
+                            {
+                                "@type": "MenuItem",
+                                name: "Tiramisu",
+                                offers: {
+                                    "@type": "Offer",
+                                    price: "5.00",
+                                    priceCurrency: "EUR",
+                                },
+                            },
+                            {
+                                "@type": "MenuItem",
+                                name: "Glaces artisanales Pédone",
+                                offers: [
+                                    {
+                                        "@type": "Offer",
+                                        name: "Uno (1 boule)",
+                                        price: "2.80",
+                                        priceCurrency: "EUR",
+                                    },
+                                    {
+                                        "@type": "Offer",
+                                        name: "Duo (2 boules)",
+                                        price: "5.00",
+                                        priceCurrency: "EUR",
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            }}
         />
 
         <Seo
