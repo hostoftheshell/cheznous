@@ -1,6 +1,6 @@
 ---
 closure:
-  isVisible: false
+  isVisible: true
   title: Fermerture exceptionelle
   description: |-
     Nous sommes fermés ce dimanche 18 mai.
