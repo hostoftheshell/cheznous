@@ -9,7 +9,7 @@ description: Le sentier de grande randonnée 13 (GR 13) est un itinéraire de 42
   boisés.
 image:
   src: ./images/nearby-gr13.jpg
-  alt: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua.
-url: Paysage naturel près du sentier de randonnée GR13, à proximité de Lucy-sur-Cure
+  alt: Paysage naturel près du sentier de randonnée GR13, à proximité de
+    Lucy-sur-Cure
+url: https://fr.wikipedia.org/wiki/Sentier_de_grande_randonn%C3%A9e_13
 ---
