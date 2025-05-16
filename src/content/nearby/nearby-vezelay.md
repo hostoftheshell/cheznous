@@ -9,5 +9,6 @@ description: Perché sur sa colline éternelle en Bourgogne, est un haut lieu
   offrant une expérience unique aux visiteurs.
 image:
   src: ./images/nearby-vezelay.jpg
+  alt: texte alternatif
 url: https://fr.wikipedia.org/wiki/V%C3%A9zelay
 ---
