@@ -1,6 +1,7 @@
 ---
 id: 2
 title: l'accueil
+description: ...
 image:
   src: ./images/restaurant-accueil.jpeg
   alt: Accueil d'un restaurant avec un comptoir en bois ancien et des tabourets
