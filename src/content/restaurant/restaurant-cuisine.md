@@ -1,8 +1,10 @@
 ---
-id: 05
-title: "la cuisine"
-description: "Lorem ipsum dolor sit amet. 33 quod magni qui accusamus nisi non reprehenderit placeat. Qui reprehenderit commodi ab temporibus aliquam ut omnis accusantium est culpa rerum."
-image: 
-  src: "./images/restaurant-cuisine.jpeg"
-  alt: "description de la cuisine."
+id: 5
+title: la cuisine
+description: Ancienne salle des archives du notaire, cette pièce est
+  completement renovée pour permettre l'installation d'une cuisine moderne et
+  spacieuse.
+image:
+  src: ./images/restaurant-cuisine.jpeg
+  alt: description de la cuisine.
 ---
