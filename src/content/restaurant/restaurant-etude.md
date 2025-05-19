@@ -1,7 +1,9 @@
 ---
 id: 1
 title: l'étude
-description: ...
+description: C'est dans cette salle que le notaire faisait les actes et les
+  signatures . Beaucoup d'histoires pour les boiseries qui ornent cette petite
+  pièce.
 image:
   src: ./images/restaurant-etude.jpeg
   alt: Salle de restaurant chaleureuse avec boiseries anciennes, cheminée et
