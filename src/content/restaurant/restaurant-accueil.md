@@ -1,7 +1,9 @@
 ---
 id: 2
 title: l'accueil
-description: ...
+description: La cloison centrale à été supprimée pour mieux vous acceuillir .
+  Une grande verrière vous invite à découvrir le patio pour dejeuner ou diner
+  dans le calme et la tranquilité.
 image:
   src: ./images/restaurant-accueil.jpeg
   alt: Accueil d'un restaurant avec un comptoir en bois ancien et des tabourets
