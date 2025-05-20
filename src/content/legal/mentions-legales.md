@@ -63,6 +63,8 @@ Les icônes utilisées sur ce site proviennent des bibliothèques suivantes :
 
     [Simple Icons](https://simpleicons.org/) — Logos de marques sous licence CC0
 
+Conception graphique logo [ADN Imprimeur Vermenton / Dijon](https://www.adnimprimeur.fr/)
+
 Merci de respecter les droits d’auteur et les licences associées aux ressources tierces.
 
 ## 8. Prestataire technique
