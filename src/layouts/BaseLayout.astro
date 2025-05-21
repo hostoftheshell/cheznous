@@ -13,6 +13,7 @@ import {
 
 const { isLegalPage = false } = Astro.props;
 
+
 import "@fontsource/metropolis/300.css";
 import "@fontsource/metropolis/400.css";
 import "@fontsource-variable/fraunces/wght.css";
@@ -38,7 +39,6 @@ const {
 } = siteDescription ?? {};
 
 const currentPath = Astro.url.pathname;
-console.log("Current path:", currentPath);
 
 const getDescriptionForPath = (path: string) => {
     if (path === "/" || path === "/accueil") return accueil;
