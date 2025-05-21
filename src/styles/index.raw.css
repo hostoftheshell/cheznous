@@ -320,7 +320,7 @@ figure {
   padding: var(--grid-margin) var(--grid-margin) 0 var(--grid-margin);
   box-sizing: border-box;
   z-index: var(--z-index-top);
-  transition: height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid transparent;
   outline: 1px solid transparent;
 }

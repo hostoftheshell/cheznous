@@ -59,9 +59,9 @@ Le contenu du site (textes, images, graphismes, logos, vidéos, sons, etc.) est 
 
 Les icônes utilisées sur ce site proviennent des bibliothèques suivantes :
 
-    [Lucide](https://lucide.dev/) — Icônes open source sous licence MIT
+  [Lucide](https://lucide.dev/) — Icônes open source sous licence MIT
 
-    [Simple Icons](https://simpleicons.org/) — Logos de marques sous licence CC0
+  [Simple Icons](https://simpleicons.org/) — Logos de marques sous licence CC0
 
 Conception graphique logo [ADN Imprimeur Vermenton / Dijon](https://www.adnimprimeur.fr/)
 
