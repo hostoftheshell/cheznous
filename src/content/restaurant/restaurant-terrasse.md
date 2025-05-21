@@ -5,5 +5,6 @@ description: La terrasse est cachée, il faut rentrer pour y acceder et passer u
   bon moment dans un cadre qui vous fera oublier que vous êtes en plein village.
 image:
   src: ./images/restaurant-terrasse.jpeg
-  alt: une description de la terrasse
+  alt: Vue depuis l’intérieur d’un restaurant sur une cour calme et arborée, vieux
+    murs en pierre et ambiance rustique.
 ---
