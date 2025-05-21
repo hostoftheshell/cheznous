@@ -2,6 +2,7 @@
 import "@styles/index.css";
 import { Schema } from "astro-seo-schema";
 import { Seo } from "astro-seo-meta";
+
 import {
     Header,
     Banner,
@@ -15,7 +16,6 @@ const { isLegalPage = false } = Astro.props;
 import "@fontsource/metropolis/300.css";
 import "@fontsource/metropolis/400.css";
 import "@fontsource-variable/fraunces/wght.css";
-
 import metropolis300Woff2 from "@fontsource/metropolis/files/metropolis-latin-300-normal.woff2?url";
 import metropolis400Woff2 from "@fontsource/metropolis/files/metropolis-latin-400-normal.woff2?url";
 import frauncesWoff2 from "@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url";
@@ -47,6 +47,8 @@ const getDescriptionForPath = (path: string) => {
         return politiqueDeConfidentialite;
     return accueil;
 };
+
+const canonicalUrl = new URL(currentPath, Astro.site).toString();
 ---
 
 <!doctype html>
@@ -55,88 +57,14 @@ const getDescriptionForPath = (path: string) => {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="generator" content={Astro.generator} />
-
         <meta
             name="google-site-verification"
             content="CluXYYgdmPn5vVxP7zl9IhlhrKKLqmLcds1aO_-kW4w"
         />
+
+        <link rel="canonical" href={canonicalUrl} />
         <link rel="icon" type="image/png" href="/favicon.png?" />
         <link rel="sitemap" href="/sitemap-index.xml" />
-        <script is:inline>
-            (() => {
-                function setLayoutVariables() {
-                    const vh = window.innerHeight * 0.01;
-                    const vw = window.innerWidth * 0.01;
-                    document.documentElement.style.setProperty(
-                        "--vh",
-                        `${vh}px`,
-                    );
-                    document.documentElement.style.setProperty(
-                        "--vw",
-                        `${vw}px`,
-                    );
-                    const banner = document.querySelector("[data-banner]");
-                    const header = document.querySelector("header");
-                    const slogan = document.querySelector(".c-footer-slogan");
-                    let hBanner = 0;
-                    let hHeader = 0;
-                    let hSlogan = 0;
-                    if (banner) {
-                        hBanner = banner.offsetHeight;
-                        document.documentElement.style.setProperty(
-                            "--h-banner",
-                            `${hBanner}px`,
-                        );
-                    }
-                    if (header) {
-                        hHeader = header.offsetHeight;
-                        document.documentElement.style.setProperty(
-                            "--h-header",
-                            `${hHeader}px`,
-                        );
-                    }
-                    if (slogan) {
-                        hSlogan = slogan.offsetHeight;
-                        document.documentElement.style.setProperty(
-                            "--h-slogan",
-                            `${hSlogan}px`,
-                        );
-                    }
-                }
-
-                requestAnimationFrame(() => {
-                    setLayoutVariables();
-                });
-
-                window.addEventListener("resize", setLayoutVariables);
-
-                let scrollTimeout;
-                window.addEventListener("scroll", () => {
-                    clearTimeout(scrollTimeout);
-                    scrollTimeout = setTimeout(() => {
-                        const header = document.querySelector("header");
-                        const slogan =
-                            document.querySelector(".c-footer-slogan");
-
-                        if (header) {
-                            const hHeader = header.offsetHeight;
-                            document.documentElement.style.setProperty(
-                                "--h-header",
-                                `${hHeader}px`,
-                            );
-                        }
-
-                        if (slogan) {
-                            const hSlogan = slogan.offsetHeight;
-                            document.documentElement.style.setProperty(
-                                "--h-slogan",
-                                `${hSlogan}px`,
-                            );
-                        }
-                    }, 100);
-                });
-            })();
-        </script>
 
         <link
             rel="preload"
@@ -158,6 +86,31 @@ const getDescriptionForPath = (path: string) => {
             as="font"
             type="font/woff2"
             crossorigin="anonymous"
+        />
+
+        <Seo
+            title={siteTitle}
+            description={getDescriptionForPath(currentPath)}
+            keywords={[
+                "Dîner en famille terrasse Vermenton",
+                "Pizzeria près de Chablis",
+                "Menu du jour proche Abbaye de Vézelay pas cher",
+                "Carte des vins Yonne restaurant",
+                "Spécialités maison Bourgogne",
+            ]}
+            icon="/favicon.png"
+            themeColor="#fff4e5"
+            colorScheme="light"
+            facebook={{
+                image: "/facebook.png",
+                url: "https://cheznous89270.fr",
+                type: "website",
+            }}
+            twitter={{
+                image: "/facebook.png",
+                site: "@cheznous89270",
+                card: "summary",
+            }}
         />
 
         <Schema
@@ -389,30 +342,83 @@ const getDescriptionForPath = (path: string) => {
             }}
         />
 
-        <Seo
-            title={siteTitle}
-            description={getDescriptionForPath(currentPath)}
-            keywords={[
-                "Dîner en famille terrasse Vermenton",
-                "Pizzeria près de Chablis",
-                "Menu du jour proche Abbaye de Vézelay pas cher",
-                "Carte des vins Yonne restaurant",
-                "Spécialités maison Bourgogne",
-            ]}
-            icon="/favicon.png"
-            themeColor="#fff4e5"
-            colorScheme="light"
-            facebook={{
-                image: "/facebook.png",
-                url: "https://cheznous89270.fr",
-                type: "website",
-            }}
-            twitter={{
-                image: "/facebook.png",
-                site: "@cheznous89270",
-                card: "summary",
-            }}
-        />
+        <script is:inline>
+            (() => {
+                function setLayoutVariables() {
+                    const vh = window.innerHeight * 0.01;
+                    const vw = window.innerWidth * 0.01;
+                    document.documentElement.style.setProperty(
+                        "--vh",
+                        `${vh}px`,
+                    );
+                    document.documentElement.style.setProperty(
+                        "--vw",
+                        `${vw}px`,
+                    );
+                }
+
+                setLayoutVariables();
+
+                document.addEventListener("DOMContentLoaded", () => {
+                    const banner = document.querySelector("[data-banner]");
+                    const header = document.querySelector("header");
+                    const slogan = document.querySelector(".c-footer-slogan");
+                    let hBanner = 0;
+                    let hHeader = 0;
+                    let hSlogan = 0;
+
+                    if (banner) {
+                        hBanner = banner.offsetHeight;
+                        document.documentElement.style.setProperty(
+                            "--h-banner",
+                            `${hBanner}px`,
+                        );
+                    }
+                    if (header) {
+                        hHeader = header.offsetHeight;
+                        document.documentElement.style.setProperty(
+                            "--h-header",
+                            `${hHeader}px`,
+                        );
+                    }
+                    if (slogan) {
+                        hSlogan = slogan.offsetHeight;
+                        document.documentElement.style.setProperty(
+                            "--h-slogan",
+                            `${hSlogan}px`,
+                        );
+                    }
+                });
+
+                window.addEventListener("resize", setLayoutVariables);
+
+                let scrollTimeout;
+                window.addEventListener("scroll", () => {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        const header = document.querySelector("header");
+                        const slogan =
+                            document.querySelector(".c-footer-slogan");
+
+                        if (header) {
+                            const hHeader = header.offsetHeight;
+                            document.documentElement.style.setProperty(
+                                "--h-header",
+                                `${hHeader}px`,
+                            );
+                        }
+
+                        if (slogan) {
+                            const hSlogan = slogan.offsetHeight;
+                            document.documentElement.style.setProperty(
+                                "--h-slogan",
+                                `${hSlogan}px`,
+                            );
+                        }
+                    }, 100);
+                });
+            })();
+        </script>
     </head>
     <body>
         <Header isLegalPage={isLegalPage} />
