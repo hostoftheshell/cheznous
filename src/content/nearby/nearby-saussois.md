@@ -7,6 +7,6 @@ description: Le Saussois est un site d'escalade emblématique, réputé pour ses
   voies spectaculaires.
 image:
   src: ./images/nearby-saussois.jpg
-  alt: es Rochers du Saussois,falaises calcaires situées au bord de l'Yonne.
+  alt: Les Rochers du Saussois,falaises calcaires situées au bord de l'Yonne.
 url: https://fr.wikipedia.org/wiki/Le_Saussois
 ---
