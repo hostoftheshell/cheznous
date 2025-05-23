@@ -19,14 +19,14 @@ const { title = "", className = "" } = Astro.props;
         <figure class="c-hero__background">
             <Picture
                 src={HeroImg}
-                alt="descriptive text"
+                alt="Pizza napolitaine maison garnie de feuilles de basilic frais, entourée d'ingrédients méditerranéens sur une table rustique."
                 loading="eager"
                 fetchpriority="high"
-                widths={[240, 540, 720, 960, HeroImg.width]}
-                sizes={`sizes="(max-width: 375px) 240px,
-                              (max-width: 768px) 540px,
-                              (max-width: 1024px) 720px,
-                              (max-width: 1536px) 960px, ${HeroImg.width}px`}
+                widths={[540, 720, 960, HeroImg.width]}
+                sizes={`(max-width: 768px) 540px,
+                            (max-width: 1024px) 720px,
+                            (max-width: 1536px) 960px,
+                            ${HeroImg.width}px`}
             />
         </figure>
     </div>

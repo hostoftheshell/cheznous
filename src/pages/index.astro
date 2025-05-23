@@ -33,11 +33,19 @@ if (!nearbyText) throw new Error("'nearby-text' est manquant");
 const sortedRestaurants = [...restaurantEntries].sort(
     (a, b) => a.data.id - b.data.id,
 );
-const groupedRestaurants: RestaurantEntry[][] = [
-    sortedRestaurants.slice(0, 2),
-    sortedRestaurants.slice(2, 3),
-    sortedRestaurants.slice(3, 5),
-];
+
+const groupedRestaurants: RestaurantEntry[][] = [[], [], []];
+
+groupedRestaurants[0].push(...sortedRestaurants.slice(0, 2));
+groupedRestaurants[1].push(...sortedRestaurants.slice(2, 3));
+groupedRestaurants[2].push(...sortedRestaurants.slice(3, 6));
+
+if (sortedRestaurants.length > 6) {
+    for (let i = 6; i < sortedRestaurants.length; i++) {
+        const mod = (i - 6) % 3;
+        groupedRestaurants[mod].push(sortedRestaurants[i]);
+    }
+}
 
 const sortedNearbies = [...nearbyEntries].sort((a, b) => a.data.id - b.data.id);
 const columns: NearbyEntry[][] = [[], [], []];
