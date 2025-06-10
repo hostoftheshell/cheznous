@@ -1,5 +1,5 @@
 ---
-id: 7
+id: 6
 title: Le secretariat
 description: Ancien secretariat transformer en toilettes dont un accessible aux PMR.
 image:
