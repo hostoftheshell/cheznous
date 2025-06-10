@@ -1,6 +1,6 @@
 ---
 closure:
-  isVisible: false
+  isVisible: true
   title: Bienvenue Chez Nous!!
   description: |-
     Bienvenue Chez Nous!
