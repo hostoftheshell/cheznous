@@ -13,7 +13,6 @@ import {
 
 const { isLegalPage = false } = Astro.props;
 
-
 import "@fontsource/metropolis/300.css";
 import "@fontsource/metropolis/400.css";
 import "@fontsource-variable/fraunces/wght.css";
@@ -48,7 +47,8 @@ const getDescriptionForPath = (path: string) => {
     return accueil;
 };
 
-const canonicalUrl = new URL(currentPath, Astro.site).toString();
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const canonicalUrl = new URL(path, Astro.site).toString();
 ---
 
 <!doctype html>
