@@ -2,25 +2,7 @@
 import { Picture } from "astro:assets";
 import HeroHeadingSVG from "@assets/images/cheznous_hero-text.svg?raw";
 
-let HeroImg;
-try {
-    HeroImg = await import("@assets/images/cheznous_hero.png");
-    HeroImg = HeroImg.default;
-} catch {
-    try {
-        HeroImg = await import("@assets/images/cheznous_hero.jpg");
-        HeroImg = HeroImg.default;
-    } catch {
-        try {
-            HeroImg = await import("@assets/images/cheznous_hero.jpeg");
-            HeroImg = HeroImg.default;
-        } catch {
-            throw new Error(
-                "Hero image not found. Please ensure the file exists as .png, .jpg, or .jpeg",
-            );
-        }
-    }
-}
+import HeroImg from "@assets/images/cheznous_hero.jpg";
 
 interface Props {
     title?: string;
