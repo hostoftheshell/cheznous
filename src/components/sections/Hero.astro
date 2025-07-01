@@ -1,12 +1,31 @@
 ---
 import { Picture } from "astro:assets";
 import HeroHeadingSVG from "@assets/images/cheznous_hero-text.svg?raw";
-import HeroImg from "@assets/images/cheznous_hero.png";
+
+let HeroImg;
+try {
+    HeroImg = await import("@assets/images/cheznous_hero.png");
+    HeroImg = HeroImg.default;
+} catch {
+    try {
+        HeroImg = await import("@assets/images/cheznous_hero.jpg");
+        HeroImg = HeroImg.default;
+    } catch {
+        try {
+            HeroImg = await import("@assets/images/cheznous_hero.jpeg");
+            HeroImg = HeroImg.default;
+        } catch {
+            throw new Error(
+                "Hero image not found. Please ensure the file exists as .png, .jpg, or .jpeg",
+            );
+        }
+    }
+}
+
 interface Props {
     title?: string;
     className?: string;
 }
-
 const { title = "", className = "" } = Astro.props;
 ---
 
@@ -17,6 +36,7 @@ const { title = "", className = "" } = Astro.props;
         </div>
         <div set:html={HeroHeadingSVG} />
         <figure class="c-hero__background">
+            <div class="c-hero__overlay"></div>
             <Picture
                 src={HeroImg}
                 alt="Pizza napolitaine maison garnie de feuilles de basilic frais, entourée d'ingrédients méditerranéens sur une table rustique."
@@ -31,3 +51,35 @@ const { title = "", className = "" } = Astro.props;
         </figure>
     </div>
 </section>
+
+<style>
+    .c-hero__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0.4) 0%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.3) 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .c-hero__overlay {
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.5) 0%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.4) 100%
+        );
+    }
+
+    .c-hero__content > *:not(.c-hero__background) {
+        position: relative;
+        z-index: 2;
+    }
+</style>
