@@ -1,5 +1,5 @@
 ---
-id: 7
+id: 6
 title: Les Caves Bailly-Lapierre
 description: Les Caves Bailly Lapierre, situées à Saint-Bris-le-Vineux, offrent
   une immersion dans un ancien site souterrain de 4 hectares, où l'histoire de
