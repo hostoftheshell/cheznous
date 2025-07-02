@@ -75,7 +75,7 @@ const { site_title: pageTitle, hero_title: heroTitle } = siteConfig?.data ?? {};
     />
     <MenuSection pageTitle={pageTitle} />
     <EventSection />
-    <NearbySection groupedNearbies={columns} nearbyText={nearbyText.data} />
+    <NearbySection groupedNearbies={groupedNearbies} nearbyText={nearbyText.data} />
     <InfoSection />
     <CookieConsentProvider client:load />
 </BaseLayout>
