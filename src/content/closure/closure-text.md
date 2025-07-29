@@ -1,10 +1,9 @@
 ---
 closure:
-  isVisible: false
+  isVisible: true
   title: Bienvenue Chez Nous!!
   description: |-
-    Bienvenue Chez Nous!
-    Nous serons en vacances à partir du 23 juin.
-    Reprise le mardi 1er juillet .
+    Nous serons fermés du vendredi soir 1er août au lundi 4 inclus.
+    A mardi midi , bon week end.
   tag: Bon appétit !
 ---
