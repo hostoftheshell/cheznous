@@ -1,9 +1,7 @@
 ---
 closure:
-  isVisible: true
+  isVisible: false
   title: Bienvenue Chez Nous!!
-  description: |+
-    Le restaurant sera privatisé le week end du 20 et 21 septembre. 
-
+  description: "\n\n"
   tag: Bon appétit !
 ---
