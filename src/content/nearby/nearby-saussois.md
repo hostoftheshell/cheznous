@@ -2,7 +2,7 @@
 id: 7
 title: Le Saussois
 description: Le Saussois est un site d'escalade emblématique, réputé pour ses
-  impressionnantes falaises calcaires dominant la vallée de la Cure. Ce lieu
+  impressionnantes falaises calcaires dominant la vallée de l'Yonne. Ce lieu
   attire les amateurs de sensations fortes et les amoureux de la nature pour ses
   voies spectaculaires.
 image:
