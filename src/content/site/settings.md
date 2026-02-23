@@ -22,8 +22,9 @@ contact:
   address: 7 place de la Convention – 89270 Vermenton
   phone: 03 86 51 89 56
   phone_link: "+33386518956"
-  email: contact@cheznous89270.com
-opening_hours: Ouvert du mardi au samedi de 11h30 à 14h30 et de 19h à 21h. Le
-  dimanche, uniquement le midi de 11h30 à 14h30.
+  email: cheznous89270@orange.fr
+opening_hours: Ouvert du mardi au samedi de 12h à 14h30 et de 19h à 21h. Le
+  dimanche, uniquement le midi de 12h à 14h30. Réservation uniquement par
+  telephone!
 slogan: Pizzas artisanales préparées à la maison
 ---
