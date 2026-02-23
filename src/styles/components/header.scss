@@ -258,6 +258,10 @@
     transition: color 0.3s ease-in-out;
 }
 
+.c-header__mobile-nav_link:hover {
+    color: var(--color-link);
+}
+
 /* ========== SCROLLED STATE STYLES ========== */
 .c-header.-scrolled {
     border-bottom: 1px solid var(--color-landing-ui-dark);
